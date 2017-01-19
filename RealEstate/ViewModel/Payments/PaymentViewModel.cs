@@ -323,10 +323,15 @@ namespace RealEstate
                     fromSenderType = value;
                     OnPropertyChanged("FromSenderType");
 
-                    if (value != null && (value.Id == 2 || value.Id == 3))
-                        IsCustomerSender = true;
-                    else
-                        IsSupplierSender = true;
+                    if (value != null)
+                    {
+                        if (value.Id == 2 || value.Id == 3)
+                            IsCustomerSender = true;
+                        else if (value.Id == 1)
+                            IsSupplierSender = true;
+                        else if (value.Id == 5)
+                            IsSupplierSender = true;
+                    }
 
                     if (paymentRelation.FromSenderType != value)
                     {
@@ -335,6 +340,30 @@ namespace RealEstate
 
                 }
             }
+        }
+
+        private void SetPaymentSender()
+
+
+        private void SetSupplierSender()
+        {
+            IsSupplierSender = true;
+            IsCustomerSender = false;
+            IsBankSender = false;
+        }
+
+        private void SetCustomerSender()
+        {
+            IsCustomerSender = true;
+            IsSupplierSender = false;
+            IsBankSender = false;
+        }
+
+        private void SetBankSender()
+        {
+            IsBankSender = true;
+            IsCustomerSender = false;
+            IsSupplierSender = false;
         }
 
         private SenderType toSenderType;
@@ -544,6 +573,22 @@ namespace RealEstate
                     OnPropertyChanged("IsCustomerSender");
                     //FillProjectsBySender();
 
+                }
+            }
+        }
+
+        private bool isBankSender = false;
+        public bool IsBankSender
+        {
+            get { return isBankSender; }
+            set
+            {
+                if (isBankSender != value)
+                {
+                    isBankSender = value;
+
+                    OnPropertyChanged("IsBankSender");
+                    //FillProjectsBySender();
                 }
             }
         }
