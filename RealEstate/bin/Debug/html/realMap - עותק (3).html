@@ -1,0 +1,152 @@
+﻿<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <title>Google Maps JavaScript API v3 Example: Directions Complex</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map_canvas {
+            height: 100%;
+            width: 100%;
+           
+        }
+
+        #directionsPanel {
+            height: 100%;
+            overflow: auto;
+            background: #0F4D87;
+            color: white;
+            width: 30%;
+        }
+
+        #control {
+            background: #fff;
+            padding: 5px;
+            font-size: 14px;
+            font-family: Arial;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+            display: none;
+        }
+
+        @media print {
+            #map-canvas {
+                width: 70%;
+                margin: 0;
+            }
+
+            #directionsPanel {
+                width: 30%;
+            }
+        }
+
+        .adp-placemark {
+            background-color: #1C7DD7;
+        }
+
+        .adp-legal {
+            color: black;
+        }
+
+        .warnbox-content {
+            background: white;
+            color: black;
+        }
+    </style>
+    <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <script type="text/javascript">
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        
+        var origin = new google.maps.LatLng(32.116549,34.8405267);
+        var destination = new google.maps.LatLng(32.116549,34.8405267);
+
+		
+        function initialize() {
+		
+//origin = new google.maps.LatLng(25.520581,-103.40607);
+				    //destination = new google.maps.LatLng(position.coords.latitude +10,position.coords.longitude + 10);
+ 
+            //directionsDisplay = new google.maps.DirectionsRenderer();
+            var myOptions = {
+                zoom: [zoom],
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: origin
+            }
+            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+            //directionsDisplay.setMap(map);
+            var trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+
+            //calcRoute();
+            //directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+			     var image = {
+          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(170, 170),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(50, 50),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(50, 132)
+        };
+		
+		image='down2.png';
+			  //var image = 'down2.png';
+        var marker = new google.maps.Marker({
+            position: origin,
+           // map: map,
+            icon: image,
+            animation: google.maps.Animation.DROP,
+            title: "Click for show the data hf fhg gfh gf gfh fhf fgf the client"
+        });
+		//var address = 'מיכה 7 בני ברק ישראל';
+		 var address = '[address]';
+		 var  geocoder= new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+	
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('לא אותר המיקום המבוקש' + status);
+          }
+        });
+          
+        }
+
+        function calcRoute() {
+         
+            var request = {
+                origin: origin,
+                destination: destination,
+                // Note that Javascript allows us to access the constant
+                // using square brackets and a string value as its
+                // "property."
+                travelMode: google.maps.TravelMode["DRIVING"]
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
+      
+    </script>
+</head>
+<body onload="initialize()">
+    <div id="map_canvas"></div>
+   
+</body>
+</html>

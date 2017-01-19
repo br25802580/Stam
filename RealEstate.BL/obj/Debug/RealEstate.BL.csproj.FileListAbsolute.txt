@@ -1,0 +1,12 @@
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\RealEstate.BL.dll.config
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\RealEstate.BL.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\RealEstate.BL.pdb
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\EntityFramework.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\RealEstate.Data.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\RealEstate.Data.pdb
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\EntityFramework.xml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\obj\Debug\RealEstate.BL.csprojResolveAssemblyReference.cache
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\obj\Debug\RealEstate.BL.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.BL\obj\Debug\RealEstate.BL.pdb

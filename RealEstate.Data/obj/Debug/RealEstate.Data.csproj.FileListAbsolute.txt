@@ -1,0 +1,10 @@
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\obj\Debug\RealEstate.Data.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\bin\Debug\RealEstate.Data.dll.config
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\bin\Debug\RealEstate.Data.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\bin\Debug\RealEstate.Data.pdb
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\bin\Debug\EntityFramework.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\bin\Debug\EntityFramework.xml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\obj\Debug\RealEstate.Data.pdb
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate.Data\obj\Debug\RealEstate.Data.csprojResolveAssemblyReference.cache

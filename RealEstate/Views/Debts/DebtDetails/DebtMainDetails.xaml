@@ -1,0 +1,313 @@
+﻿<local:ModernUserControl x:Class="RealEstate.DebtMainDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:RealEstate"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI" FlowDirection="RightToLeft"
+             d:DesignHeight="700" d:DesignWidth="700">
+
+    <Grid>
+        <Grid.Resources>
+            <local:CustomerOrSupplierConverter x:Key="CustomerOrSupplierConverter"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+            <Style x:Key="ModernToggleButton"
+           BasedOn="{StaticResource BaseButtonStyle}"
+           TargetType="{x:Type ToggleButton}">
+                <Setter Property="Margin" Value="8,4,4,0"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Grid Width="25"
+                              Height="25">
+                                <Ellipse x:Name="ellipse" Fill="{TemplateBinding Background}"
+                                     Stroke="{DynamicResource ModernButtonBorder}"
+                                     StrokeThickness="1"
+                                     VerticalAlignment="Stretch" />
+                                <ContentPresenter Margin="1"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderPressed}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource ButtonTextPressed}"/>
+                    </Trigger>
+                    <!--<Trigger Property="IsChecked" Value="False">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <Image Source="C:\OFF.jpg" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>-->
+                </Style.Triggers>
+            </Style>
+            <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+            <local:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <local:CustomerConverter x:Key="CustomerConverter" />
+            <local:SupplierConverter x:Key="SupplierConverter" />
+        </Grid.Resources>
+        <ScrollViewer>
+            <StackPanel MinWidth="200" HorizontalAlignment="Left">
+                <StackPanel Margin="0,0,0,5" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="CodeNotEqual"  Height="35" Width="35" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                    <TextBlock VerticalAlignment="Center" Text="פרטי חוב" Style="{StaticResource Heading1}" Margin="0,0,15,0"  />
+                    <TextBlock Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}"
+                               Margin="0,0,0,5" Style="{StaticResource Heading2}" VerticalAlignment="Bottom" Text="{Binding Payment.Amount, StringFormat=C}" FlowDirection="LeftToRight" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}"
+                               Margin="7,0,0,5" Style="{StaticResource Heading2}" VerticalAlignment="Bottom">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource CustomerOrSupplierConverter}">
+                                <Binding Path="IsCustomerSender"/>
+                                <Binding Path="Customer"/>
+                                <Binding Path="Supplier"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}"
+                               Margin="2,0,0,5" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Text="{Binding Project.Name, StringFormat={}\, {0}}" TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
+                    <Button  ToolTip="שמירה" Command="{Binding SaveCommand}" Style="{StaticResource CommandButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave"  Height="18" Width="18" Margin="0,0,5,0"/>
+                            <TextBlock>שמירה</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  ToolTip="פתיחת פרויקט" Command="{Binding OpenProjectCommand}" Style="{StaticResource CommandButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="HomeModern"  Height="18" Width="18" Margin="0,0,5,0"/>
+                            <TextBlock>פתיחת פרויקט</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  ToolTip="פתיחת דירה" Command="{Binding OpenFlatCommand}" Style="{StaticResource CommandButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="HomeMapMarker"  Height="18" Width="18" Margin="0,0,5,0"/>
+                            <TextBlock>פתיחת דירה</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  ToolTip="פתיחת ספק" Command="{Binding OpenSupplierCommand}" Style="{StaticResource CommandButton}"
+                             Visibility="{Binding IsSupplierSender, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Run"  Height="18" Width="18" Margin="0,0,5,0"/>
+                            <TextBlock>פתיחת ספק</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  ToolTip="פתיחת לקוח" Command="{Binding OpenCustomerCommand}" Style="{StaticResource CommandButton}"
+                             Visibility="{Binding IsCustomerSender, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="HumanHandsdown"  Height="18" Width="18" Margin="0,0,5,0"/>
+                            <TextBlock>פתיחת לקוח</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <!-- actual form starts here -->
+                <StackPanel x:Name="Form" Orientation="Vertical">
+                    <StackPanel.Resources>
+                        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="Margin" Value="7" />
+                        </Style>
+                        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                            <Setter Property="Width" Value="100" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                            <Setter Property="Padding" Value="0" />
+                        </Style>
+                        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+                            <Setter Property="Padding" Value="0" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox  Header="סוג חוב">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel>
+                                    <Label Content="סוג חוב" Target="{Binding ElementName=TextAmount}"/>
+                                    <RadioButton IsChecked="{Binding Path=DebtType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:DebtType.Revenue}}">
+                                        <TextBlock>הכנסה</TextBlock>
+                                    </RadioButton>
+                                    <RadioButton IsChecked="{Binding Path=DebtType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:DebtType.Expense}}" Margin="10,0">
+                                        <TextBlock>הוצאה</TextBlock>
+                                    </RadioButton>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="מאת" Target="{Binding ElementName=ComboFrom}"/>
+                                    <ComboBox IsEnabled="{Binding Path=DebtType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:DebtType.Revenue}}"
+                            x:Name="ComboFrom" ItemsSource="{Binding SenderTypes}" SelectedItem="{Binding FromSenderType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="עבור" Target="{Binding ElementName=ComboTo}"/>
+                                    <ComboBox IsEnabled="{Binding Path=DebtType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:DebtType.Expense}}"
+                                  x:Name="ComboTo" ItemsSource="{Binding SenderTypes}" SelectedItem="{Binding  ToSenderType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1" Header="יעד חוב">
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="1" Orientation="Vertical">
+
+                                        <ToggleButton  IsChecked="{Binding Path=SenderFilter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:SenderFilter.BySender},Mode=TwoWay}" Style="{StaticResource ModernToggleButton}">
+                                            <materialDesign:PackIcon ToolTip="פרויקט לפי ספק" Kind="Run"  Height="15" Width="15" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                                        </ToggleButton>
+                                        <ToggleButton  IsChecked="{Binding Path=SenderFilter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:SenderFilter.ByProject},Mode=TwoWay}" Style="{StaticResource ModernToggleButton}">
+                                            <materialDesign:PackIcon ToolTip="ספק לפי פרויקט" Kind="HomeModern"  Height="15" Width="15" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                                        </ToggleButton>
+
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                                        <StackPanel Margin="0,4,0,-2" Orientation="Vertical" Visibility="{Binding Path=SenderFilter, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static local:SenderFilter.ByProject}}">
+                                            <StackPanel>
+                                                <Label Content="פרויקט" Target="{Binding ElementName=ComboProject1}"/>
+                                                <ComboBox x:Name="ComboProject1" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <Label Content="דירה" Target="{Binding ElementName=ComboFlat1}"/>
+                                                <ComboBox x:Name="ComboFlat1" ItemsSource="{Binding Flats}" SelectedItem="{Binding Flat, Mode=TwoWay}"  VerticalAlignment="Center" Width="150" >
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding Project.Name}"></TextBlock>
+                                                                <TextBlock Text=", דירה "></TextBlock>
+                                                                <TextBlock Text="{Binding FlatNumber}"></TextBlock>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <materialDesign:PackIcon HorizontalAlignment="Left" Kind="ArrowDown"  Height="12" Width="15" Margin="165,-2,0,0" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Visibility="{Binding IsCustomerSender, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Hidden}">
+                                            <Label Content="לקוח" Target="{Binding ElementName=ComboCustomer}"/>
+                                            <ComboBox x:Name="ComboCustomer" ItemsSource="{Binding Customers}" SelectedItem="{Binding Customer, Mode=TwoWay}"
+                                          VerticalAlignment="Center"  Width="150" >
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Converter={StaticResource CustomerConverter}}"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Visibility="{Binding IsSupplierSender, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Hidden}">
+                                            <Label Content="ספק" Target="{Binding ElementName=ComboSupplier}"/>
+                                            <ComboBox x:Name="ComboSupplier" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding Supplier, Mode=TwoWay}"
+                                          VerticalAlignment="Center"  Width="150" >
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Converter={StaticResource SupplierConverter}}"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,-2,0,4" Orientation="Vertical" Visibility="{Binding Path=SenderFilter, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static local:SenderFilter.BySender}}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Left" Kind="ArrowDown"  Height="12" Width="15" Margin="165,0,0,-2" VerticalAlignment="Center"/>
+                                            <StackPanel>
+                                                <Label Content="פרויקט" Target="{Binding ElementName=ComboProject}"/>
+                                                <ComboBox x:Name="ComboProject" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <Label Content="דירה" Target="{Binding ElementName=ComboFlat}"/>
+                                                <ComboBox x:Name="ComboFlat" ItemsSource="{Binding Flats}" SelectedItem="{Binding Flat, Mode=TwoWay}"  VerticalAlignment="Center" Width="150" >
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding Project.Name}"></TextBlock>
+                                                                <TextBlock Text=", דירה "></TextBlock>
+                                                                <TextBlock Text="{Binding FlatNumber}"></TextBlock>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Grid.ColumnSpan="2" Grid.Row="1" Header="פרטי חוב" >
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="15,7,15,7">
+                                    <Label Content="סכום" Target="{Binding ElementName=TextAmount}" FontSize="14" FontWeight="Bold"/>
+                                    <TextBox x:Name="TextAmount" Style="{StaticResource AmountTextBox}" Width="150" Text="{Binding Amount, StringFormat=C, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Margin="15,7,15,7">
+                                    <Label Content="סוג תשלום" Target="{Binding ElementName=ComboPaymentType}"/>
+                                    <ComboBox x:Name="ComboPaymentType" ItemsSource="{Binding PaymentTypes}" SelectedItem="{Binding PaymentType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="10,7,7,7">
+                                    <Label Content="תאריך יעד" Target="{Binding ElementName=DateDueDate}" />
+                                    <DatePicker Height="23" x:Name="DateDueDate" SelectedDate="{Binding Debt.DueDate}" Width="150" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,7,7,7">
+                                    <Label Content="תאריך יצירה" Target="{Binding ElementName=DateCreatedDate}"/>
+                                    <DatePicker Height="23" x:Name="DateCreatedDate" IsEnabled="False" SelectedDate="{Binding Debt.CreatedDate}" Width="150"/>
+                                </StackPanel>
+                                <StackPanel Margin="15,7,15,7" Grid.ColumnSpan="2" Grid.Row="2" >
+                                    <Label Content="הערה" Target="{Binding ElementName=DateCreatedDate}"/>
+                                    <TextBox Width="470" Text="{Binding Debt.Comment, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Grid.ColumnSpan="2" Grid.Row="2" Header="פרטי תשלום" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel  Margin="15,7,15,7">
+                                    <Label Content="סכום ששולם" Target="{Binding ElementName=TextAmount}" FontSize="14">
+                                    </Label>
+                                    <!--<TextBox Visibility="{Binding Path=DebtType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static local:DebtType.Expense}}"
+                                             x:Name="TxtAmountPaid" Width="150" Text="{Binding AmountPaid, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                    <TextBlock Visibility="{Binding Path=DebtType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static local:DebtType.Revenue}}"
+                                               Style="{StaticResource AmountText}" Width="150" Text="{Binding AmountPaid, StringFormat=C, Mode=OneWay}"/>-->
+                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Debt.AmountPaid, StringFormat=C, Mode=OneWay}"/>
+                                </StackPanel>
+                                <StackPanel  Grid.Column="1" Margin="10,7,7,7">
+                                    <Label Content="יתרת חוב" Target="{Binding ElementName=TextAmount}" FontSize="14" FontWeight="Bold"/>
+                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Debt.DelinquentAmount, StringFormat=C, Mode=OneWay}"/>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</local:ModernUserControl>

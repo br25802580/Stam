@@ -1,0 +1,622 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1042B2A0-FCD0-4359-AFE9-75E2AE361F40}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RealEstate</RootNamespace>
+    <AssemblyName>RealEstate</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>C:\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>CBC761BD894F7ACEFF00D353C529C2B3117BBDBA</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>RealEstate_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FirstFloor.ModernUI, Version=1.0.9.0, Culture=neutral, PublicKeyToken=bc9b0c37bf06c6a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\ModernUI.WPF.1.0.9\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Interop.SHDocVw, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.SHDocVw.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.2.1.750, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.2.1.750\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\LinksTemplateSelector.cs" />
+    <Compile Include="ClientModels\PaymentWrapper.cs" />
+    <Compile Include="ClientModels\IEntityWrapper.cs" />
+    <Compile Include="Common\BeforeSaveResult.cs" />
+    <Compile Include="Common\Metadata\TableEditorMetadata.cs" />
+    <Compile Include="Common\Metadata\NewEditorMetadata.cs" />
+    <Compile Include="Common\Metadata\PageMetaData.cs" />
+    <Compile Include="Common\ViewModelFactory.cs" />
+    <Compile Include="Common\RealEstateRepository.cs" />
+    <Compile Include="ClientModels\DebtWrapper.cs" />
+    <Compile Include="Converters\EntityHighlightConverter.cs" />
+    <Compile Include="Converters\EntityStateConverter.cs" />
+    <Compile Include="Converters\ProjectAddressConverter.cs" />
+    <Compile Include="Converters\PaymentsConverter.cs" />
+    <Compile Include="Converters\GroupsToTotalConverter.cs" />
+    <Compile Include="Converters\PaymentTypeConverter.cs" />
+    <Compile Include="Converters\CustomerOrSupplierConverter.cs" />
+    <Compile Include="Converters\PaymentTypesConverter.cs" />
+    <Compile Include="Converters\SupplierConverter.cs" />
+    <Compile Include="Converters\CustomerConverter.cs" />
+    <Compile Include="Converters\FlatConverter.cs" />
+    <Compile Include="Converters\ProjectConverter.cs" />
+    <Compile Include="Converters\BooleanConverter.cs" />
+    <Compile Include="Converters\OppositveBoolToVisibilityConverters.cs" />
+    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Enums\EntityState.cs" />
+    <Compile Include="Enums\EditorType.cs" />
+    <Compile Include="Enums\DebtType.cs" />
+    <Compile Include="Enums\SenderFilter.cs" />
+    <Compile Include="Enums\PageType.cs" />
+    <Compile Include="Mesages\NavigationMessage.cs" />
+    <Compile Include="Utils\HandleErrorUtils.cs" />
+    <Compile Include="Utils\InitEntityUtils.cs" />
+    <Compile Include="Utils\EditorUtils.cs" />
+    <Compile Include="Utils\PaymentsUtils.cs" />
+    <Compile Include="Utils\CloneUtils.cs" />
+    <Compile Include="Utils\DialogUtils.cs" />
+    <Compile Include="ViewModel\Base\INavigationViewModel.cs" />
+    <Compile Include="ViewModel\Base\TableViewModel.cs" />
+    <Compile Include="ViewModel\Contracts\ContractsViewModel.cs" />
+    <Compile Include="ViewModel\Contracts\ContractViewModel.cs" />
+    <Compile Include="ViewModel\Map\Map.cs" />
+    <Compile Include="ViewModel\Map\MapViewModel.cs" />
+    <Compile Include="ViewModel\Payments\ConstantPaymentViewModel.cs" />
+    <Compile Include="ViewModel\Payments\PaymentsViewModel.cs" />
+    <Compile Include="ViewModel\Payments\DebtViewModel.cs" />
+    <Compile Include="ViewModel\Payments\PaymentViewModel.cs" />
+    <Compile Include="ViewModel\Suppliers\SuppliersViewModel.cs" />
+    <Compile Include="ViewModel\Suppliers\SupplierViewModel.cs" />
+    <Compile Include="ViewModel\Customers\CustomersViewModel.cs" />
+    <Compile Include="ViewModel\Customers\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\Lease\LeaseFlatViewModel.cs" />
+    <Compile Include="ViewModel\MarketingBase\MarketingViewModel.cs" />
+    <Compile Include="ViewModel\MarketingBase\ProjectViewModel.cs" />
+    <Compile Include="ViewModel\Sales\SalesFlatViewModel.cs" />
+    <Compile Include="ViewModel\Sales\SalesProjectViewModel.cs" />
+    <Compile Include="ViewModel\Sales\SaleViewModel.cs" />
+    <Compile Include="ViewModel\System\PaymentRelationViewModel.cs" />
+    <Compile Include="ViewModel\System\CityViewModel.cs" />
+    <Compile Include="ViewModel\System\NamedElementViewModel.cs" />
+    <Compile Include="ViewModel\System\SystemViewModel.cs" />
+    <Compile Include="Views\Contracts\ContractDetails\ContractView.xaml.cs">
+      <DependentUpon>ContractView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contracts\ContractsPage.xaml.cs">
+      <DependentUpon>ContractsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contracts\ContractDetails\ContractMainDetails.xaml.cs">
+      <DependentUpon>ContractMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customers\Table.xaml.cs">
+      <DependentUpon>Table.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Debts\DebtDetails\DebtMainDetails.xaml.cs">
+      <DependentUpon>DebtMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Debts\DebtDetails\DebtView.xaml.cs">
+      <DependentUpon>DebtView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Debts\DebtsTable.xaml.cs">
+      <DependentUpon>DebtsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map\MapMainDetails.xaml.cs">
+      <DependentUpon>MapMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payments\PaymentDetails\ConstantPaymentMainDetails.xaml.cs">
+      <DependentUpon>ConstantPaymentMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payments\RevenuesTable.xaml.cs">
+      <DependentUpon>RevenuesTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payments\PaymentDetails\PaymentMainDetails.xaml.cs">
+      <DependentUpon>PaymentMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payments\PaymentDetails\PaymentView.xaml.cs">
+      <DependentUpon>PaymentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payments\PaymentsPage.xaml.cs">
+      <DependentUpon>PaymentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payments\ExpensesTable.xaml.cs">
+      <DependentUpon>ExpensesTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payments\PaymentsTable.xaml.cs">
+      <DependentUpon>PaymentsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Suppliers\SupplierDetails\SupplierNew.xaml.cs">
+      <DependentUpon>SupplierNew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Suppliers\SupplierDetails\SupplierMainDetails.xaml.cs">
+      <DependentUpon>SupplierMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Suppliers\SupplierDetails\SupplierView.xaml.cs">
+      <DependentUpon>SupplierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Suppliers\SuppliersPage.xaml.cs">
+      <DependentUpon>SuppliersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Suppliers\SuppliersTable.xaml.cs">
+      <DependentUpon>SuppliersTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customers\CustomersPage.xaml.cs">
+      <DependentUpon>CustomersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customers\CustomerDetails\CustomerMainDetails.xaml.cs">
+      <DependentUpon>CustomerMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customers\CustomerDetails\CustomerView.xaml.cs">
+      <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flats\FlatDetails\FlatSuppliers.xaml.cs">
+      <DependentUpon>FlatSuppliers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customers\CustomersTable.xaml.cs">
+      <DependentUpon>CustomersTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flats\FlatDetails\FlatMainDetails.xaml.cs">
+      <DependentUpon>FlatMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flats\FlatDetails\FlatView.xaml.cs">
+      <DependentUpon>FlatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lease\SalesPage.xaml.cs">
+      <DependentUpon>SalesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\ProjectDetails\ProjectMainDetails.xaml.cs">
+      <DependentUpon>ProjectMainDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\ProjectDetails\ProjectView.xaml.cs">
+      <DependentUpon>ProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Metadata\EditorMetaData.cs" />
+    <Compile Include="Views\Base\ModernUserControl.cs" />
+    <Compile Include="ViewModel\MarketingBase\FlatViewModel.cs" />
+    <Compile Include="ViewModel\Home\HomeViewModel.cs" />
+    <Compile Include="ViewModel\Lease\LeaseProjectViewModel.cs" />
+    <Compile Include="ViewModel\Base\PageViewModel.cs" />
+    <Compile Include="ViewModel\Base\EditorViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\System\PaymentRelationDetails.xaml.cs">
+      <DependentUpon>PaymentRelationDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\System\CityDetails.xaml.cs">
+      <DependentUpon>CityDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\System\CountryDetails.xaml.cs">
+      <DependentUpon>CountryDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\System\SystemPage.xaml.cs">
+      <DependentUpon>SystemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC\SenderChooser.xaml.cs">
+      <DependentUpon>SenderChooser.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Behaviors\IListItemConverter.cs" />
+    <Compile Include="Behaviors\MultiSelectorBehaviours.cs" />
+    <Compile Include="Behaviors\TwoListSynchronizer.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Style\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\ModernTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\ModernDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contracts\ContractDetails\ContractView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Contracts\ContractsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Contracts\ContractDetails\ContractMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Customers\Table.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Debts\DebtDetails\DebtMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Debts\DebtDetails\DebtView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Debts\DebtsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Map\MapMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Payments\PaymentDetails\ConstantPaymentMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Payments\RevenuesTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Payments\PaymentDetails\PaymentMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Payments\PaymentDetails\PaymentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Payments\PaymentsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Payments\ExpensesTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Payments\PaymentsTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Suppliers\SupplierDetails\SupplierNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Suppliers\SupplierDetails\SupplierMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Suppliers\SupplierDetails\SupplierView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Suppliers\SuppliersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Suppliers\SuppliersTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Customers\CustomersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Customers\CustomerDetails\CustomerMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Customers\CustomerDetails\CustomerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Flats\FlatDetails\FlatSuppliers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Customers\CustomersTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flats\FlatDetails\FlatMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Flats\FlatDetails\FlatView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Lease\SalesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Projects\ProjectDetails\ProjectMainDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Projects\ProjectDetails\ProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Flats\FlatsTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Projects\ProjectsTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Lease\LeasesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Views\Flats\FlatsTable.xaml.cs">
+      <DependentUpon>FlatsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\ProjectsTable.xaml.cs">
+      <DependentUpon>ProjectsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Main\MainViewModel.cs" />
+    <Compile Include="ViewModel\Lease\LeasesViewModel.cs" />
+    <Compile Include="Views\Lease\LeasesPage.xaml.cs">
+      <DependentUpon>LeasesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\Settings\Appearance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Views\Settings\Appearance.xaml.cs">
+      <DependentUpon>Appearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Settings\AppearanceViewModel.cs" />
+    <Page Include="Views\Home\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Views\Home\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Views\System\PaymentRelationDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\System\CityDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\System\CountryDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\System\SystemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UC\SenderChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="RealEstate_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Sale\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RealEstate.BL\RealEstate.BL.csproj">
+      <Project>{0ea82592-8017-431b-9509-fcb34debafe9}</Project>
+      <Name>RealEstate.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RealEstate.Data\RealEstate.Data.csproj">
+      <Project>{c4b58967-1d71-4ceb-89eb-94480846c978}</Project>
+      <Name>RealEstate.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Delet_all.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Paste16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="blue-pin-marker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

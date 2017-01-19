@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="76e34c8607ed4d24a19760e08f6329f5" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="RealEstateModel.Sale" PointX="2.75" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateModel.City" Width="1.5" PointX="0.5" PointY="0.875" />
+        <EntityTypeShape EntityType="RealEstateModel.AirDirection" Width="1.5" PointX="5" PointY="0.75" />
+        <EntityTypeShape EntityType="RealEstateModel.Flat" Width="1.5" PointX="7.625" PointY="2.125" />
+        <EntityTypeShape EntityType="RealEstateModel.ProjectType" Width="1.5" PointX="2.875" PointY="3.25" />
+        <EntityTypeShape EntityType="RealEstateModel.Customer" Width="1.5" PointX="8.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateModel.CustomerInProject" Width="1.5" PointX="10.75" PointY="1.25" />
+        <AssociationConnector Association="RealEstateModel.FK_CustomerInProject_Customer" />
+        <AssociationConnector Association="RealEstateModel.FK_CustomerInProject_Flat" />
+        <AssociationConnector Association="RealEstateModel.FK_Customer_City" />
+        <EntityTypeShape EntityType="RealEstateModel.ServiceType" Width="1.5" PointX="3.5" PointY="7" />
+        <EntityTypeShape EntityType="RealEstateModel.Supplier" Width="1.5" PointX="1.125" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealEstateModel.SupplierInProject" Width="1.5" PointX="11.875" PointY="5" />
+        <AssociationConnector Association="RealEstateModel.FK_Suppliers_City" />
+        <AssociationConnector Association="RealEstateModel.FK_SupplierInProject_Flat" />
+        <AssociationConnector Association="RealEstateModel.FK_Suppliers_ServiceType" />
+        <AssociationConnector Association="RealEstateModel.FK_SupplierInProject_Supplier" />
+        <EntityTypeShape EntityType="RealEstateModel.PaymentMethod" Width="1.5" PointX="16.75" PointY="6.375" />
+        <EntityTypeShape EntityType="RealEstateModel.PaymentType" Width="1.5" PointX="16.875" PointY="3.75" />
+        <EntityTypeShape EntityType="RealEstateModel.Payment" Width="1.5" PointX="14.375" PointY="2.25" />
+        <AssociationConnector Association="RealEstateModel.FK_Payment_PaymentMethod" />
+        <EntityTypeShape EntityType="RealEstateModel.PaymentRelation" Width="1.5" PointX="14.625" PointY="9.75" />
+        <EntityTypeShape EntityType="RealEstateModel.SenderType" Width="1.5" PointX="12.375" PointY="10" />
+        <AssociationConnector Association="RealEstateModel.FK_PaymentTarget_SenderType" />
+        <AssociationConnector Association="RealEstateModel.FK_PaymentTarget_SenderType1" />
+        <AssociationConnector Association="RealEstateModel.FK_PaymentType_PaymentRelation" />
+        <EntityTypeShape EntityType="RealEstateModel.Debt" Width="1.5" PointX="19.125" PointY="2.875" />
+        <AssociationConnector Association="RealEstateModel.FK_Debt_CustomerInProject" />
+        <AssociationConnector Association="RealEstateModel.FK_Debt_PaymentType" />
+        <AssociationConnector Association="RealEstateModel.FK_Debt_SupplierInProject" />
+        <AssociationConnector Association="RealEstateModel.FK_Debt_PaymentRelation" />
+        <EntityTypeShape EntityType="RealEstateModel.PaymentTypeForService" Width="1.5" PointX="14.25" PointY="7.625" />
+        <AssociationConnector Association="RealEstateModel.FK_PaymentTypeForService_PaymentType" />
+        <AssociationConnector Association="RealEstateModel.FK_PaymentTypeForService_ServiceType" />
+        <AssociationConnector Association="RealEstateModel.FK_Payment_CustomerInProject" />
+        <AssociationConnector Association="RealEstateModel.FK_Payment_SupplierInProject" />
+        <AssociationConnector Association="RealEstateModel.FK_Payment_PaymentRelation" />
+        <EntityTypeShape EntityType="RealEstateModel.PaymentItem" Width="1.5" PointX="22.125" PointY="3.25" />
+        <AssociationConnector Association="RealEstateModel.FK_PaymentItem_Payment" />
+        <AssociationConnector Association="RealEstateModel.FK_PaymentItem_PaymentType" />
+        <AssociationConnector Association="RealEstateModel.FK_PaymentItem_Debt" />
+        <EntityTypeShape EntityType="RealEstateModel.ConstantPayment" Width="1.5" PointX="22.125" PointY="7.125" />
+        <AssociationConnector Association="RealEstateModel.FK_ConstantPayment_PaymentType" />
+        <EntityTypeShape EntityType="RealEstateModel.Country" Width="1.5" PointX="0.75" PointY="9.875" />
+        <AssociationConnector Association="RealEstateModel.FK_Customer_Country" />
+        <AssociationConnector Association="RealEstateModel.FK_Supplier_Country" />
+        <EntityTypeShape EntityType="RealEstateModel.Gender" Width="1.5" PointX="3.375" PointY="9.875" />
+        <AssociationConnector Association="RealEstateModel.FK_Customer_Gender" />
+        <AssociationConnector Association="RealEstateModel.FK_Supplier_Gender" />
+        <EntityTypeShape EntityType="RealEstateModel.Project" Width="1.5" PointX="5.25" PointY="2.75" />
+        <AssociationConnector Association="RealEstateModel.FK_Project_City" />
+        <AssociationConnector Association="RealEstateModel.FK_ConstantPayment_Project" />
+        <AssociationConnector Association="RealEstateModel.FK_Project_Country" />
+        <AssociationConnector Association="RealEstateModel.FK_CustomerInProject_Project" />
+        <AssociationConnector Association="RealEstateModel.FK_Flat_Project" />
+        <AssociationConnector Association="RealEstateModel.FK_Project_ProjectType" />
+        <AssociationConnector Association="RealEstateModel.FK_SupplierInProject_Project" />
+        <EntityTypeShape EntityType="RealEstateModel.LeaseContract" Width="1.5" PointX="5.375" PointY="9.875" />
+        <AssociationConnector Association="RealEstateModel.FK_CustomerInProject_LeaseContract" />
+        <EntityTypeShape EntityType="RealEstateModel.SaleContract" Width="1.5" PointX="0.75" PointY="12.75" />
+        <AssociationConnector Association="RealEstateModel.FK_CustomerInProject_SaleContract" />
+        <AssociationConnector Association="RealEstateModel.fk_City_Country" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
