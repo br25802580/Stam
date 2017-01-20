@@ -158,7 +158,7 @@ namespace RealEstate
             set { Entity = value; }
         }
 
-        private DebtType paymentType;
+        private DebtType paymentType = DebtType.None;
         public DebtType PaymentType
         {
             get { return paymentType; }
@@ -189,7 +189,7 @@ namespace RealEstate
                         //        item.Amount *= -1;
                         //}
 
-                        FromSenderTypes.Remove(FromSenderTypes.Last());
+                        FromSenderTypes.Remove(FromSenderTypes.First(senderType => senderType.Id == 4));
                     }
                     else
                     {
@@ -207,7 +207,7 @@ namespace RealEstate
                         //    if (item.Amount > 0)
                         //        item.Amount *= -1;
                         //}
-                        ToSenderTypes.Remove(ToSenderTypes.Last());
+                        ToSenderTypes.Remove(ToSenderTypes.First(senderType => senderType.Id == 4));
                     }
                 }
             }
@@ -325,45 +325,15 @@ namespace RealEstate
 
                     if (value != null)
                     {
-                        if (value.Id == 2 || value.Id == 3)
-                            IsCustomerSender = true;
-                        else if (value.Id == 1)
-                            IsSupplierSender = true;
-                        else if (value.Id == 5)
-                            IsSupplierSender = true;
+                        SetPaymentSender(value.Id);
                     }
 
                     if (paymentRelation.FromSenderType != value)
                     {
                         PaymentRelation = new PaymentsBL().GetPaymentRelation(fromSenderType.Id, ToSenderType.Id);
                     }
-
                 }
             }
-        }
-
-        private void SetPaymentSender()
-
-
-        private void SetSupplierSender()
-        {
-            IsSupplierSender = true;
-            IsCustomerSender = false;
-            IsBankSender = false;
-        }
-
-        private void SetCustomerSender()
-        {
-            IsCustomerSender = true;
-            IsSupplierSender = false;
-            IsBankSender = false;
-        }
-
-        private void SetBankSender()
-        {
-            IsBankSender = true;
-            IsCustomerSender = false;
-            IsSupplierSender = false;
         }
 
         private SenderType toSenderType;
@@ -378,10 +348,8 @@ namespace RealEstate
 
                     OnPropertyChanged("ToSenderType");
 
-                    if (value != null && (value.Id == 1))
-                        IsSupplierSender = true;
-                    else
-                        IsCustomerSender = true;
+                    if (value != null)
+                        SetPaymentSender(value.Id);
 
                     if (paymentRelation.ToSenderType != value)
                     {
@@ -568,10 +536,13 @@ namespace RealEstate
                 if (isCustomerSender != value)
                 {
                     isCustomerSender = value;
-                    IsSupplierSender = !value;
 
                     OnPropertyChanged("IsCustomerSender");
                     //FillProjectsBySender();
+                    if (isCustomerSender)
+                    {
+                        DisplaySenderFilter = true;
+                    }
 
                 }
             }
@@ -588,7 +559,52 @@ namespace RealEstate
                     isBankSender = value;
 
                     OnPropertyChanged("IsBankSender");
+
+                    if (isBankSender)
+                    {
+                        DisplaySenderFilter = false;
+                    }
+
                     //FillProjectsBySender();
+                }
+            }
+        }
+
+        private bool displaySenderFilter = false;
+        public bool DisplaySenderFilter
+        {
+            get { return displaySenderFilter; }
+            set
+            {
+                if (displaySenderFilter != value)
+                {
+                    displaySenderFilter = value;
+
+                    OnPropertyChanged("DisplaySenderFilter");
+
+                    if (!displaySenderFilter)
+                        SenderFilter = SenderFilter.ByProject;
+
+                }
+            }
+        }
+
+        private bool isNoneSender = false;
+        public bool IsNoneSender
+        {
+            get { return isNoneSender; }
+            set
+            {
+                if (isNoneSender != value)
+                {
+                    isNoneSender = value;
+
+                    OnPropertyChanged("IsNoneSender");
+
+                    if (isNoneSender)
+                    {
+                        DisplaySenderFilter = false;
+                    }
                 }
             }
         }
@@ -602,9 +618,14 @@ namespace RealEstate
                 if (isSupplierSender != value)
                 {
                     isSupplierSender = value;
-                    IsCustomerSender = !value;
+                    //IsCustomerSender = !value;
 
                     OnPropertyChanged("isSupplierSender");
+
+                    if (isSupplierSender)
+                    {
+                        DisplaySenderFilter = true;
+                    }
                     //FillProjectsBySender();
                 }
             }
@@ -694,7 +715,7 @@ namespace RealEstate
                 new GeneralBL().Save();
                 OpenedEditors["PaymentItems"].RefreshData();
             }
-            OnPropertyChanged("Payment.PaymentItems");
+            OnPropertyChanged("PaymentItems");
         }
 
         public ICommand UnLinkDebtCommand { get; set; }
@@ -992,8 +1013,15 @@ namespace RealEstate
 
                 Payment.CustomerInProject = null;
             }
+            //else if (IsBankSender) { }
+            //else if (IsNoneSender)
+            //{
+            //}
 
-            if (Payment.Amount == null)
+            Payment.Project = Project;
+            Payment.Flat = Flat;
+
+            if (Amount == null || Amount == 0)
             {
                 beforeSaveResult.IsValidData = false;
                 beforeSaveResult.ErrorMessage = "נא הגדר סכום";
@@ -1076,6 +1104,7 @@ namespace RealEstate
             InitList(typeof(SenderType));
             InitList(typeof(PaymentRelation));
             InitList(typeof(PaymentMethod));
+            InitList(typeof(Bank));
 
             Amount = Payment.Amount.HasValue ? Payment.Amount.Value : 0;
             PaymentRelation paymentRelation = Payment.PaymentRelation;
@@ -1106,14 +1135,17 @@ namespace RealEstate
 
             FillBySenderFilter();
 
-            if (PaymentRelation.ToSenderTypeId == 1)
-            {
-                IsSupplierSender = true;
-            }
-            else if (PaymentRelation.FromSenderTypeId == 2 || PaymentRelation.FromSenderTypeId == 3)
-            {
-                IsCustomerSender = true;
-            }
+            //if (PaymentRelation.ToSenderTypeId == 1)
+            //{
+            //    IsSupplierSender = true;
+            //}
+
+            //SetPaymentSender(PaymentRelation.FromSenderTypeId.Value);
+
+            //else if (PaymentRelation.FromSenderTypeId == 2 || PaymentRelation.FromSenderTypeId == 3)
+            //{
+            //    IsCustomerSender = true;
+            //}
 
             if (Payment.CustomerInProject != null)
             {
@@ -1131,8 +1163,10 @@ namespace RealEstate
                 Payment.CreatedDate = DateTime.Now;
             }
 
-            PaymentItems = new ObservableCollection<PaymentItemWrapper>(Payment.PaymentItems
-                .Select(paymentItem => new PaymentItemWrapper(paymentItem, Payment)));
+            foreach (PaymentItem paymentItem in Payment.PaymentItems)
+            {
+                PaymentItems.Add(new PaymentItemWrapper(paymentItem, Payment));
+            }
 
             foreach (var item in PaymentItems)
             {
@@ -1197,6 +1231,62 @@ namespace RealEstate
             }
         }
 
+
+        private void SetPaymentSender(int senderId)
+        {
+            switch (senderId)
+            {
+                case 1:
+                    SetSupplierSender();
+                    break;
+                case 2:
+                case 3:
+                    SetCustomerSender();
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    SetBankSender();
+                    break;
+                default:
+                    SetNoneSender();
+                    break;
+            }
+        }
+
+        private void SetNoneSender()
+        {
+            IsSupplierSender = false;
+            IsCustomerSender = false;
+            IsBankSender = false;
+            IsNoneSender = true;
+        }
+
+        private void SetSupplierSender()
+        {
+            IsCustomerSender = false;
+            IsBankSender = false;
+            IsNoneSender = false;
+            IsSupplierSender = true;
+        }
+
+        private void SetCustomerSender()
+        {
+            IsSupplierSender = false;
+            IsBankSender = false;
+            IsNoneSender = false;
+            IsCustomerSender = true;
+        }
+
+        private void SetBankSender()
+        {
+            IsCustomerSender = false;
+            IsSupplierSender = false;
+            IsNoneSender = false;
+            IsBankSender = true;
+        }
+
+
         //private void FillPaymentTypeBySupplier()
         //{
         //    if (supplier != null && supplier.ServiceType != null && Payment.PaymentType == null)
@@ -1215,14 +1305,16 @@ namespace RealEstate
         {
             return Payment.CustomerInProject != null ?
                  Payment.CustomerInProject.Project : Payment.SupplierInProject != null ?
-                 Payment.SupplierInProject.Project : null;
+                 Payment.SupplierInProject.Project : Payment.Project != null ?
+                 Payment.Project : null;
         }
 
         public Flat GetFlat()
         {
             return Payment.CustomerInProject != null ?
                  Payment.CustomerInProject.Flat : Payment.SupplierInProject != null ?
-                 Payment.SupplierInProject.Flat : null;
+                 Payment.SupplierInProject.Flat : Payment.Flat != null ?
+                  Payment.Flat : null;
         }
 
         private void FillListsByProject()
@@ -1233,7 +1325,8 @@ namespace RealEstate
                 {
                     Customers = Project.CustomerInProjects.Select(project => project.Customer).Distinct().ToList();
                     Suppliers = Project.SupplierInProjects.Where(sInP => sInP != null && sInP.Supplier != null).Select(project => project.Supplier).Distinct().ToList();
-                    Flats = Project.Flats.Where(flat => flat.CustomerInProjects?.Count > 0).ToList();
+                    //Flats = Project.Flats.Where(flat => flat.CustomerInProjects?.Count > 0).ToList();
+                    Flats = Project.Flats.ToList();
                 }
                 else
                 {
@@ -1241,7 +1334,7 @@ namespace RealEstate
                     {
                         Flats = Project.Flats.Where(flat => flat.CustomerInProjects.Any(cInP => cInP.Customer == Customer)).ToList();
                     }
-                    else
+                    else if (IsSupplierSender)
                     {
                         Flats = Project.Flats.Where(flat => flat.SupplierInProjects.Any(cInP => cInP.Supplier == Supplier)).ToList();
                     }

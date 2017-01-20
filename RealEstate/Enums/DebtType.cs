@@ -9,6 +9,7 @@ namespace RealEstate
     public enum DebtType
     {
        Expense,
-       Revenue
+       Revenue,
+       None
     }
 }

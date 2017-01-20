@@ -132,7 +132,7 @@
                                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="-15,7,7,7">
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="-12,7,7,7" Visibility="{Binding DisplaySenderFilter,Converter={StaticResource BoolToVisibilityConverter}}">
 
                                         <ToggleButton  IsChecked="{Binding Path=SenderFilter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static local:SenderFilter.BySender},Mode=TwoWay}" Style="{StaticResource ModernToggleButton}">
                                             <materialDesign:PackIcon ToolTip="פרויקט לפי ספק" Kind="Run"  Height="15" Width="15" Margin="0,0,0,0" VerticalAlignment="Center"/>
@@ -163,8 +163,10 @@
                                                 </ComboBox>
                                                 <!--<materialDesign:PackIcon  Kind="Close"  Height="12" Width="15" Margin="0,-2,0,0" VerticalAlignment="Center"/>-->
 
-                                            </StackPanel> <!--Margin="165,-2,0,0"-->
-                                            <materialDesign:PackIcon HorizontalAlignment="Left" Kind="ArrowDown"  Height="12" Width="15" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                            <!--Margin="165,-2,0,0"-->
+                                            <materialDesign:PackIcon Visibility="{Binding DisplaySenderFilter,Converter={StaticResource BoolToVisibilityConverter}}" HorizontalAlignment="Left" Kind="ArrowDown"  Height="12" Width="15" Margin="165,0,0,-2" VerticalAlignment="Center"/>
+
                                         </StackPanel>
                                         <StackPanel Visibility="{Binding IsCustomerSender, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
                                             <Label Content="לקוח" Target="{Binding ElementName=ComboCustomer}"/>
@@ -189,7 +191,8 @@
                                             </ComboBox>
                                         </StackPanel>
                                         <StackPanel Margin="0,0,0,0" Orientation="Vertical" Visibility="{Binding Path=SenderFilter, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static local:SenderFilter.BySender}}">
-                                            <materialDesign:PackIcon HorizontalAlignment="Left" Kind="ArrowDown"  Height="12" Width="15" Margin="165,0,0,-2" VerticalAlignment="Center"/>
+                                            <materialDesign:PackIcon Visibility="{Binding DisplaySenderFilter,Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                     HorizontalAlignment="Left" Kind="ArrowDown"  Height="12" Width="15" Margin="165,0,0,-2" VerticalAlignment="Center"/>
                                             <StackPanel>
                                                 <Label Content="פרויקט" Target="{Binding ElementName=ComboProject}"/>
                                                 <ComboBox x:Name="ComboProject" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
@@ -209,12 +212,22 @@
                                                 </ComboBox>
                                             </StackPanel>
                                         </StackPanel>
+                                        <StackPanel  Visibility="{Binding IsBankSender,Converter={StaticResource BoolToVisibilityConverter}}">
+                                            <Label Content="בנק" Target="{Binding ElementName=ComboFlat1}"/>
+                                            <ComboBox  ItemsSource="{Binding Banks}" SelectedItem="{Binding Payment.Bank, Mode=TwoWay}" DisplayMemberPath="Name"  VerticalAlignment="Center" Width="150" >
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel  Visibility="{Binding IsNoneSender,Converter={StaticResource BoolToVisibilityConverter}}">
+                                            <Label Content="תיאור מקור/יעד" Target="{Binding ElementName=ComboFlat1}"/>
+                                            <TextBox Text="{Binding Payment.SenderDescription, Mode=TwoWay}" Width="150" >
+                                            </TextBox>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Grid>
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Grid.ColumnSpan="2" Grid.Row="1" Header="פרטי תשלום" >
-                            <Grid >
+                            <Grid Margin="7">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"></RowDefinition>
                                     <RowDefinition Height="auto"></RowDefinition>
@@ -222,44 +235,44 @@
                                     <RowDefinition Height="auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Margin="15,7,15,7">
+                                <StackPanel Margin="7,7,55,7">
                                     <Label Content="סכום כללי" Target="{Binding ElementName=TextAmount}" FontSize="14" FontWeight="Bold"/>
                                     <TextBox Style="{StaticResource AmountTextBox}" x:Name="TextAmount" Width="150" Text="{Binding Amount, Mode=TwoWay, ValidatesOnDataErrors=True, StringFormat=C, UpdateSourceTrigger=PropertyChanged}"/>
                                 </StackPanel>
-                                <StackPanel Margin="10,7,7,7" Grid.Column="1">
+                                <StackPanel  Grid.Column="1">
                                     <Label Content="תאריך תשלום" Target="{Binding ElementName=DateDueDate}" />
                                     <DatePicker Height="23" x:Name="DateDueDate" SelectedDate="{Binding Payment.PaymentDate}" Width="150"/>
                                 </StackPanel>
-                                <StackPanel Grid.Row="1" Margin="15,7,15,7">
+                                <StackPanel Grid.Row="1">
                                     <Label Target="{Binding ElementName=TextChequeNumber}">
                                         חייב במע"ם?
                                     </Label>
                                     <CheckBox FlowDirection="LeftToRight" IsChecked="{Binding Payment.WithVat}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,7,7,7">
+                                <StackPanel Grid.Row="1" Grid.Column="1">
                                     <Label Content="אופן תשלום" Target="{Binding ElementName=ComboPaymentMethod}"/>
                                     <ComboBox x:Name="ComboPaymentMethod" ItemsSource="{Binding PaymentMethods}" SelectedItem="{Binding PaymentMethod, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
                                 </StackPanel>
-                                <StackPanel Grid.Row="2" Margin="15,7,15,7" Visibility="{Binding DisplayChequeDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
+                                <StackPanel Grid.Row="2"  Visibility="{Binding DisplayChequeDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
                                     <Label  Content="מס' צ'ק" Target="{Binding ElementName=TextChequeNumber}"/>
                                     <TextBox x:Name="TextChequeNumber" Width="150" Text="{Binding Payment.ChequeNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Row="2" Grid.Column="1"  Margin="10,7,7,7" Visibility="{Binding DisplayChequeDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
+                                <StackPanel Grid.Row="2" Grid.Column="1"  Visibility="{Binding DisplayChequeDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
                                     <Label Content="ת.יעד צ'ק" Target="{Binding ElementName=ComboPaymentMethod}"/>
                                     <DatePicker Height="23" SelectedDate="{Binding Payment.ChequeDueDate}" Width="150"/>
                                 </StackPanel>
-                                <StackPanel  Margin="15,7,15,7" Grid.Row="2" Visibility="{Binding DisplayCreditDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
+                                <StackPanel Grid.Row="2" Visibility="{Binding DisplayCreditDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
                                     <Label  Content="מס' אשראי" Target="{Binding ElementName=TextChequeNumber}"/>
                                     <TextBox  Width="150" Text="{Binding Payment.CreditNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Row="2" Grid.Column="1" Margin="10,7,7,7" Visibility="{Binding DisplayCreditDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
+                                <StackPanel Grid.Row="2" Grid.Column="1" Visibility="{Binding DisplayCreditDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
                                     <Label Content="תוקף אשראי" Target="{Binding ElementName=ComboPaymentMethod}"/>
                                     <DatePicker Height="23" SelectedDate="{Binding Payment.CreditValidity}" Width="150"/>
                                 </StackPanel>
-                                <StackPanel  Grid.Row="3"  Margin="15,7,15,7" Visibility="{Binding DisplayCreditDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
+                                <StackPanel  Grid.Row="3" Visibility="{Binding DisplayCreditDetails, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
                                     <Label  Content="מס' תשלומים" Target="{Binding ElementName=TextChequeNumber}"/>
                                     <TextBox  Width="150" Text="{Binding Payment.CreditPaymentsNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 </StackPanel>

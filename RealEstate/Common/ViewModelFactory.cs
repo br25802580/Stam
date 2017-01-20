@@ -490,7 +490,7 @@ namespace RealEstate
             tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentRelation", "סוג הוצאה", new PaymentTypeConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "פרויקט", new PaymentProjectConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "דירה", new PaymentFlatConverter()));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "לקוח/ספק", new CustomerOrSupplierByEntityConverter()));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "מקור/יעד", new CustomerOrSupplierByEntityConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentMethod.Name", "אמצעי תשלום"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "סוג תשלום", new PaymentTypesConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Comment", "הערה"));

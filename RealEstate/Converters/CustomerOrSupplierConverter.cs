@@ -20,54 +20,42 @@ namespace RealEstate
 
             try
             {
+                int paymentSenderTypeId = 0;
                 if (payment?.PaymentRelation != null)
                 {
-                    if (payment.PaymentRelation.FromSenderTypeId != 4)
-                    {
-                        if (payment.PaymentRelation.FromSenderTypeId == 1)
-                        {
-                            if (payment.SupplierInProject?.Supplier != null)
-                                returnedValue = $"{payment.SupplierInProject.Supplier.Name} {payment.SupplierInProject.Supplier.Family} (ספק)";
-                        }
-                        else
-                        {
-                            if (payment.CustomerInProject?.Customer != null)
-                                returnedValue = $"{payment.CustomerInProject.Customer.Name} {payment.CustomerInProject.Customer.Family} (לקוח)";
-                        }
-                    }
-                    else if (payment.PaymentRelation.ToSenderTypeId != 4)
-                    {
-                        if (payment.PaymentRelation.ToSenderTypeId == 1)
-                        {
-                            if (payment.SupplierInProject?.Supplier != null)
-                                returnedValue = $"{payment.SupplierInProject.Supplier.Name} {payment.SupplierInProject.Supplier.Family} (ספק)";
-                        }
-                        else
-                        {
-                            if (payment.CustomerInProject?.Customer != null)
-                                returnedValue = $"{payment.CustomerInProject.Customer.Name} {payment.CustomerInProject.Customer.Family} (לקוח)";
-                        }
-                    }
+                    paymentSenderTypeId = payment.PaymentRelation.FromSenderTypeId == 4 ?
+                        payment.PaymentRelation.ToSenderTypeId.Value : payment.PaymentRelation.FromSenderTypeId.Value;
                 }
                 else
                 {
                     Debt debt = value as Debt;
 
                     if (debt?.PaymentRelation != null)
-                    {
-                        if (debt.PaymentRelation.ToSenderTypeId == 1)
-                        {
-                            if (debt.SupplierInProject?.Supplier != null)
-                                returnedValue = $"{debt.SupplierInProject.Supplier.Name} {debt.SupplierInProject.Supplier.Family} (ספק)";
-                        }
-                        else
-                        {
-                            if (debt.CustomerInProject?.Customer != null)
-                                returnedValue = $"{debt.CustomerInProject.Customer.Name} {debt.CustomerInProject.Customer.Family} (לקוח)";
-                        }
-                    }
+                        paymentSenderTypeId = debt.PaymentRelation.ToSenderTypeId.Value;
+                }
+                switch (paymentSenderTypeId)
+                {
+                    case 1:
+                        if (payment.SupplierInProject?.Supplier != null)
+                            returnedValue = $"{payment.SupplierInProject.Supplier.Name} {payment.SupplierInProject.Supplier.Family} (ספק)";
+                        break;
+                    case 2:
+                    case 3:
+                        if (payment.CustomerInProject?.Customer != null)
+                            returnedValue = $"{payment.CustomerInProject.Customer.Name} {payment.CustomerInProject.Customer.Family} (לקוח)";
+
+                        break;
+                    case 5:
+                        if (payment.Bank != null)
+                            returnedValue = $"{payment.Bank.Name} (בנק)";
+                        break;
+                    default:
+                        if (!string.IsNullOrEmpty(payment.SenderDescription))
+                            returnedValue = $"{payment.SenderDescription} (מקור חיצוני)";
+                        break;
                 }
             }
+
             catch (Exception ex)
             {
                 log.HandleError(ex);
@@ -109,7 +97,7 @@ namespace RealEstate
                     }
                 }
             }
-            catch   (Exception ex)
+            catch (Exception ex)
             {
                 log.HandleError(ex);
             }

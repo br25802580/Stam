@@ -32,6 +32,7 @@ namespace RealEstate
             ListsInitializer.Add(typeof(ProjectType), InitProjectTypes);
             ListsInitializer.Add(typeof(ServiceType), InitServiceTypes);
             ListsInitializer.Add(typeof(Gender), InitGenders);
+            ListsInitializer.Add(typeof(Bank), InitBanks);
 
             SaveCommand = new RelayCommand(SaveExecute);
         }
@@ -214,6 +215,11 @@ namespace RealEstate
         private void InitGenders()
         {
             Genders = new GeneralBL().GetGenders().ToList();
+        }
+
+        private void InitBanks()
+        {
+            Banks = new GeneralBL().GetBanks().ToList();
         }
 
         private void InitPaymentTypes()
@@ -412,6 +418,17 @@ namespace RealEstate
             {
                 genders = value;
                 OnPropertyChanged("Genders");
+            }
+        }
+
+        private IList<Bank> banks;
+        public IList<Bank> Banks
+        {
+            get { return banks; }
+            set
+            {
+                banks = value;
+                OnPropertyChanged("Banks");
             }
         }
 

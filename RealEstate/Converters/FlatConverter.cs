@@ -36,7 +36,8 @@ namespace RealEstate
         {
             return payment.CustomerInProject != null ?
                 payment.CustomerInProject.Flat : payment.SupplierInProject != null ?
-                payment.SupplierInProject.Flat : null;
+                payment.SupplierInProject.Flat : payment.Flat != null ?
+                  payment.Flat : null;
         }
     }
 

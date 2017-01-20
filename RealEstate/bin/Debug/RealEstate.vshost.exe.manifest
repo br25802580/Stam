@@ -186,14 +186,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.exe" size="441256">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.exe" size="444328">
       <assemblyIdentity name="RealEstate" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QWcSGVxke5b1OHqViY/QEngYzMCiKkQB5958EL0iPmY=</dsig:DigestValue>
+        <dsig:DigestValue>ni3kSlMLGY7gAFXzB2Lq2PmyXh5Yi2zllpBt2zzBBQM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -205,19 +205,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NFI0vKWbYyuXH/+RreKrrA7IBsPHX5J6Xlv0+GxvfuU=</dsig:DigestValue>
+        <dsig:DigestValue>E1UwjzupKh/+zNyZgbPYn82KPM7liXb2jL31WsMwi/I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.Data.dll" size="148480">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.Data.dll" size="156672">
       <assemblyIdentity name="RealEstate.Data" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lJhUu+vOzM/6Q2hPzJRpLmJNkW1zri3uT+T1moOkNRo=</dsig:DigestValue>
+        <dsig:DigestValue>XipvmdqbNLBJGkzJKRJ+oxw+swxxLKPLQGVE6jeYgnM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

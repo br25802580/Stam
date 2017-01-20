@@ -1,0 +1,30 @@
+2017-01-19 17:34:22,338 [7] ERROR RealEstate.TableViewModel Error!
+System.NullReferenceException: ההפניה לאובייקט לא הוגדרה למופע של אובייקט.
+   ב-  RealEstate.PaymentViewModel.FillBySenderFilter() ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 1349
+   ב-  RealEstate.PaymentViewModel.set_SenderFilter(SenderFilter value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 370
+   ב-  RealEstate.PaymentViewModel.set_DisplaySenderFilter(Boolean value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 586
+   ב-  RealEstate.PaymentViewModel.set_IsCustomerSender(Boolean value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 544
+   ב-  RealEstate.PaymentViewModel.SetCustomerSender() ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 1267
+   ב-  RealEstate.PaymentViewModel.SetPaymentSender(Int32 senderId) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 1235
+   ב-  RealEstate.PaymentViewModel.set_FromSenderType(SenderType value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 328
+   ב-  RealEstate.PaymentViewModel.set_PaymentRelation(PaymentRelation value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 304
+   ב-  RealEstate.PaymentViewModel.set_PaymentType(DebtType value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 180
+   ב-  RealEstate.PaymentViewModel.Init() ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 1121
+   ב-  RealEstate.RealEstateRepository.OpenNewEditor(EditorType editorType, String title, Action`1 afterCreateNewEditor, Object entity, String entityTitle) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Common\RealEstateRepository.cs:שורה 302
+   ב-  RealEstate.TableViewModel.AddEntity(EditorType editorType) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Base\TableViewModel.cs:שורה 423
+   ב-  RealEstate.TableViewModel.AddExecute(Object parameter) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Base\TableViewModel.cs:שורה 193
+2017-01-19 17:34:37,927 [7] ERROR RealEstate.TableViewModel Error!
+System.NullReferenceException: ההפניה לאובייקט לא הוגדרה למופע של אובייקט.
+   ב-  RealEstate.PaymentViewModel.FillBySenderFilter() ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 1349
+   ב-  RealEstate.PaymentViewModel.set_SenderFilter(SenderFilter value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 370
+   ב-  RealEstate.PaymentViewModel.set_DisplaySenderFilter(Boolean value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 586
+   ב-  RealEstate.PaymentViewModel.set_IsCustomerSender(Boolean value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 544
+   ב-  RealEstate.PaymentViewModel.SetCustomerSender() ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 1267
+   ב-  RealEstate.PaymentViewModel.SetPaymentSender(Int32 senderId) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 1235
+   ב-  RealEstate.PaymentViewModel.set_FromSenderType(SenderType value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 328
+   ב-  RealEstate.PaymentViewModel.set_PaymentRelation(PaymentRelation value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 304
+   ב-  RealEstate.PaymentViewModel.set_PaymentType(DebtType value) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 180
+   ב-  RealEstate.PaymentViewModel.Init() ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Payments\PaymentViewModel.cs:שורה 1121
+   ב-  RealEstate.RealEstateRepository.OpenNewEditor(EditorType editorType, String title, Action`1 afterCreateNewEditor, Object entity, String entityTitle) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Common\RealEstateRepository.cs:שורה 302
+   ב-  RealEstate.TableViewModel.AddEntity(EditorType editorType) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Base\TableViewModel.cs:שורה 423
+   ב-  RealEstate.TableViewModel.AddExecute(Object parameter) ב- C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\ViewModel\Base\TableViewModel.cs:שורה 193

@@ -1,0 +1,17 @@
+
+# setup #
+RealEstateSetup
+RealEstateSetup
+
+# data #
+RealEstate.Data
+RealEstate.Data
+
+# bl #
+RealEstate.BL
+RealEstate.BL
+
+bin
+obj
+packages
+
