@@ -177,8 +177,7 @@ namespace RealEstate
                         if (PaymentRelation == null || (PaymentRelation.FromSenderTypeId != 2 && PaymentRelation.FromSenderTypeId != 3
                             || PaymentRelation.ToSenderTypeId != 4))
                         {
-                            PaymentRelation = PaymentRelations.FirstOrDefault
-                                (pr => pr.FromSenderTypeId == 3 && pr.ToSenderTypeId == 4);
+                            PaymentRelation = new PaymentsBL().GetPaymentRelation(3, 4);
                         }
 
                         //if (Amount < 0)
@@ -618,7 +617,6 @@ namespace RealEstate
                 if (isSupplierSender != value)
                 {
                     isSupplierSender = value;
-                    //IsCustomerSender = !value;
 
                     OnPropertyChanged("isSupplierSender");
 
@@ -626,7 +624,6 @@ namespace RealEstate
                     {
                         DisplaySenderFilter = true;
                     }
-                    //FillProjectsBySender();
                 }
             }
         }
@@ -1231,7 +1228,6 @@ namespace RealEstate
             }
         }
 
-
         private void SetPaymentSender(int senderId)
         {
             switch (senderId)
@@ -1286,35 +1282,22 @@ namespace RealEstate
             IsBankSender = true;
         }
 
-
-        //private void FillPaymentTypeBySupplier()
-        //{
-        //    if (supplier != null && supplier.ServiceType != null && Payment.PaymentType == null)
-        //    {
-        //        if (PaymentType == null || !PaymentType.PaymentTypeForServices.Any(p => p.ServiceType == supplier.ServiceType))
-        //        {
-        //            PaymentTypeForService paymentTypeForService = supplier.ServiceType
-        //            .PaymentTypeForServices.FirstOrDefault();
-        //            if (paymentTypeForService != null)
-        //                PaymentType = paymentTypeForService.PaymentType;
-        //        }
-        //    }
-        //}
-
         public Project GetProject()
         {
-            return Payment.CustomerInProject != null ?
-                 Payment.CustomerInProject.Project : Payment.SupplierInProject != null ?
-                 Payment.SupplierInProject.Project : Payment.Project != null ?
-                 Payment.Project : null;
+            return Payment.Project;
+            //return Payment.CustomerInProject != null ?
+            //     Payment.CustomerInProject.Project : Payment.SupplierInProject != null ?
+            //     Payment.SupplierInProject.Project : Payment.Project != null ?
+            //     Payment.Project : null;
         }
 
         public Flat GetFlat()
         {
-            return Payment.CustomerInProject != null ?
-                 Payment.CustomerInProject.Flat : Payment.SupplierInProject != null ?
-                 Payment.SupplierInProject.Flat : Payment.Flat != null ?
-                  Payment.Flat : null;
+            return Payment.Flat;
+            //return Payment.CustomerInProject != null ?
+            //     Payment.CustomerInProject.Flat : Payment.SupplierInProject != null ?
+            //     Payment.SupplierInProject.Flat : Payment.Flat != null ?
+            //      Payment.Flat : null;
         }
 
         private void FillListsByProject()

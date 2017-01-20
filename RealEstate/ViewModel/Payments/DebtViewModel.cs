@@ -35,7 +35,7 @@ namespace RealEstate
             set { Entity = value; }
         }
 
-        private DebtType debtType;
+        private DebtType debtType = DebtType.None;
         public DebtType DebtType
         {
             get { return debtType; }
@@ -54,20 +54,19 @@ namespace RealEstate
                         if (PaymentRelation == null || (PaymentRelation.FromSenderTypeId != 2 && PaymentRelation.FromSenderTypeId != 3
                             || PaymentRelation.ToSenderTypeId != 4))
                         {
-                            PaymentRelation = PaymentRelations.FirstOrDefault
-                                (pr => pr.FromSenderTypeId == 3 && pr.ToSenderTypeId == 4);
+                            PaymentRelation = new PaymentsBL().GetPaymentRelation(3, 4);
                         }
-                        FromSenderTypes.Remove(FromSenderTypes.Last());
+                        FromSenderTypes.Remove(FromSenderTypes.First(senderType => senderType.Id == 4));
                     }
                     else
                     {
                         if (PaymentRelation == null || (PaymentRelation.FromSenderTypeId != 4
                           || PaymentRelation.ToSenderTypeId != 1))
                         {
-                            PaymentRelation = PaymentRelations.FirstOrDefault
-                         (pr => pr.FromSenderTypeId == 4 && pr.ToSenderTypeId == 1);
+                            PaymentRelation = new PaymentsBL().GetPaymentRelation(4, 1);
+
+                            ToSenderTypes.Remove(ToSenderTypes.First(senderType => senderType.Id == 4));
                         }
-                        ToSenderTypes.Remove(ToSenderTypes.Last());
                     }
                     Debt.CalculateDebtAmount();
                 }
@@ -131,15 +130,14 @@ namespace RealEstate
                     fromSenderType = value;
                     OnPropertyChanged("FromSenderType");
 
-                    if (value != null && (value.Id == 2 || value.Id == 3))
-                        IsCustomerSender = true;
-                    else
-                        IsSupplierSender = true;
+                    if (value != null)
+                    {
+                        SetPaymentSender(value.Id);
+                    }
 
                     if (paymentRelation.FromSenderType != value)
                     {
-                        PaymentRelation = PaymentRelations.FirstOrDefault
-                                   (pr => pr.FromSenderType == value && pr.ToSenderType == ToSenderType);
+                        PaymentRelation = new PaymentsBL().GetPaymentRelation(fromSenderType.Id, ToSenderType.Id);
                     }
 
                 }
@@ -157,15 +155,12 @@ namespace RealEstate
                     toSenderType = value;
                     OnPropertyChanged("ToSenderType");
 
-                    if (value != null && (value.Id == 1))
-                        IsSupplierSender = true;
-                    else
-                        IsCustomerSender = true;
+                    if (value != null)
+                        SetPaymentSender(value.Id);
 
                     if (paymentRelation.ToSenderType != value)
                     {
-                        PaymentRelation = PaymentRelations.FirstOrDefault
-                                   (pr => pr.FromSenderType == FromSenderType && pr.ToSenderType == value);
+                        PaymentRelation = new PaymentsBL().GetPaymentRelation(FromSenderType.Id, toSenderType.Id);
                     }
                 }
             }
@@ -404,11 +399,74 @@ namespace RealEstate
                 if (isCustomerSender != value)
                 {
                     isCustomerSender = value;
-                    IsSupplierSender = !value;
 
                     OnPropertyChanged("IsCustomerSender");
-                    //  FillProjectsBySender();
 
+                    if (isCustomerSender)
+                    {
+                        DisplaySenderFilter = true;
+                    }
+                }
+            }
+        }
+
+        private bool isBankSender = false;
+        public bool IsBankSender
+        {
+            get { return isBankSender; }
+            set
+            {
+                if (isBankSender != value)
+                {
+                    isBankSender = value;
+
+                    OnPropertyChanged("IsBankSender");
+
+                    if (isBankSender)
+                    {
+                        DisplaySenderFilter = false;
+                    }
+
+                    //FillProjectsBySender();
+                }
+            }
+        }
+
+        private bool displaySenderFilter = false;
+        public bool DisplaySenderFilter
+        {
+            get { return displaySenderFilter; }
+            set
+            {
+                if (displaySenderFilter != value)
+                {
+                    displaySenderFilter = value;
+
+                    OnPropertyChanged("DisplaySenderFilter");
+
+                    if (!displaySenderFilter)
+                        SenderFilter = SenderFilter.ByProject;
+
+                }
+            }
+        }
+
+        private bool isNoneSender = false;
+        public bool IsNoneSender
+        {
+            get { return isNoneSender; }
+            set
+            {
+                if (isNoneSender != value)
+                {
+                    isNoneSender = value;
+
+                    OnPropertyChanged("IsNoneSender");
+
+                    if (isNoneSender)
+                    {
+                        DisplaySenderFilter = false;
+                    }
                 }
             }
         }
@@ -422,10 +480,13 @@ namespace RealEstate
                 if (isSupplierSender != value)
                 {
                     isSupplierSender = value;
-                    IsCustomerSender = !value;
 
                     OnPropertyChanged("isSupplierSender");
-                    //       FillProjectsBySender();
+
+                    if (isSupplierSender)
+                    {
+                        DisplaySenderFilter = true;
+                    }
                 }
             }
         }
@@ -537,6 +598,7 @@ namespace RealEstate
             InitList(typeof(City));
             InitList(typeof(SenderType));
             InitList(typeof(PaymentRelation));
+            InitList(typeof(Bank));
 
             PaymentRelation paymentRelation = Debt.PaymentRelation;
 
@@ -559,14 +621,14 @@ namespace RealEstate
 
             //      FillBySenderFilter();
 
-            if (PaymentRelation.ToSenderTypeId == 1)
-            {
-                IsSupplierSender = true;
-            }
-            else if (PaymentRelation.FromSenderTypeId == 2 || PaymentRelation.FromSenderTypeId == 3)
-            {
-                IsCustomerSender = true;
-            }
+            //if (PaymentRelation.ToSenderTypeId == 1)
+            //{
+            //    IsSupplierSender = true;
+            //}
+            //else if (PaymentRelation.FromSenderTypeId == 2 || PaymentRelation.FromSenderTypeId == 3)
+            //{
+            //    IsCustomerSender = true;
+            //}
 
             if (Debt.CustomerInProject != null)
             {
@@ -585,6 +647,7 @@ namespace RealEstate
                 Debt.CreatedDate = DateTime.Now;
                 Debt.AmountPaid = 0;
                 Debt.DelinquentAmount = 0;
+                Debt.DueDate = DateTime.Now.AddMonths(1);
             }
 
             Amount = Debt.Amount.HasValue ? Debt.Amount.Value : 0;
@@ -611,18 +674,75 @@ namespace RealEstate
             }
         }
 
+
+        private void SetPaymentSender(int senderId)
+        {
+            switch (senderId)
+            {
+                case 1:
+                    SetSupplierSender();
+                    break;
+                case 2:
+                case 3:
+                    SetCustomerSender();
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    SetBankSender();
+                    break;
+                default:
+                    SetNoneSender();
+                    break;
+            }
+        }
+
+        private void SetNoneSender()
+        {
+            IsSupplierSender = false;
+            IsCustomerSender = false;
+            IsBankSender = false;
+            IsNoneSender = true;
+        }
+
+        private void SetSupplierSender()
+        {
+            IsCustomerSender = false;
+            IsBankSender = false;
+            IsNoneSender = false;
+            IsSupplierSender = true;
+        }
+
+        private void SetCustomerSender()
+        {
+            IsSupplierSender = false;
+            IsBankSender = false;
+            IsNoneSender = false;
+            IsCustomerSender = true;
+        }
+
+        private void SetBankSender()
+        {
+            IsCustomerSender = false;
+            IsSupplierSender = false;
+            IsNoneSender = false;
+            IsBankSender = true;
+        }
+
         public Project GetProject()
         {
-            return Debt.CustomerInProject != null ?
-                 Debt.CustomerInProject.Project : Debt.SupplierInProject != null ?
-                 Debt.SupplierInProject.Project : null;
+            return Debt.Project;
+            //return Debt.CustomerInProject != null ?
+            //     Debt.CustomerInProject.Project : Debt.SupplierInProject != null ?
+            //     Debt.SupplierInProject.Project : null;
         }
 
         public Flat GetFlat()
         {
-            return Debt.CustomerInProject != null ?
-                 Debt.CustomerInProject.Flat : Debt.SupplierInProject != null ?
-                 Debt.SupplierInProject.Flat : null;
+            return Debt.Flat;
+            //return Debt.CustomerInProject != null ?
+            //     Debt.CustomerInProject.Flat : Debt.SupplierInProject != null ?
+            //     Debt.SupplierInProject.Flat : null;
         }
 
         public override BeforeSaveResult BeforeSave()
@@ -681,6 +801,9 @@ namespace RealEstate
                 Debt.CustomerInProject = null;
             }
 
+            Debt.Project = Project;
+            Debt.Flat = Flat;
+
             if (Debt.Amount == null || Debt.Amount == 0)
             {
                 beforeSaveResult.IsValidData = false;
@@ -706,7 +829,8 @@ namespace RealEstate
                 {
                     Customers = Project.CustomerInProjects.Select(project => project.Customer).Distinct().ToList();
                     Suppliers = Project.SupplierInProjects.Where(sInP => sInP != null && sInP.Supplier != null).Select(project => project.Supplier).Distinct().ToList();
-                    Flats = Project.Flats.Where(flat => flat.CustomerInProjects?.Count > 0).ToList();
+                    Flats = Project.Flats.ToList();
+                    //Flats = Project.Flats.Where(flat => flat.CustomerInProjects?.Count > 0).ToList();
                 }
                 else
                 {
@@ -714,7 +838,7 @@ namespace RealEstate
                     {
                         Flats = Project.Flats.Where(flat => flat.CustomerInProjects.Any(cInP => cInP.Customer == Customer)).ToList();
                     }
-                    else
+                    else if(IsSupplierSender)
                     {
                         Flats = Project.Flats.Where(flat => flat.SupplierInProjects.Any(cInP => cInP.Supplier == Supplier)).ToList();
                     }

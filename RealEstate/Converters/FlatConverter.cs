@@ -56,8 +56,9 @@ namespace RealEstate
         private Flat GetFlat(Debt debt)
         {
             return debt.CustomerInProject != null ?
-                 debt.CustomerInProject.Flat : debt.SupplierInProject != null ?
-                 debt.SupplierInProject.Flat : null;
+                    debt.CustomerInProject.Flat : debt.SupplierInProject != null ?
+                    debt.SupplierInProject.Flat : debt.Flat != null ?
+                    debt.Flat : null;
         }
     }
 }

@@ -69,7 +69,8 @@ namespace RealEstate
         {
             return debt.CustomerInProject != null ?
                  debt.CustomerInProject.Project : debt.SupplierInProject != null ?
-                 debt.SupplierInProject.Project : null;
+                 debt.SupplierInProject.Project : debt.Project != null ?
+                 debt.Project : null;
         }
     }
 }

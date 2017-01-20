@@ -25,34 +25,64 @@ namespace RealEstate
                 {
                     paymentSenderTypeId = payment.PaymentRelation.FromSenderTypeId == 4 ?
                         payment.PaymentRelation.ToSenderTypeId.Value : payment.PaymentRelation.FromSenderTypeId.Value;
+                    //else
+                    //{
+                    //    Debt debt = value as Debt;
+
+                    //    if (debt?.PaymentRelation != null)
+                    //        paymentSenderTypeId = debt.PaymentRelation.ToSenderTypeId.Value;
+                    //}
+                    switch (paymentSenderTypeId)
+                    {
+                        case 1:
+                            if (payment.SupplierInProject?.Supplier != null)
+                                returnedValue = $"{payment.SupplierInProject.Supplier.Name} {payment.SupplierInProject.Supplier.Family} (ספק)";
+                            break;
+                        case 2:
+                        case 3:
+                            if (payment.CustomerInProject?.Customer != null)
+                                returnedValue = $"{payment.CustomerInProject.Customer.Name} {payment.CustomerInProject.Customer.Family} (לקוח)";
+
+                            break;
+                        case 5:
+                            if (payment.Bank != null)
+                                returnedValue = $"{payment.Bank.Name} (בנק)";
+                            break;
+                        default:
+                            if (!string.IsNullOrEmpty(payment.SenderDescription))
+                                returnedValue = $"{payment.SenderDescription} (מקור חיצוני)";
+                            break;
+                    }
                 }
                 else
                 {
                     Debt debt = value as Debt;
 
                     if (debt?.PaymentRelation != null)
-                        paymentSenderTypeId = debt.PaymentRelation.ToSenderTypeId.Value;
-                }
-                switch (paymentSenderTypeId)
-                {
-                    case 1:
-                        if (payment.SupplierInProject?.Supplier != null)
-                            returnedValue = $"{payment.SupplierInProject.Supplier.Name} {payment.SupplierInProject.Supplier.Family} (ספק)";
-                        break;
-                    case 2:
-                    case 3:
-                        if (payment.CustomerInProject?.Customer != null)
-                            returnedValue = $"{payment.CustomerInProject.Customer.Name} {payment.CustomerInProject.Customer.Family} (לקוח)";
+                        paymentSenderTypeId = debt.PaymentRelation.FromSenderTypeId == 4 ?
+                      debt.PaymentRelation.ToSenderTypeId.Value : debt.PaymentRelation.FromSenderTypeId.Value;
 
-                        break;
-                    case 5:
-                        if (payment.Bank != null)
-                            returnedValue = $"{payment.Bank.Name} (בנק)";
-                        break;
-                    default:
-                        if (!string.IsNullOrEmpty(payment.SenderDescription))
-                            returnedValue = $"{payment.SenderDescription} (מקור חיצוני)";
-                        break;
+                    switch (paymentSenderTypeId)
+                    {
+                        case 1:
+                            if (debt.SupplierInProject?.Supplier != null)
+                                returnedValue = $"{debt.SupplierInProject.Supplier.Name} {debt.SupplierInProject.Supplier.Family} (ספק)";
+                            break;
+                        case 2:
+                        case 3:
+                            if (debt.CustomerInProject?.Customer != null)
+                                returnedValue = $"{debt.CustomerInProject.Customer.Name} {debt.CustomerInProject.Customer.Family} (לקוח)";
+
+                            break;
+                        case 5:
+                            if (debt.Bank != null)
+                                returnedValue = $"{debt.Bank.Name} (בנק)";
+                            break;
+                        default:
+                            if (!string.IsNullOrEmpty(debt.SenderDescription))
+                                returnedValue = $"{debt.SenderDescription} (מקור חיצוני)";
+                            break;
+                    }
                 }
             }
 

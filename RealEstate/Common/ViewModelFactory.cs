@@ -488,8 +488,10 @@ namespace RealEstate
             tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentDate", "תאריך"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Amount", "סכום"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentRelation", "סוג הוצאה", new PaymentTypeConverter()));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "פרויקט", new PaymentProjectConverter()));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "דירה", new PaymentFlatConverter()));
+            //tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "פרויקט", new PaymentProjectConverter()));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Project.Name", "פרויקט"));
+            //tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "דירה", new PaymentFlatConverter()));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Flat.FlatNumber", "דירה"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "מקור/יעד", new CustomerOrSupplierByEntityConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentMethod.Name", "אמצעי תשלום"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "סוג תשלום", new PaymentTypesConverter()));
@@ -564,9 +566,11 @@ namespace RealEstate
             tableEditorMetadata.Fields.Add(new ColumnMetadata("AmountPaid", "סכום ששולם"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("DelinquentAmount", "יתרת חוב"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentType.Name", "סוג תשלום"));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "פרויקט", new DebtProjectConverter()));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "דירה", new DebtFlatConverter()));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "לקוח/ספק", new CustomerOrSupplierByEntityConverter()));
+            //tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "פרויקט", new DebtProjectConverter()));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Project.Name", "פרויקט"));
+            //tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "דירה", new DebtFlatConverter()));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Flat.FlatNumber", "דירה"));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "מקור/יעד", new CustomerOrSupplierByEntityConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentRelation", "סוג חוב", new PaymentTypeConverter()));
 
             tableEditorMetadata.RowStateConverter = new DebtStateConverter();
