@@ -251,6 +251,10 @@ namespace RealEstate
             AddCitiesEditor();
             AddSendersEditor();
             AddPaymentRelationsEditor();
+            AddBanksEditor();
+            AddServiceTypesEditor();
+            AddPaymentTypesEditor();
+            AddPaymentTypeForServicesEditor();
 
             pageType = PageType.System;
 
@@ -280,6 +284,34 @@ namespace RealEstate
             editorMetaData = new NewEditorMetadata(type, typeof(PaymentRelationViewModel), editorType, pageType,
              typeof(PaymentRelationDetails));
             editorMetaData.IconKind = PackIconKind.AccountSwitch;
+            EditorsMetaData.Add(editorType, editorMetaData);
+
+            type = typeof(Bank);
+            editorType = EditorType.Bank;
+            editorMetaData = new NewEditorMetadata(type, typeof(NamedElementViewModel), editorType, pageType,
+             typeof(CountryDetails));
+            editorMetaData.IconKind = PackIconKind.Bank;
+            EditorsMetaData.Add(editorType, editorMetaData);
+
+            type = typeof(ServiceType);
+            editorType = EditorType.ServiceType;
+            editorMetaData = new NewEditorMetadata(type, typeof(NamedElementViewModel), editorType, pageType,
+             typeof(CountryDetails));
+            editorMetaData.IconKind = PackIconKind.Run;
+            EditorsMetaData.Add(editorType, editorMetaData);
+
+            type = typeof(PaymentType);
+            editorType = EditorType.PaymentType;
+            editorMetaData = new NewEditorMetadata(type, typeof(PaymentTypeViewModel), editorType, pageType,
+             typeof(PaymentTypeDetails));
+            editorMetaData.IconKind = PackIconKind.Database;
+            EditorsMetaData.Add(editorType, editorMetaData);
+
+            type = typeof(PaymentTypeForService);
+            editorType = EditorType.PaymentTypeForService;
+            editorMetaData = new NewEditorMetadata(type, typeof(PaymentTypeForServiceViewModel), editorType, pageType,
+             typeof(PaymentTypeForServiceDetails));
+            editorMetaData.IconKind = PackIconKind.Run;
             EditorsMetaData.Add(editorType, editorMetaData);
         }
 
@@ -632,7 +664,7 @@ namespace RealEstate
             tableEditorMetadata.GetReadOnlyItems = (sourceList) =>
             {
                 IList<Country> list = sourceList as IList<Country>;
-                return  list.Where(country => country.Id == 1).ToList();
+                return list.Where(country => country.Id == 1).ToList();
             };
 
             tableEditorMetadata.EditInPopup = true;
@@ -659,14 +691,174 @@ namespace RealEstate
             tableEditorMetadata.ChildEditorType = EditorType.Sender;
             tableEditorMetadata.NewEditorType = EditorType.Sender;
 
+            tableEditorMetadata.BeforeDelete = (entities) =>
+            {
+                foreach (SenderType senderType in entities)
+                {
+                    if (senderType != null)
+                    {
+                        foreach (var paymentRelation in senderType.PaymentRelations)
+                        {
+                            foreach (var payment in paymentRelation.Payments)
+                            {
+                                payment.PaymentRelation = new PaymentsBL().GetPaymentRelation(6, 4);
+                            }
+
+                            foreach (var debt in paymentRelation.Debts)
+                            {
+                                debt.PaymentRelation = new PaymentsBL().GetPaymentRelation(6, 4);
+                            }
+                        }
+
+                        foreach (var paymentRelation in senderType.PaymentRelations1)
+                        {
+                            foreach (var payment in paymentRelation.Payments)
+                            {
+                                payment.PaymentRelation = new PaymentsBL().GetPaymentRelation(4, 6);
+                            }
+
+                            foreach (var debt in paymentRelation.Debts)
+                            {
+                                debt.PaymentRelation = new PaymentsBL().GetPaymentRelation(4, 6);
+                            }
+                        }
+                    }
+                }
+            };
+
+            tableEditorMetadata.AfterAddEntityAfterSave = (entity) =>
+            {
+                SenderType senderType = entity as SenderType;
+                if (senderType != null)
+                {
+                    new PaymentsBL().GetPaymentRelation(senderType.Id, 4);
+                    new PaymentsBL().GetPaymentRelation(4, senderType.Id);
+                }
+            };
+
             tableEditorMetadata.GetReadOnlyItems = (sourceList) =>
             {
                 IList<SenderType> list = sourceList as IList<SenderType>;
-                return list.Where(sender => sender.Id <= 4).ToList();
+                return list.Where(sender => sender.Id <= 6).ToList();
             };
 
-            tableEditorMetadata.EditInPopup = true;
             tableEditorMetadata.RowBackgroundConverter = new EntityLockedHighlightConverter();
+
+            EditorsMetaData.Add(editorType, tableEditorMetadata);
+        }
+
+        private void AddPaymentTypeForServicesEditor()
+        {
+            PageType pageType = PageType.System;
+            Type type = typeof(Data.PaymentTypeForService);
+            EditorType editorType = EditorType.PaymentTypeForServices;
+            TableEditorMetadata tableEditorMetadata = new TableEditorMetadata(type, typeof(TableViewModel), editorType, pageType, "/Views/Customers/CustomersTable.xaml");
+
+            tableEditorMetadata.PluralCaption = "סוגי תשלום עבור שירות";
+            tableEditorMetadata.SingleCaption = "סוג תשלום עבור שירות ספק";
+            tableEditorMetadata.EditInPopup = true;
+
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentType.Name", "שם") { Width = new DataGridLength(230) });
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentType.Order", "סדר") { Width = new DataGridLength(230) });
+
+            tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata("ServiceType.Name", "סוג שירות"));
+            tableEditorMetadata.Groups.Add(tableEditorMetadata.AvailableGroups[0]);
+
+            tableEditorMetadata.IconKind = PackIconKind.Run;
+            tableEditorMetadata.InitList = () => { return new ObservableCollection<PaymentTypeForService>(new PaymentsBL().GetPaymentTypesForService()); };
+            tableEditorMetadata.ChildEditorType = EditorType.PaymentTypeForService;
+            tableEditorMetadata.NewEditorType = EditorType.PaymentTypeForService;
+
+            tableEditorMetadata.BeforeDelete = (entities) =>
+            {
+                //foreach (SenderType senderType in entities)
+                //{
+                //    if (senderType != null)
+                //    {
+                //        foreach (var paymentRelation in senderType.PaymentRelations)
+                //        {
+                //            foreach (var payment in paymentRelation.Payments)
+                //            {
+                //                payment.PaymentRelation = new PaymentsBL().GetPaymentRelation(6, 4);
+                //            }
+
+                //            foreach (var debt in paymentRelation.Debts)
+                //            {
+                //                debt.PaymentRelation = new PaymentsBL().GetPaymentRelation(6, 4);
+                //            }
+                //        }
+
+                //        foreach (var paymentRelation in senderType.PaymentRelations1)
+                //        {
+                //            foreach (var payment in paymentRelation.Payments)
+                //            {
+                //                payment.PaymentRelation = new PaymentsBL().GetPaymentRelation(4, 6);
+                //            }
+
+                //            foreach (var debt in paymentRelation.Debts)
+                //            {
+                //                debt.PaymentRelation = new PaymentsBL().GetPaymentRelation(4, 6);
+                //            }
+                //        }
+                //}
+                //}
+            };
+
+            //tableEditorMetadata.AfterAddEntityAfterSave = (entity) =>
+            //{
+            //    SenderType senderType = entity as SenderType;
+            //    if (senderType != null)
+            //    {
+            //        new PaymentsBL().GetPaymentRelation(senderType.Id, 4);
+            //        new PaymentsBL().GetPaymentRelation(4, senderType.Id);
+            //    }
+            //};
+
+            EditorsMetaData.Add(editorType, tableEditorMetadata);
+        }
+
+        private void AddServiceTypesEditor()
+        {
+            PageType pageType = PageType.System;
+            Type type = typeof(Data.ServiceType);
+            EditorType editorType = EditorType.ServiceTypes;
+            TableEditorMetadata tableEditorMetadata = new TableEditorMetadata(type, typeof(TableViewModel), editorType, pageType, "/Views/Customers/CustomersTable.xaml");
+
+            tableEditorMetadata.PluralCaption = "סוגי שירותים";
+            tableEditorMetadata.SingleCaption = "סוג שירות";
+            tableEditorMetadata.EditInPopup = true;
+
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Name", "שם") { Width = new DataGridLength(230) });
+
+            tableEditorMetadata.IconKind = PackIconKind.Run;
+            tableEditorMetadata.InitList = () => { return new ObservableCollection<ServiceType>(new GeneralBL().GetServiceTypes()); };
+            tableEditorMetadata.ChildEditorType = EditorType.ServiceType;
+            tableEditorMetadata.NewEditorType = EditorType.ServiceType;
+
+            tableEditorMetadata.EditInPopup = true;
+
+            EditorsMetaData.Add(editorType, tableEditorMetadata);
+        }
+
+        private void AddBanksEditor()
+        {
+            PageType pageType = PageType.System;
+            Type type = typeof(Data.Bank);
+            EditorType editorType = EditorType.Banks;
+            TableEditorMetadata tableEditorMetadata = new TableEditorMetadata(type, typeof(TableViewModel), editorType, pageType, "/Views/Customers/CustomersTable.xaml");
+
+            tableEditorMetadata.PluralCaption = "בנקים";
+            tableEditorMetadata.SingleCaption = "בנק";
+            tableEditorMetadata.EditInPopup = true;
+
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Name", "שם") { Width = new DataGridLength(230) });
+
+            tableEditorMetadata.IconKind = PackIconKind.Bank;
+            tableEditorMetadata.InitList = () => { return new ObservableCollection<Bank>(new GeneralBL().GetBanks()); };
+            tableEditorMetadata.ChildEditorType = EditorType.Bank;
+            tableEditorMetadata.NewEditorType = EditorType.Bank;
+
+            tableEditorMetadata.EditInPopup = true;
 
             EditorsMetaData.Add(editorType, tableEditorMetadata);
         }
@@ -695,6 +887,41 @@ namespace RealEstate
             EditorsMetaData.Add(editorType, tableEditorMetadata);
         }
 
+        private void AddPaymentTypesEditor()
+        {
+            PageType pageType = PageType.System;
+            Type type = typeof(Data.PaymentType);
+            EditorType editorType = EditorType.PaymentTypes;
+            TableEditorMetadata tableEditorMetadata = new TableEditorMetadata(type, typeof(TableViewModel), editorType, pageType, "/Views/Customers/CustomersTable.xaml");
+
+            tableEditorMetadata.PluralCaption = "סוגי תשלום";
+            tableEditorMetadata.SingleCaption = "תשלום";
+            tableEditorMetadata.EditInPopup = true;
+
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Name", "שם") { Width = new DataGridLength(220) });
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentRelation.FromSenderType.Name", "מקור תשלום") { Width = new DataGridLength(220) });
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentRelation.ToSenderType.Name", "יעד תשלום") { Width = new DataGridLength(220) });
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Order", "מיקום ברשימה") { Width = new DataGridLength(220) });
+
+            tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata(".", "סוג תשלום", new PaymentRelationTypeConverter()));
+            tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata(".", "יעד תשלום", new PaymentRelationSenderConverter()));
+            tableEditorMetadata.Groups.Add(tableEditorMetadata.AvailableGroups[0]);
+            tableEditorMetadata.Groups.Add(tableEditorMetadata.AvailableGroups[1]);
+
+            tableEditorMetadata.IconKind = PackIconKind.Database;
+            tableEditorMetadata.InitList = () =>
+            {
+                return new ObservableCollection<PaymentType>(new PaymentsBL().GetPaymentTypes()
+                            .Where(paymentType => paymentType.PaymentTypeForServices.Count == 0)
+                            .OrderBy(paymentType=> new PaymentRelationTypeConverter().Convert(paymentType,null,null,null))
+                            .ThenBy(paymentType => new PaymentRelationSenderConverter().Convert(paymentType, null, null, null)));
+            };
+            tableEditorMetadata.ChildEditorType = EditorType.PaymentType;
+            tableEditorMetadata.NewEditorType = EditorType.PaymentType;
+
+            EditorsMetaData.Add(editorType, tableEditorMetadata);
+        }
+
         private void AddCitiesEditor()
         {
             PageType pageType = PageType.System;
@@ -715,8 +942,6 @@ namespace RealEstate
             tableEditorMetadata.InitList = () => { return new ObservableCollection<City>(new GeneralBL().GetCities()); };
             tableEditorMetadata.ChildEditorType = EditorType.City;
             tableEditorMetadata.NewEditorType = EditorType.City;
-
-            tableEditorMetadata.EditInPopup = true;
 
             EditorsMetaData.Add(editorType, tableEditorMetadata);
         }

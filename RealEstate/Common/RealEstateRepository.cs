@@ -166,6 +166,8 @@ namespace RealEstate
             tableViewModel.ChildEditorType = tableEditorMetadata.ChildEditorType;
             tableViewModel.NewEditorType = tableEditorMetadata.NewEditorType;
             tableViewModel.InitListSource = tableEditorMetadata.InitList;
+            tableViewModel.AfterAddEntity = tableEditorMetadata.AfterAddEntity;
+            tableViewModel.AfterAddEntityAfterSave = tableEditorMetadata.AfterAddEntityAfterSave;
             tableViewModel.AfterCreateNewEditor = tableEditorMetadata.AfterCreateNewEditor;
             tableViewModel.GetReadOnlyItems = tableEditorMetadata.GetReadOnlyItems;
             tableViewModel.BeforeDelete = tableEditorMetadata.BeforeDelete;
@@ -245,6 +247,8 @@ namespace RealEstate
                         tableViewModel.ChildEditorType = tableEditorMetadata.ChildEditorType;
                         tableViewModel.NewEditorType = tableEditorMetadata.NewEditorType;
                         tableViewModel.InitListSource = tableEditorMetadata.InitList;
+                        tableViewModel.AfterAddEntity = tableEditorMetadata.AfterAddEntity;
+                        tableViewModel.AfterAddEntityAfterSave = tableEditorMetadata.AfterAddEntityAfterSave;
                         tableViewModel.AfterCreateNewEditor = tableEditorMetadata.AfterCreateNewEditor;
                         tableViewModel.BeforeDelete = tableEditorMetadata.BeforeDelete;
                         tableViewModel.GetReadOnlyItems = tableEditorMetadata.GetReadOnlyItems;
@@ -268,7 +272,7 @@ namespace RealEstate
 
             return viewModel;
         }
-        public DialogResult OpenNewEditor(EditorType editorType, string title, Action<EditorViewModel> afterCreateNewEditor = null, object entity = null, string entityTitle="")
+        public DialogResult OpenNewEditor(EditorType editorType, string title, Action<EditorViewModel> afterCreateNewEditor = null, object entity = null, string entityTitle = "")
         {
             DialogResult dialogResult = new DialogResult();
             NewEditorMetadata editorMetaData = metaDataFactory.EditorsMetaData[editorType] as NewEditorMetadata;
@@ -284,6 +288,10 @@ namespace RealEstate
                 {
                     Type entityType = editorMetaData.EntityType;
                     entity = Activator.CreateInstance(entityType);
+                }
+                else
+                {
+                    viewModel.IsEditEditor = true;
                 }
 
                 viewModel.Entity = entity;

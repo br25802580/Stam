@@ -154,3 +154,7 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\De
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\CityDetails.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentRelationDetails.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentRelationDetails.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentTypeDetails.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentTypeDetails.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentTypeForServiceDetails.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentTypeForServiceDetails.baml

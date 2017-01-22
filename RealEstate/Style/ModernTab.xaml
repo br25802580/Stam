@@ -401,6 +401,12 @@
                                                     </StackPanel>
                                                 </DockPanel>
                                             </DataTemplate>
+                                            <DataTemplate x:Key="DefaultEditorTemplate">
+                                                <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                    <materialDesign:PackIcon Kind="{Binding ViewModel.IconKind}"  Height="18" Width="18" Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding ViewModel.EditorMetaData.PluralCaption}" Margin="2" TextTrimming="CharacterEllipsis" />
+                                                </StackPanel>
+                                            </DataTemplate>
                                         </ListBox.Resources>
                                     </ListBox>
 

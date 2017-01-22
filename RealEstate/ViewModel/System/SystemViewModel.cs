@@ -36,7 +36,11 @@ namespace RealEstate
             RealEstateRepository.Instance.AddEditor(EditorType.Countries);
             RealEstateRepository.Instance.AddEditor(EditorType.Cities);
             RealEstateRepository.Instance.AddEditor(EditorType.Senders);
-            RealEstateRepository.Instance.AddEditor(EditorType.PaymentRelations);
+           // RealEstateRepository.Instance.AddEditor(EditorType.PaymentRelations);
+            RealEstateRepository.Instance.AddEditor(EditorType.Banks);
+            RealEstateRepository.Instance.AddEditor(EditorType.PaymentTypes);
+            RealEstateRepository.Instance.AddEditor(EditorType.ServiceTypes);
+            RealEstateRepository.Instance.AddEditor(EditorType.PaymentTypeForServices);
 
             RealEstateRepository.Instance.SelectEditor(EditorType.Countries);
         }

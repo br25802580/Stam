@@ -52,6 +52,14 @@ namespace RealEstate
         Senders,
         Sender,
         PaymentRelations,
-        PaymentRelation
+        PaymentRelation,
+        Banks,
+        Bank,
+        ServiceTypes,
+        ServiceType,
+        PaymentTypes,
+        PaymentType,
+        PaymentTypeForServices,
+        PaymentTypeForService
     }
 }

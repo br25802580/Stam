@@ -393,6 +393,7 @@ namespace RealEstate
         #endregion
 
         public Action<object> AfterAddEntity { get; set; }
+        public Action<object> AfterAddEntityAfterSave { get; set; }
         public Action<object> DetachEntity { get; set; }
 
         public void EditEntityInPopup(object entity, EditorType editorType)
@@ -425,9 +426,10 @@ namespace RealEstate
             if (dialogResult.Result != null)
             {
                 AfterAddEntity?.Invoke(dialogResult.Result);
-
+                
                 new GeneralBL().AddEntity(dialogResult.Result);
                 new GeneralBL().Save();
+                AfterAddEntityAfterSave?.Invoke(dialogResult.Result);
                 RealEstateRepository.Instance.RefreshAllEditors();
                 //  SelectedItems.Clear();
                 //   SelectedItems.Add(entity);

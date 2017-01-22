@@ -60,6 +60,32 @@ namespace RealEstate
                         return beforeSaveResult;
                     }
                 }
+                else
+                {
+                    Bank bank = Entity as Bank;
+                    if (bank != null)
+                    {
+                        if (string.IsNullOrEmpty(bank.Name))
+                        {
+                            beforeSaveResult.IsValidData = false;
+                            beforeSaveResult.ErrorMessage = "נא הגדר שם בנק";
+                            return beforeSaveResult;
+                        }
+                    }
+                    else
+                    {
+                        ServiceType serviceType = Entity as ServiceType;
+                        if (serviceType != null)
+                        {
+                            if (string.IsNullOrEmpty(bank.Name))
+                            {
+                                beforeSaveResult.IsValidData = false;
+                                beforeSaveResult.ErrorMessage = "נא הגדר סוג שירות";
+                                return beforeSaveResult;
+                            }
+                        }
+                    }
+                }
             }
 
             return beforeSaveResult;

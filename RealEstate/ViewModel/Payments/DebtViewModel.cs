@@ -35,6 +35,17 @@ namespace RealEstate
             set { Entity = value; }
         }
 
+        private void InitSenderTypes()
+        {
+            FromSenderTypes = new ObservableCollection<SenderType>(SenderTypes);
+            ToSenderTypes = new ObservableCollection<SenderType>(SenderTypes);
+
+            if (DebtType == DebtType.Revenue)
+                FromSenderTypes.Remove(FromSenderTypes.First(senderType => senderType.Id == 4));
+            else
+                ToSenderTypes.Remove(ToSenderTypes.First(senderType => senderType.Id == 4));
+        }
+
         private DebtType debtType = DebtType.None;
         public DebtType DebtType
         {
@@ -46,9 +57,6 @@ namespace RealEstate
                     debtType = value;
                     OnPropertyChanged("DebtType");
 
-                    FromSenderTypes = new ObservableCollection<SenderType>(SenderTypes);
-                    ToSenderTypes = new ObservableCollection<SenderType>(SenderTypes);
-
                     if (debtType == DebtType.Revenue)
                     {
                         if (PaymentRelation == null || (PaymentRelation.FromSenderTypeId != 2 && PaymentRelation.FromSenderTypeId != 3
@@ -56,7 +64,6 @@ namespace RealEstate
                         {
                             PaymentRelation = new PaymentsBL().GetPaymentRelation(3, 4);
                         }
-                        FromSenderTypes.Remove(FromSenderTypes.First(senderType => senderType.Id == 4));
                     }
                     else
                     {
@@ -64,10 +71,11 @@ namespace RealEstate
                           || PaymentRelation.ToSenderTypeId != 1))
                         {
                             PaymentRelation = new PaymentsBL().GetPaymentRelation(4, 1);
-
-                            ToSenderTypes.Remove(ToSenderTypes.First(senderType => senderType.Id == 4));
                         }
                     }
+
+                    InitSenderTypes();
+
                     Debt.CalculateDebtAmount();
                 }
             }
@@ -629,7 +637,7 @@ namespace RealEstate
             //{
             //    IsCustomerSender = true;
             //}
-
+            PaymentType paymentType = Debt.PaymentType;
             if (Debt.CustomerInProject != null)
             {
                 Customer = Debt.CustomerInProject.Customer;
@@ -638,7 +646,7 @@ namespace RealEstate
             {
                 Supplier = Debt.SupplierInProject.Supplier;
             }
-            PaymentType = Debt.PaymentType;
+            PaymentType = paymentType;
             Project = GetProject();
             Flat = GetFlat();
 
@@ -838,7 +846,7 @@ namespace RealEstate
                     {
                         Flats = Project.Flats.Where(flat => flat.CustomerInProjects.Any(cInP => cInP.Customer == Customer)).ToList();
                     }
-                    else if(IsSupplierSender)
+                    else if (IsSupplierSender)
                     {
                         Flats = Project.Flats.Where(flat => flat.SupplierInProjects.Any(cInP => cInP.Supplier == Supplier)).ToList();
                     }
@@ -897,6 +905,12 @@ namespace RealEstate
         public override void RefreshData()
         {
             base.RefreshData();
+
+            InitSenderTypes();
+            PaymentRelation = Debt.PaymentRelation;
+
+            RefreshPaymentTypes();
+
             OnPropertyChanged(null);
 
         }
@@ -1035,11 +1049,12 @@ namespace RealEstate
                     {
                         paymentTypes = Supplier.ServiceType.PaymentTypeForServices.Select
                             (paymentTypeForService => paymentTypeForService.PaymentType).ToList();
-                        PaymentType generalPaymentType = paymentRelation.PaymentTypes.FirstOrDefault
-                            (paymentType => paymentType.Name == "כללי");
-                        if (generalPaymentType != null)
+                        IList<PaymentType> generalPaymentTypes = paymentRelation.PaymentTypes
+                            .Where(paymentType => paymentType.PaymentTypeForServices.Count == 0).ToList();
+
+                        foreach (var paymentType in generalPaymentTypes)
                         {
-                            paymentTypes.Add(generalPaymentType);
+                            paymentTypes.Add(paymentType);
                         }
                     }
                 }

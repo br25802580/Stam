@@ -83,7 +83,7 @@ namespace RealEstate
                         selectedTemplate = element.FindResource("DebtTemplate") as DataTemplate;
                         break;
                     default:
-                        selectedTemplate = null;
+                        selectedTemplate = element.FindResource("DefaultEditorTemplate") as DataTemplate;
                         break;
                 }
               

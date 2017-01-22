@@ -26,7 +26,8 @@ namespace RealEstate
             EditInPopup = false;
             Buttons = new List<ButtonMetadata>();
         }
-
+        public Action<object> AfterAddEntity { get; set; }
+        public Action<object> AfterAddEntityAfterSave { get; set; }
         public Type EntityType { get; set; }
         //public Type NewEditorType { get; set; }
         public Type EntityWrapperType { get; set; }

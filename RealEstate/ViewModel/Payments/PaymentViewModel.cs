@@ -158,6 +158,17 @@ namespace RealEstate
             set { Entity = value; }
         }
 
+        private void InitSenderTypes()
+        {
+            FromSenderTypes = new ObservableCollection<SenderType>(SenderTypes);
+            ToSenderTypes = new ObservableCollection<SenderType>(SenderTypes);
+
+            if (PaymentType == DebtType.Revenue)
+                FromSenderTypes.Remove(FromSenderTypes.First(senderType => senderType.Id == 4));
+            else
+                ToSenderTypes.Remove(ToSenderTypes.First(senderType => senderType.Id == 4));
+        }
+
         private DebtType paymentType = DebtType.None;
         public DebtType PaymentType
         {
@@ -169,9 +180,6 @@ namespace RealEstate
                     paymentType = value;
                     OnPropertyChanged("PaymentType");
 
-
-                    FromSenderTypes = new ObservableCollection<SenderType>(SenderTypes);
-                    ToSenderTypes = new ObservableCollection<SenderType>(SenderTypes);
                     if (paymentType == DebtType.Revenue)
                     {
                         if (PaymentRelation == null || (PaymentRelation.FromSenderTypeId != 2 && PaymentRelation.FromSenderTypeId != 3
@@ -179,16 +187,6 @@ namespace RealEstate
                         {
                             PaymentRelation = new PaymentsBL().GetPaymentRelation(3, 4);
                         }
-
-                        //if (Amount < 0)
-                        //    Amount *= -1;
-                        //foreach (var item in PaymentItems)
-                        //{
-                        //    if (item.Amount < 0)
-                        //        item.Amount *= -1;
-                        //}
-
-                        FromSenderTypes.Remove(FromSenderTypes.First(senderType => senderType.Id == 4));
                     }
                     else
                     {
@@ -197,17 +195,9 @@ namespace RealEstate
                         {
                             PaymentRelation = new PaymentsBL().GetPaymentRelation(4, 1);
                         }
-
-
-                        //if (Amount > 0)
-                        //    Amount *= -1;
-                        //foreach (var item in PaymentItems)
-                        //{
-                        //    if (item.Amount > 0)
-                        //        item.Amount *= -1;
-                        //}
-                        ToSenderTypes.Remove(ToSenderTypes.First(senderType => senderType.Id == 4));
                     }
+
+                    InitSenderTypes();
                 }
             }
         }
@@ -253,11 +243,11 @@ namespace RealEstate
                     {
                         paymentTypes = Supplier.ServiceType.PaymentTypeForServices.Select
                             (paymentTypeForService => paymentTypeForService.PaymentType).ToList();
-                        PaymentType generalPaymentType = paymentRelation.PaymentTypes.FirstOrDefault
-                            (paymentType => paymentType.Name == "כללי");
-                        if (generalPaymentType != null)
+                        IList<PaymentType> generalPaymentTypes = paymentRelation.PaymentTypes
+                             .Where(paymentType => paymentType.PaymentTypeForServices.Count == 0).ToList();
+                        foreach (var paymentType in generalPaymentTypes)
                         {
-                            paymentTypes.Add(generalPaymentType);
+                            paymentTypes.Add(paymentType);
                         }
                     }
                 }
@@ -1183,8 +1173,12 @@ namespace RealEstate
         public override void RefreshData()
         {
             base.RefreshData();
-            OnPropertyChanged(null);
 
+            InitSenderTypes();
+            PaymentRelation = Payment.PaymentRelation;
+            RefreshPaymentItems();
+
+            OnPropertyChanged(null);
         }
 
         private void PaymentItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

@@ -177,6 +177,7 @@
     <Compile Include="Common\ViewModelFactory.cs" />
     <Compile Include="Common\RealEstateRepository.cs" />
     <Compile Include="ClientModels\DebtWrapper.cs" />
+    <Compile Include="Converters\PaymentRelationTypeConverter.cs" />
     <Compile Include="Converters\EntityHighlightConverter.cs" />
     <Compile Include="Converters\EntityStateConverter.cs" />
     <Compile Include="Converters\ProjectAddressConverter.cs" />
@@ -225,6 +226,8 @@
     <Compile Include="ViewModel\Sales\SalesFlatViewModel.cs" />
     <Compile Include="ViewModel\Sales\SalesProjectViewModel.cs" />
     <Compile Include="ViewModel\Sales\SaleViewModel.cs" />
+    <Compile Include="ViewModel\System\PaymentTypeForServiceViewModel.cs" />
+    <Compile Include="ViewModel\System\PaymentTypeViewModel.cs" />
     <Compile Include="ViewModel\System\PaymentRelationViewModel.cs" />
     <Compile Include="ViewModel\System\CityViewModel.cs" />
     <Compile Include="ViewModel\System\NamedElementViewModel.cs" />
@@ -328,6 +331,12 @@
     <Compile Include="ViewModel\Base\EditorViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\System\PaymentTypeForServiceDetails.xaml.cs">
+      <DependentUpon>PaymentTypeForServiceDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\System\PaymentTypeDetails.xaml.cs">
+      <DependentUpon>PaymentTypeDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\System\PaymentRelationDetails.xaml.cs">
       <DependentUpon>PaymentRelationDetails.xaml</DependentUpon>
     </Compile>
@@ -543,6 +552,14 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Views\System\PaymentTypeForServiceDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\System\PaymentTypeDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\System\PaymentRelationDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
