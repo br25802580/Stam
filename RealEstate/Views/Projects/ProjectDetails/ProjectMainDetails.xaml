@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:st="http://schemas.spicytaco.io/" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
@@ -11,7 +12,7 @@
              d:DesignHeight="700" d:DesignWidth="800">
     <local:ModernUserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <local:OppositveBoolToVisibilityConverters x:Key="OppositveBoolToVisibilityConverters"/> 
+        <local:OppositveBoolToVisibilityConverters x:Key="OppositveBoolToVisibilityConverters"/>
         <local:PaymentsConverter x:Key="PaymentsConverter"/>
         <local:RevenuesConverter x:Key="RevenuesConverter"/>
         <local:ExpensesConverter x:Key="ExpensesConverter"/>
@@ -19,7 +20,7 @@
     </local:ModernUserControl.Resources>
     <Grid>
         <ScrollViewer>
-            <StackPanel MinWidth="200" HorizontalAlignment="Left" >
+            <StackPanel MinWidth="200" HorizontalAlignment="Stretch" >
                 <StackPanel Margin="0,10,0,20" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <materialDesign:PackIcon Kind="HomeModern"  Height="35" Width="35" Margin="0,0,20,0" VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Text="פרטי פרויקט" Style="{StaticResource Heading1}" Margin="0,0,15,0"  />
@@ -48,8 +49,8 @@
                             <Setter Property="Margin" Value="7" />
                         </Style>
                         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                            <Setter Property="Width" Value="100" />
                             <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
                             <Setter Property="Padding" Value="-3,3" />
@@ -66,86 +67,83 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <GroupBox Header="הערות"  Grid.Column="2" >
-                            <StackPanel Orientation="Vertical">
-                                <TextBox Name="tbMultiLine" TextWrapping="Wrap" Height="130" Width="180" Margin="7"
+                            <TextBox Name="tbMultiLine" TextWrapping="Wrap" Height="130"  Margin="7"
                             AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding Project.Comment}">
-                                </TextBox>
-                            </StackPanel>
+                            </TextBox>
                         </GroupBox>
                         <GroupBox  Header="פרטי פרויקט">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel>
-                                    <Label Content="שם פרויקט" Target="{Binding ElementName=TextName}" BorderBrush="Transparent"/>
-                                    <TextBox x:Name="TextName" Width="150" Text="{Binding Project.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="סוג פרויקט" Target="{Binding ElementName=ComboProjectType}" BorderBrush="Transparent"/>
-                                    <ComboBox x:Name="ComboProjectType" ItemsSource="{Binding ProjectTypes}" SelectedItem="{Binding Project.ProjectType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="תיאור" Target="{Binding ElementName=TextName}" BorderBrush="Transparent"/>
-                                    <TextBox Width="150" Text="{Binding Project.Description, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="1" Grid.Column="0">
-                                    <Label Target="{Binding ElementName=TextChequeNumber}">
-                                        מעלית?
-                                    </Label>
-                                    <CheckBox FlowDirection="LeftToRight" IsChecked="{Binding Project.HasElevator}"/>
-                                </StackPanel>
-                            </StackPanel>
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*">
+                                <Label Content="שם פרויקט" Target="{Binding ElementName=TextName}" BorderBrush="Transparent"/>
+                                <TextBox x:Name="TextName" Text="{Binding Project.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="סוג פרויקט" Target="{Binding ElementName=ComboProjectType}" BorderBrush="Transparent"/>
+                                <ComboBox x:Name="ComboProjectType" ItemsSource="{Binding ProjectTypes}" SelectedItem="{Binding Project.ProjectType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
+
+                                <Label Content="תיאור" Target="{Binding ElementName=TextName}" BorderBrush="Transparent"/>
+                                <TextBox Text="{Binding Project.Description, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Target="{Binding ElementName=TextChequeNumber}">
+                                    מעלית?
+                                </Label>
+                                <CheckBox FlowDirection="LeftToRight" HorizontalAlignment="Left" IsChecked="{Binding Project.HasElevator}"/>
+                            </st:AutoGrid>
                         </GroupBox>
                         <GroupBox  Header="כתובת" Grid.Column="1">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel>
-                                    <Label Content="ארץ" Target="{Binding ElementName=ComboCity}"/>
-                                    <ComboBox Margin="0" ItemsSource="{Binding Countries}" SelectedItem="{Binding Project.Country, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="עיר" Target="{Binding ElementName=ComboCity}"/>
-                                    <ComboBox x:Name="ComboCity" ItemsSource="{Binding Cities}" SelectedItem="{Binding Project.City, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="רחוב" Target="{Binding ElementName=TextStreet}"  BorderBrush="Transparent"/>
-                                    <TextBox x:Name="TextStreet" Width="150" Text="{Binding Project.Street, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="מס' בית" Target="{Binding ElementName=TextHouseNumber}"/>
-                                    <TextBox x:Name="TextHouseNumber" Width="150" Text="{Binding Project.HouseNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </GroupBox>
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*">
 
+                                <Label Content="ארץ" Target="{Binding ElementName=ComboCity}"/>
+                                <ComboBox  ItemsSource="{Binding Countries}" SelectedItem="{Binding Project.Country, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
+
+                                <Label Content="עיר" Target="{Binding ElementName=ComboCity}"/>
+                                <ComboBox  x:Name="ComboCity" ItemsSource="{Binding Cities}" SelectedItem="{Binding Project.City, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
+
+                                <Label Content="רחוב" Target="{Binding ElementName=TextStreet}"  BorderBrush="Transparent"/>
+                                <TextBox x:Name="TextStreet"  Text="{Binding Project.Street, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="מס' בית" Target="{Binding ElementName=TextHouseNumber}"/>
+                                <TextBox x:Name="TextHouseNumber" Text="{Binding Project.HouseNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
+                        </GroupBox>
                         <GroupBox Grid.ColumnSpan="3" Grid.Row="1" Header="פרטי תשלום" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel>
+                            <st:AutoGrid Rows="auto" Columns="2*,3*,*,2*,3*,*,2*,3*,*,2*,3*" Orientation="Vertical">
+                                <Label  Margin="7,15" Content="תשלומים" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Project, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label  />
+
+                                <Label  Content="הכנסות" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Project, Converter={StaticResource RevenuesConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label  />
+
+                                <Label   Content="הוצאות" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Project, Converter={StaticResource ExpensesConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label  />
+
+                                <Label  Content="חובות" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Project, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
+                            </st:AutoGrid>
+                            <!--<st:AutoGrid Rows="auto" Columns=",*,*,*" Orientation="Vertical">
+                                <st:StackPanel MarginBetweenChildren="10" Orientation="Horizontal">
                                     <Label  Content="תשלומים" />
-                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Project, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="1" >
+                                    <TextBlock Style="{StaticResource AmountText}" Text="{Binding Project, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
+                                </st:StackPanel>
+                                <st:StackPanel MarginBetweenChildren="10" Orientation="Horizontal">
                                     <Label  Content="הכנסות" />
-                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Project, Converter={StaticResource RevenuesConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource AmountText}" Text="{Binding Project, Converter={StaticResource RevenuesConverter}, StringFormat=C, Mode=OneWay}"/>
+                                </st:StackPanel>
+
+                                <st:StackPanel MarginBetweenChildren="10" Orientation="Horizontal">
                                     <Label   Content="הוצאות" />
-                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Project, Converter={StaticResource ExpensesConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="3" >
+                                    <TextBlock Style="{StaticResource AmountText}" Text="{Binding Project, Converter={StaticResource ExpensesConverter}, StringFormat=C, Mode=OneWay}"/>
+                                </st:StackPanel>
+
+                                <st:StackPanel MarginBetweenChildren="10" Orientation="Horizontal">
                                     <Label  Content="חובות" />
-                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Project, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                            </Grid>
+                                    <TextBlock Style="{StaticResource AmountText}" Text="{Binding Project, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
+                                </st:StackPanel>
+                            </st:AutoGrid>-->
                         </GroupBox>
                     </Grid>
                 </StackPanel>

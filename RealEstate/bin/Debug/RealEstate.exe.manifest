@@ -186,14 +186,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.exe" size="467880">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.exe" size="465832">
       <assemblyIdentity name="RealEstate" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nB9HJirIWsYeO7LhMLJkk4sVZ4yDVjVPw6cnQfIx8yw=</dsig:DigestValue>
+        <dsig:DigestValue>Qm9xhgmEK2ijPSBcsClcfppDTeZX16blavmRHmTLjB8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

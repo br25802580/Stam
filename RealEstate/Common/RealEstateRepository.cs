@@ -317,6 +317,10 @@ namespace RealEstate
                 Type viewType = editorMetaData.NewEditorType;
                 //  viewModel = Activator.CreateInstance(viewModelType) as EditorViewModel;
                 UserControl uc = Activator.CreateInstance(viewType) as UserControl;
+
+                if (editorMetaData.Width.HasValue)
+                    uc.Width = editorMetaData.Width.Value;
+
                 var dialog = new ModernDialog
                 {
                     Title = title,

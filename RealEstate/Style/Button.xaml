@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:st="http://schemas.spicytaco.io/" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="ContentRoot" TargetType="FrameworkElement">
         <Setter Property="Margin" Value="16,22,16,10" />
@@ -127,5 +128,10 @@
                 <Setter Property="Foreground" Value="{DynamicResource ButtonTextPressed}"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style TargetType="st:AutoGrid">
+        <Setter Property="ChildMargin" Value="7"/>
+        <Setter Property="Margin" Value="7"/>
     </Style>
 </ResourceDictionary>

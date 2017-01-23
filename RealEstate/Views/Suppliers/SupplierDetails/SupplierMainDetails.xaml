@@ -5,6 +5,7 @@
             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:st="http://schemas.spicytaco.io/" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI" FlowDirection="RightToLeft"
@@ -16,7 +17,7 @@
     </local:ModernUserControl.Resources>
     <Grid>
         <ScrollViewer>
-            <StackPanel MinWidth="200" HorizontalAlignment="Left" >
+            <StackPanel MinWidth="200" >
                 <StackPanel Margin="0,10,0,20" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <materialDesign:PackIcon Kind="Run"  Height="35" Width="35" Margin="0,0,20,0" VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Text="פרטי ספק" Style="{StaticResource Heading1}" Margin="0,0,15,0"  />
@@ -47,8 +48,8 @@
                             <Setter Property="Margin" Value="7" />
                         </Style>
                         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                            <Setter Property="Width" Value="90" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Stretch" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
                             <Setter Property="Padding" Value="0,3" />
@@ -61,107 +62,76 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <GroupBox  Header="הערות" Grid.Column="2" VerticalContentAlignment="Top">
-                            <TextBox  Name="tbMultiLine" TextWrapping="Wrap" Width="180" Height="155"  Margin="10,15,10,14"
+                            <TextBox  Name="tbMultiLine" TextWrapping="Wrap" IsTabStop="False" Height="165"  Margin="10,15,10,14"
                             AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding Supplier.Comment}">
                             </TextBox>
                         </GroupBox>
                         <GroupBox  Header="פרטים כלליים">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel>
-                                    <Label Content="סוג שירות" Target="{Binding ElementName=ComboServiceType}"/>
-                                    <ComboBox x:Name="ComboServiceType" ItemsSource="{Binding ServiceTypes}" SelectedItem="{Binding Supplier.ServiceType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="מין"/>
-                                    <ComboBox ItemsSource="{Binding Genders}" SelectedItem="{Binding Supplier.Gender, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="שם" Target="{Binding ElementName=TextName}"/>
-                                    <TextBox x:Name="TextName" Width="150" Text="{Binding Supplier.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="משפחה" Target="{Binding ElementName=TextFamily}"/>
-                                    <TextBox x:Name="TextFamily" Width="150" Text="{Binding Supplier.Family, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="מס' תיק ניכויים" Target="{Binding ElementName=TextFamily}"/>
-                                    <TextBox Width="150" Text="{Binding Supplier.CNPJ, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                            </StackPanel>
+                            <st:AutoGrid Rows="auto,auto,auto,auto,auto" Columns="2*,5*">
+                                <Label Content="סוג שירות" Target="{Binding ElementName=ComboServiceType}"/>
+                                <ComboBox x:Name="ComboServiceType" ItemsSource="{Binding ServiceTypes}" SelectedItem="{Binding Supplier.ServiceType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
+
+                                <Label Content="מין"/>
+                                <ComboBox ItemsSource="{Binding Genders}" SelectedItem="{Binding Supplier.Gender, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
+
+                                <Label Content="שם" Target="{Binding ElementName=TextName}"/>
+                                <TextBox x:Name="TextName" Text="{Binding Supplier.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="משפחה" Target="{Binding ElementName=TextFamily}"/>
+                                <TextBox x:Name="TextFamily" Text="{Binding Supplier.Family, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="ח.פ" Target="{Binding ElementName=TextFamily}"/>
+                                <TextBox Text="{Binding Supplier.CNPJ, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
                         </GroupBox>
                         <GroupBox  Header="כתובת" Grid.Column="1">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel>
-                                    <Label Content="ארץ" Target="{Binding ElementName=ComboCity}"/>
-                                    <ComboBox Margin="0" ItemsSource="{Binding Countries}" SelectedItem="{Binding Supplier.Country, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="עיר" Target="{Binding ElementName=ComboCity}"/>
-                                    <ComboBox x:Name="ComboCity" ItemsSource="{Binding Cities}" SelectedItem="{Binding Supplier.City, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="רחוב" Target="{Binding ElementName=TextStreet}"/>
-                                    <TextBox x:Name="TextStreet" Width="150" Text="{Binding Supplier.Street, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="מס' בית" Target="{Binding ElementName=TextHouseNumber}"/>
-                                    <TextBox x:Name="TextHouseNumber" Width="150" Text="{Binding Supplier.HouseNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                            </StackPanel>
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*">
+                                <Label Content="ארץ" Target="{Binding ElementName=ComboCity}"/>
+                                <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding Supplier.Country, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
+
+                                <Label Content="עיר" Target="{Binding ElementName=ComboCity}"/>
+                                <ComboBox x:Name="ComboCity" ItemsSource="{Binding Cities}" SelectedItem="{Binding Supplier.City, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
+
+                                <Label Content="רחוב" Target="{Binding ElementName=TextStreet}"/>
+                                <TextBox x:Name="TextStreet" Text="{Binding Supplier.Street, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="מס' בית" Target="{Binding ElementName=TextHouseNumber}"/>
+                                <TextBox x:Name="TextHouseNumber" Text="{Binding Supplier.HouseNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
                         </GroupBox>
                         <GroupBox  Header="יצירת קשר" Grid.Row="1" Grid.ColumnSpan="3">
-                            <StackPanel Orientation="Vertical">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                    <StackPanel  Margin="7,7,15,7">
-                                    <Label Content="טלפון 1" Target="{Binding ElementName=TextPhone1}"/>
-                                    <TextBox x:Name="TextPhone1" Width="150" Text="{Binding Supplier.Phone1, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                    <StackPanel  Margin="43,7,7,7" Grid.Column="1">
-                                    <Label  Content="טלפון 2" Target="{Binding ElementName=TextPhone2}"/>
-                                    <TextBox x:Name="TextPhone2" Width="150" Text="{Binding Supplier.Phone2, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                    <StackPanel Margin="40,7,7,7" Grid.Column="2">
-                                        <Label  Content="מייל" Target="{Binding ElementName=TextPhone2}"/>
-                                        <TextBox Width="150" Text="{Binding Supplier.Eצשןך, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                    </StackPanel>
-                                </Grid>
-                            </StackPanel>
+                            <st:AutoGrid Rows="auto" Columns="2*,5*,45,2*,5*,45,2*,5*" Orientation="Vertical">
+                                <Label Content="טלפון 1" Target="{Binding ElementName=TextPhone1}"/>
+                                <TextBox x:Name="TextPhone1" Text="{Binding Supplier.Phone1, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
+
+                                <Label  Content="טלפון 2" Target="{Binding ElementName=TextPhone2}"/>
+                                <TextBox x:Name="TextPhone2" Text="{Binding Supplier.Phone2, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
+
+                                <Label  Content="מייל" Target="{Binding ElementName=TextPhone2}"/>
+                                <TextBox Text="{Binding Supplier.Eצשןך, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
                         </GroupBox>
                         <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="תשלומים" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
-                                <Grid >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Margin="7">
-                                        <Label  Content="תשלומים" />
-                                        <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Supplier, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
-                                    </StackPanel>
-                                    <StackPanel Margin="30,7,7,7" Grid.Column="1" Grid.Row="1">
-                                        <Label  Content="חובות" />
-                                        <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Supplier, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
-                                    </StackPanel>
-                                </Grid>
+                            <st:AutoGrid Rows="auto" Columns="2*,5*,45,2*,5*,45,2*,5*" Orientation="Vertical">
+                                <Label  Margin="7,15" Content="תשלומים" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Supplier, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label/>
+                                <Label  Content="חובות" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Supplier, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label/>
+                                <Label/>
+                                <Label/>
+                            </st:AutoGrid>
                         </GroupBox>
                     </Grid>
                 </StackPanel>

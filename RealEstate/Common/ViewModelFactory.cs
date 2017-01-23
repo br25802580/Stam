@@ -110,7 +110,7 @@ namespace RealEstate
 
             type = typeof(Data.Project);
             editorType = EditorType.LeaseProjectNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(LeaseProjectViewModel), editorType, pageType, typeof(ProjectMainDetails));
+            editorMetaData = new NewEditorMetadata(type, typeof(LeaseProjectViewModel), editorType, pageType, typeof(ProjectMainDetails), 950);
             editorMetaData.IconKind = PackIconKind.HomeModern;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -122,7 +122,7 @@ namespace RealEstate
 
             type = typeof(Data.Flat);
             editorType = EditorType.LeaseFlatNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(LeaseFlatViewModel), editorType, pageType, typeof(FlatMainDetails));
+            editorMetaData = new NewEditorMetadata(type, typeof(LeaseFlatViewModel), editorType, pageType, typeof(FlatMainDetails), 900);
             editorMetaData.IconKind = PackIconKind.HomeMapMarker;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -137,7 +137,7 @@ namespace RealEstate
 
             type = typeof(Data.Project);
             editorType = EditorType.SaleProjectNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(SalesProjectViewModel), editorType, pageType, typeof(ProjectMainDetails));
+            editorMetaData = new NewEditorMetadata(type, typeof(SalesProjectViewModel), editorType, pageType, typeof(ProjectMainDetails), 950);
             editorMetaData.IconKind = PackIconKind.HomeModern;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -149,7 +149,7 @@ namespace RealEstate
 
             type = typeof(Data.Flat);
             editorType = EditorType.SaleFlatNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(SalesFlatViewModel), editorType, pageType, typeof(FlatMainDetails));
+            editorMetaData = new NewEditorMetadata(type, typeof(SalesFlatViewModel), editorType, pageType, typeof(FlatMainDetails), 900);
             editorMetaData.IconKind = PackIconKind.HomeMapMarker;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -164,7 +164,7 @@ namespace RealEstate
 
             type = typeof(Data.Customer);
             editorType = EditorType.CustomerNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(CustomerViewModel), editorType, pageType, typeof(CustomerMainDetails));
+            editorMetaData = new NewEditorMetadata(type, typeof(CustomerViewModel), editorType, pageType, typeof(CustomerMainDetails), 900);
             editorMetaData.IconKind = PackIconKind.HumanHandsdown;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -179,7 +179,7 @@ namespace RealEstate
 
             type = typeof(Data.CustomerInProject);
             editorType = EditorType.ContractNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(ContractViewModel), editorType, pageType, typeof(ContractMainDetails));
+            editorMetaData = new NewEditorMetadata(type, typeof(ContractViewModel), editorType, pageType, typeof(ContractMainDetails), 900);
             editorMetaData.IconKind = PackIconKind.FormatFloatLeft;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -194,7 +194,7 @@ namespace RealEstate
 
             type = typeof(Data.Supplier);
             editorType = EditorType.SupplierNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(SupplierViewModel), editorType, pageType, typeof(SupplierMainDetails));
+            editorMetaData = new NewEditorMetadata(type, typeof(SupplierViewModel), editorType, pageType, typeof(SupplierMainDetails), 900);
             editorMetaData.IconKind = PackIconKind.Run;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -210,7 +210,7 @@ namespace RealEstate
             type = typeof(Data.Payment);
             editorType = EditorType.PaymentNew;
             editorMetaData = new NewEditorMetadata(type, typeof(PaymentViewModel), editorType, pageType,
-                typeof(PaymentMainDetails));
+                typeof(PaymentMainDetails), 900);
             //editorMetaData = new NewEditorMetadata(type, typeof(PaymentViewModel), editorType, pageType,
             //   typeof(PaymentMainDetails), typeof(PaymentWrapper));
             editorMetaData.IconKind = PackIconKind.Database;
@@ -225,7 +225,7 @@ namespace RealEstate
             type = typeof(Data.Debt);
             editorType = EditorType.DebtNew;
             editorMetaData = new NewEditorMetadata(type, typeof(DebtViewModel), editorType, pageType,
-             typeof(DebtMainDetails));
+             typeof(DebtMainDetails), 900);
             editorMetaData.IconKind = PackIconKind.CodeNotEqual;
             EditorsMetaData.Add(editorType, editorMetaData);
 

@@ -28,7 +28,7 @@ namespace RealEstate
             var ue = e.OriginalSource as FrameworkElement;
 
 
-            if (ue != null && (e.Key == Key.Enter && ue.GetType() != typeof(Button)))
+            if (ue != null && (e.Key == Key.Enter && ue.GetType() != typeof(Button) && (ue.GetType() != typeof(TextBox) || !((TextBox)ue).AcceptsReturn)))
             {
                 e.Handled = true;
                 ue.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));

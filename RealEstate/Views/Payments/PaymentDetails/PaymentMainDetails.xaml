@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:st="http://schemas.spicytaco.io/" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI" FlowDirection="RightToLeft"
@@ -20,7 +21,7 @@
             <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </Grid.Resources>
         <ScrollViewer>
-            <StackPanel MinWidth="200" Margin="0">
+            <StackPanel MinWidth="200">
                 <StackPanel Margin="0,0,0,5" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <materialDesign:PackIcon Kind="Database"  Height="35" Width="35" Margin="0,0,20,0" VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Text="פרטי תשלום" Style="{StaticResource Heading1}" Margin="0,0,15,0"  />

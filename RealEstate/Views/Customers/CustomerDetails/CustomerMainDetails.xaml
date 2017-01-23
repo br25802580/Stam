@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:st="http://schemas.spicytaco.io/" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
@@ -16,7 +17,7 @@
     </local:ModernUserControl.Resources>
     <Grid>
         <ScrollViewer>
-            <StackPanel HorizontalAlignment="Left" MinWidth="200">
+            <StackPanel MinWidth="200">
                 <StackPanel Margin="0,10,0,20" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <materialDesign:PackIcon Kind="HumanHandsdown"  Height="35" Width="35" Margin="0,0,20,0" VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Text="פרטי לקוח" Style="{StaticResource Heading1}" Margin="0,0,15,0"  />
@@ -48,8 +49,8 @@
                             <Setter Property="Margin" Value="7" />
                         </Style>
                         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                            <Setter Property="Width" Value="80" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Stretch" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
                             <Setter Property="Padding" Value="0,3" />
@@ -70,17 +71,7 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <GroupBox  Header="הערות" Grid.Column="2" Grid.RowSpan="1">
-                            <GroupBox.Style>
-                                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
-                                    <Setter Property="Grid.RowSpan" Value="1"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsEditEditor}"  Value="True">
-                                            <Setter Property="Grid.RowSpan" Value="1"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </GroupBox.Style>
-                                <TextBox IsTabStop="False" VerticalAlignment="Top"  Height="135" Name="tbMultiLine"  TextWrapping="Wrap"  Width="220" Margin="0,15"
+                            <TextBox IsTabStop="False" VerticalAlignment="Top"  Height="128" Name="tbMultiLine"  TextWrapping="Wrap" Margin="7,15,7,7"
                             AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding Customer.Comment}">
                                 <!--<TextBox.Style>
                                     <Style  TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
@@ -95,98 +86,71 @@
                             </TextBox>
                         </GroupBox>
                         <GroupBox  Header="פרטים כלליים">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel>
-                                    <Label Content="תעודת זהות" Target="{Binding ElementName=TextTZ}"/>
-                                    <TextBox x:Name="TextTZ" Width="150" Text="{Binding Customer.TZ, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="מין"/>
-                                    <ComboBox ItemsSource="{Binding Genders}" SelectedItem="{Binding Customer.Gender, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="שם" Target="{Binding ElementName=TextName}"/>
-                                    <TextBox x:Name="TextName" Width="150" Text="{Binding Customer.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="משפחה" Target="{Binding ElementName=TextFamily}"/>
-                                    <TextBox x:Name="TextFamily" Width="150" Text="{Binding Customer.Family, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                            </StackPanel>
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*">
+
+                                <Label Content="מס' זהות" Target="{Binding ElementName=TextTZ}"/>
+                                <TextBox x:Name="TextTZ" Text="{Binding Customer.TZ, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="מין"/>
+                                <ComboBox ItemsSource="{Binding Genders}" SelectedItem="{Binding Customer.Gender, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
+
+                                <Label Content="שם" Target="{Binding ElementName=TextName}"/>
+                                <TextBox x:Name="TextName" Text="{Binding Customer.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="משפחה" Target="{Binding ElementName=TextFamily}"/>
+                                <TextBox x:Name="TextFamily" Text="{Binding Customer.Family, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
                         </GroupBox>
                         <GroupBox  Header="כתובת" Grid.Column="1">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel>
-                                    <Label Content="ארץ" Target="{Binding ElementName=ComboCity}"/>
-                                    <ComboBox Margin="0" ItemsSource="{Binding Countries}" SelectedItem="{Binding Customer.Country, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="עיר" Target="{Binding ElementName=ComboCity}"/>
-                                    <ComboBox x:Name="ComboCity" ItemsSource="{Binding Cities}" SelectedItem="{Binding Customer.City, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="רחוב" Target="{Binding ElementName=TextStreet}"/>
-                                    <TextBox x:Name="TextStreet" Width="150" Text="{Binding Customer.Street, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="מס' בית" Target="{Binding ElementName=TextHouseNumber}"/>
-                                    <TextBox x:Name="TextHouseNumber" Width="150" Text="{Binding Customer.HouseNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                            </StackPanel>
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*">
+
+                                <Label Content="ארץ" Target="{Binding ElementName=ComboCity}"/>
+                                <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding Customer.Country, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
+
+                                <Label Content="עיר" Target="{Binding ElementName=ComboCity}"/>
+                                <ComboBox x:Name="ComboCity" ItemsSource="{Binding Cities}" SelectedItem="{Binding Customer.City, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
+
+                                <Label Content="רחוב" Target="{Binding ElementName=TextStreet}"/>
+                                <TextBox x:Name="TextStreet" Text="{Binding Customer.Street, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="מס' בית" Target="{Binding ElementName=TextHouseNumber}"/>
+                                <TextBox x:Name="TextHouseNumber" Text="{Binding Customer.HouseNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
                         </GroupBox>
                         <GroupBox Header="יצירת קשר" Grid.Row="1" Grid.ColumnSpan="3">
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                    <StackPanel  Margin="7,7,15,7">
-                                    <Label Content="טלפון 1" Target="{Binding ElementName=TextPhone1}"/>
-                                    <TextBox x:Name="TextPhone1" Width="150" Text="{Binding Customer.Phone1, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Margin="30,7,7,7" Grid.Column="1">
-                                    <Label  Content="טלפון 2" Target="{Binding ElementName=TextPhone2}"/>
-                                    <TextBox x:Name="TextPhone2" Width="150" Text="{Binding Customer.Phone2, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                    <StackPanel Margin="33,7,7,7" Grid.Column="2">
-                                        <Label  Content="מייל" Target="{Binding ElementName=TextPhone2}"/>
-                                        <TextBox Width="150" Text="{Binding Customer.Email, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                    </StackPanel>
-                                </Grid>
-                            </StackPanel>
+                            <st:AutoGrid Rows="auto" Columns="2*,5*,45,2*,5*,45,2*,5*" Orientation="Vertical">
+
+                                <Label Content="טלפון 1" Target="{Binding ElementName=TextPhone1}"/>
+                                <TextBox x:Name="TextPhone1" Text="{Binding Customer.Phone1, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
+
+                                <Label  Content="טלפון 2" Target="{Binding ElementName=TextPhone2}"/>
+                                <TextBox x:Name="TextPhone2" Text="{Binding Customer.Phone2, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
+
+                                <Label  Content="מייל" Target="{Binding ElementName=TextPhone2}"/>
+                                <TextBox Text="{Binding Customer.Email, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
                         </GroupBox>
-                        <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Margin="1,7" Header="תשלומים" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Margin="15,7,0,7">
-                                    <Label  Content="תשלומים" />
-                                    <TextBlock Margin="5,0" Style="{StaticResource AmountText}" Width="150" Text="{Binding Customer, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                                <StackPanel Margin="30,7,0,7" Grid.Column="1" Grid.Row="1">
-                                    <Label  Content="חובות" />
-                                    <TextBlock Margin="5,0" Style="{StaticResource AmountText}" Width="150" Text="{Binding Customer, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                            </Grid>
+                        <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="תשלומים" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
+                            <st:AutoGrid Rows="auto" Columns="2*,5*,45,2*,5*,45,2*,5*" Orientation="Vertical">
+                                <Label  Content="תשלומים" Margin="7,15" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Customer, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label/>
+                                <Label  Content="חובות" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Customer, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label/>
+                                <Label/>
+                                <Label/>
+                            </st:AutoGrid>
                         </GroupBox>
                         <!--<StackPanel>
                             <Label Foreground="Gray" Content="תשלומים" />
-                            <TextBox IsReadOnly="True" Width="150" Text="{Binding Customer, Converter={StaticResource PaymentsConverter}, Mode=OneWay}"/>
+                            <TextBox IsReadOnly="True" Text="{Binding Customer, Converter={StaticResource PaymentsConverter}, Mode=OneWay}"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Foreground="Gray" Content="חובות" />
-                            <TextBox IsReadOnly="True" Width="150" Text="{Binding Customer, Converter={StaticResource DebtsConverter}, Mode=OneWay}"/>
+                            <TextBox IsReadOnly="True" Text="{Binding Customer, Converter={StaticResource DebtsConverter}, Mode=OneWay}"/>
                         </StackPanel>-->
                     </Grid>
 

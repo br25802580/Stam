@@ -70,7 +70,7 @@ namespace RealEstate
             System.Windows.Input.KeyboardFocusChangedEventArgs e)
         {
             var txt = e.NewFocus as TextBox;
-            if (txt != null)
+            if (txt != null && !txt.AcceptsReturn)
                 txt.SelectAll();
         }
 
@@ -78,7 +78,7 @@ namespace RealEstate
             System.Windows.Input.MouseEventArgs e)
         {
             var txt = e.OriginalSource as TextBox;
-            if (txt != null)
+            if (txt != null && !txt.AcceptsReturn)
                 txt.SelectAll();
         }
     }

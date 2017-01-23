@@ -8,7 +8,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" MinHeight="380"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI" FlowDirection="RightToLeft"
-             d:DesignHeight="800" d:DesignWidth="900" Width="900">
+             xmlns:st="http://schemas.spicytaco.io/" 
+             d:DesignHeight="800" d:DesignWidth="900">
     <local:ModernUserControl.Resources>
         <local:OppositveBoolToVisibilityConverters x:Key="OppositveBoolToVisibilityConverters"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -21,7 +22,7 @@
     </local:ModernUserControl.Resources>
     <Grid>
         <ScrollViewer>
-            <StackPanel HorizontalAlignment="Left" MinWidth="200">
+            <StackPanel MinWidth="200">
                 <StackPanel Margin="0,10,0,20" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <materialDesign:PackIcon Kind="HomeMapMarker"  Height="35" Width="35" Margin="0,0,20,0" VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Text="פרטי דירה" Style="{StaticResource Heading1}" Margin="0,0,15,0"  />
@@ -49,8 +50,8 @@
                             <Setter Property="Margin" Value="7" />
                         </Style>
                         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                            <Setter Property="Width" Value="100" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Stretch" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
                             <Setter Property="Padding" Value="0,3" />
@@ -68,164 +69,101 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <GroupBox Grid.Row="0" Grid.ColumnSpan="2" Header="פרטי פרויקט">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Margin="7,7,15,7">
-                                    <Label Content="סוג דירה" Target="{Binding ElementName=ComboProjectType}"/>
-                                    <ComboBox x:Name="ComboProjectType" ItemsSource="{Binding ProjectTypes}" SelectedItem="{Binding ProjectType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
-                                </StackPanel>
+                            <st:AutoGrid Rows="auto,auto,auto" Columns="2*,5*,45,2*,5*">
+                                <Label Content="סוג דירה" Target="{Binding ElementName=ComboProjectType}"/>
+                                <ComboBox x:Name="ComboProjectType" ItemsSource="{Binding ProjectTypes}" SelectedItem="{Binding ProjectType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
+                                <Label/>
 
-                                <StackPanel Grid.Column="1">
-                                    <Label Content="פרויקט" Target="{Binding ElementName=ComboProject}"/>
-                                    <ComboBox x:Name="ComboProject" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" />
-                                </StackPanel>
+                                <Label Content="פרויקט" Target="{Binding ElementName=ComboProject}"/>
+                                <ComboBox x:Name="ComboProject" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
 
-                                <StackPanel Grid.Row="1">
-                                    <Label Foreground="Gray" Content="ארץ" Target="{Binding ElementName=TextCity}"/>
-                                    <TextBox IsTabStop="False" IsReadOnly="True" Width="150" Text="{Binding Project.Country.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
+                                <Label Foreground="Gray" Content="ארץ" Target="{Binding ElementName=TextCity}"/>
+                                <TextBox IsTabStop="False" IsReadOnly="True" Text="{Binding Project.Country.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
 
-                                <StackPanel Grid.Row="1" Grid.Column="1">
-                                    <Label Foreground="Gray" Content="עיר" Target="{Binding ElementName=TextCity}"/>
-                                    <TextBox IsTabStop="False" IsReadOnly="True" x:Name="TextCity" Width="150" Text="{Binding Project.City.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
+                                <Label Foreground="Gray" Content="עיר" Target="{Binding ElementName=TextCity}"/>
+                                <TextBox IsTabStop="False" IsReadOnly="True" x:Name="TextCity" Text="{Binding Project.City.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
 
-                                <StackPanel Grid.Row="2">
-                                    <Label IsTabStop="False" Foreground="Gray" Content="רחוב" Target="{Binding ElementName=TextStreet}"/>
-                                    <TextBox IsReadOnly="True" x:Name="TextStreet" Width="150" Text="{Binding Project.Street, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
+                                <Label IsTabStop="False" Foreground="Gray" Content="רחוב" Target="{Binding ElementName=TextStreet}"/>
+                                <TextBox IsReadOnly="True" x:Name="TextStreet" Text="{Binding Project.Street, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
 
-                                <StackPanel Grid.Row="2" Grid.Column="1">
-                                    <Label IsTabStop="False" Foreground="Gray" Content="מס' בית" Target="{Binding ElementName=TextHouseNumber}"/>
-                                    <TextBox IsReadOnly="True" x:Name="TextHouseNumber" Width="150" Text="{Binding Project.HouseNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                            </Grid>
+                                <Label IsTabStop="False" Foreground="Gray" Content="מס' בית" Target="{Binding ElementName=TextHouseNumber}"/>
+                                <TextBox IsReadOnly="True" x:Name="TextHouseNumber" Text="{Binding Project.HouseNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
                         </GroupBox>
                         <GroupBox Header="הערות"  Grid.Column="2" Grid.Row="0" >
-                            <GroupBox.Style>
-                                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
-                                    <Setter Property="Grid.RowSpan" Value="1"/>
-                                    <!--<Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsEditEditor}"  Value="True">
-                                            <Setter Property="Grid.RowSpan" Value="1"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>-->
-                                </Style>
-                            </GroupBox.Style>
-                                <TextBox Height="93" Name="tbMultiLine" TextWrapping="Wrap" Width="220" Margin="7"
+
+                            <TextBox Height="93" Name="tbMultiLine" TextWrapping="Wrap" Margin="7"
                             AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding Flat.Comment}">
-                                </TextBox>
-                                <!--<TextBox Height="365"  TextWrapping="Wrap"  Width="180" Margin="7"
-                                         Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
-                            AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding Flat.Comment}">
-                                </TextBox>-->
+                            </TextBox>
                         </GroupBox>
                         <GroupBox Grid.ColumnSpan="3" Grid.Row="1" Header="פרטי דירה">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
-                                    <Label Content="מס' דירה" Target="{Binding ElementName=TextFlatNumber}"/>
-                                    <TextBox x:Name="TextFlatNumber" Width="150" Text="{Binding Flat.FlatNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="1" >
-                                    <Label  Content="קומה" Target="{Binding ElementName=TextFloor}"/>
-                                    <TextBox x:Name="TextFloor" Width="150" Text="{Binding Flat.Floor, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="0" Grid.Column="2">
-                                    <Label  Content="סטטוס" Target="{Binding ElementName=TextAirDirection}"/>
-                                    <ComboBox Background="{Binding Flat.Status.Id,Converter={StaticResource StatusConverter},Mode=OneWay}" ItemsSource="{Binding Statuses}" SelectedItem="{Binding Flat.Status, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="150" >
-                                    </ComboBox>
-                                </StackPanel>
-                                <StackPanel Grid.Row="1">
-                                    <Label FontWeight="Bold" Content="מחיר" Target="{Binding ElementName=TextPrice}">
-                                    </Label>
-                                    <TextBox Style="{StaticResource AmountTextBox}" x:Name="TextPrice"  Width="150" Text="{Binding Flat.Price, Mode=TwoWay, StringFormat=C, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="1"  Grid.Column="1">
-                                    <Label Content="שטח (מ&quot;ר)" Target="{Binding ElementName=TextFlatNumber}"/>
-                                    <TextBox Width="150" Text="{Binding Flat.SquareMeter, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="1" Grid.Column="2">
-                                    <Label FontWeight="Bold" Foreground="Gray" Content="מחיר למ&quot;ר" Target="{Binding ElementName=TextAirDirection}"/>
-                                    <TextBox IsTabStop="False" IsReadOnly="True" Width="150" Style="{StaticResource AmountTextBox}">
-                                        <TextBox.Text>
-                                            <MultiBinding StringFormat="C" Converter="{StaticResource FlatPriceForMeterConverter}">
-                                                <Binding Path="Flat.Price"/>
-                                                <Binding Path="Flat.SquareMeter"/>
-                                            </MultiBinding>
-                                        </TextBox.Text>
-                                    </TextBox>
-                                </StackPanel>
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*,45,2*,5*,45,2*,5*">
+                                <Label Content="מס' דירה" Target="{Binding ElementName=TextFlatNumber}"/>
+                                <TextBox x:Name="TextFlatNumber" Text="{Binding Flat.FlatNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
 
-                                <!--</StackPanel>
-                    </GroupBox>-->
+                                <Label  Content="קומה" Target="{Binding ElementName=TextFloor}"/>
+                                <TextBox x:Name="TextFloor" Text="{Binding Flat.Floor, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
 
-                                <StackPanel Grid.Row="2" Grid.Column="0">
-                                    <Label Content="שטח מרפסת (מ&quot;ר)" Target="{Binding ElementName=TextAirDirection}"/>
-                                    <TextBox  Width="150" Text="{Binding Flat.BalconyArea, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="2" Grid.Column="1">
-                                    <Label Content="שטח גינה (מ&quot;ר)" Target="{Binding ElementName=TextAirDirection}"/>
-                                    <TextBox  Width="150" Text="{Binding Flat.GardenArea, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="2" Grid.Column="2">
-                                    <Label Content="מס' חדרים" Target="{Binding ElementName=TextFlatNumber}"/>
-                                    <TextBox Width="150" Text="{Binding Flat.RoomsCount, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="3">
-                                    <Label Content="כיווני אוויר" Target="{Binding ElementName=TextAirDirection}"/>
-                                    <TextBox x:Name="TextAirDirection" Width="150" Text="{Binding Flat.AirDirections, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                                </StackPanel>
+                                <Label  Content="סטטוס" Target="{Binding ElementName=TextAirDirection}"/>
+                                <ComboBox Background="{Binding Flat.Status.Id,Converter={StaticResource StatusConverter},Mode=OneWay}" ItemsSource="{Binding Statuses}" SelectedItem="{Binding Flat.Status, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" >
+                                </ComboBox>
 
-                            </Grid>
+                                <Label FontWeight="Bold" Content="מחיר" Target="{Binding ElementName=TextPrice}">
+                                </Label>
+                                <TextBox Style="{StaticResource AmountTextBox}" x:Name="TextPrice"  Text="{Binding Flat.Price, Mode=TwoWay, StringFormat=C, ValidatesOnDataErrors=True}"/>
+                                <Label/>
+
+                                <Label Content="שטח (מ&quot;ר)" Target="{Binding ElementName=TextFlatNumber}"/>
+                                <TextBox Text="{Binding Flat.SquareMeter, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
+
+                                <Label FontWeight="Bold" Foreground="Gray" Content="מחיר למ&quot;ר" Target="{Binding ElementName=TextAirDirection}"/>
+                                <TextBox IsTabStop="False" IsReadOnly="True" Style="{StaticResource AmountTextBox}">
+                                    <TextBox.Text>
+                                        <MultiBinding StringFormat="C" Converter="{StaticResource FlatPriceForMeterConverter}">
+                                            <Binding Path="Flat.Price"/>
+                                            <Binding Path="Flat.SquareMeter"/>
+                                        </MultiBinding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Content="שטח מרפסת (מ&quot;ר)" Target="{Binding ElementName=TextAirDirection}"/>
+                                <TextBox  Text="{Binding Flat.BalconyArea, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
+
+                                <Label Content="שטח גינה (מ&quot;ר)" Target="{Binding ElementName=TextAirDirection}"/>
+                                <TextBox  Text="{Binding Flat.GardenArea, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label/>
+
+                                <Label Content="מס' חדרים" Target="{Binding ElementName=TextFlatNumber}"/>
+                                <TextBox Text="{Binding Flat.RoomsCount, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+
+                                <Label Content="כיווני אוויר" Target="{Binding ElementName=TextAirDirection}"/>
+                                <TextBox x:Name="TextAirDirection" Text="{Binding Flat.AirDirections, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            </st:AutoGrid>
                         </GroupBox>
-                        <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="פרטי תשלום" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                    <!--<RowDefinition Height="auto"></RowDefinition>-->
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel>
-                                    <Label  Content="תשלומים" />
-                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Flat, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="1">
-                                    <Label  Content="הכנסות" />
-                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Flat, Converter={StaticResource RevenuesConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="2" >
-                                    <Label   Content="הוצאות" />
-                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Flat, Converter={StaticResource ExpensesConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="3" >
-                                    <Label  Content="חובות" />
-                                    <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Flat, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
-                                </StackPanel>
-                            </Grid>
+                        <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="תשלומים" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
+                            <st:AutoGrid Rows="auto" Columns="2*,3*,*,2*,3*,*,2*,3*,*,2*,3*" Orientation="Vertical">
+
+                                <Label  Margin="7,15" Content="תשלומים" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Flat, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label/>
+
+                                <Label  Content="הכנסות" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Flat, Converter={StaticResource RevenuesConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label/>
+
+                                <Label   Content="הוצאות" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Flat, Converter={StaticResource ExpensesConverter}, StringFormat=C, Mode=OneWay}"/>
+                                <Label/>
+
+                                <Label  Content="חובות" />
+                                <TextBlock Style="{StaticResource AmountText}" Text="{Binding Flat, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
+                            </st:AutoGrid>
                         </GroupBox>
                     </Grid>
 
