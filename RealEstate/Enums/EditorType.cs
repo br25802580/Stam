@@ -60,6 +60,8 @@ namespace RealEstate
         PaymentTypes,
         PaymentType,
         PaymentTypeForServices,
-        PaymentTypeForService
+        PaymentTypeForService,
+        Statuses,
+        Status
     }
 }

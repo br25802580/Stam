@@ -112,6 +112,10 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SpicyTaco.AutoGrid, Version=1.1.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpicyTaco.AutoGrid.1.1.19\lib\net40\SpicyTaco.AutoGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -167,6 +171,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviors\SelectAllTextOnFocusBehavior.cs" />
+    <Compile Include="Behaviors\EnterKeyTraversal.cs" />
     <Compile Include="Behaviors\LinksTemplateSelector.cs" />
     <Compile Include="ClientModels\PaymentWrapper.cs" />
     <Compile Include="ClientModels\IEntityWrapper.cs" />
@@ -177,6 +183,8 @@
     <Compile Include="Common\ViewModelFactory.cs" />
     <Compile Include="Common\RealEstateRepository.cs" />
     <Compile Include="ClientModels\DebtWrapper.cs" />
+    <Compile Include="Converters\FlatPriceForMeterConverter.cs" />
+    <Compile Include="Converters\StatusConverter.cs" />
     <Compile Include="Converters\PaymentRelationTypeConverter.cs" />
     <Compile Include="Converters\EntityHighlightConverter.cs" />
     <Compile Include="Converters\EntityStateConverter.cs" />
@@ -276,9 +284,6 @@
     </Compile>
     <Compile Include="Views\Payments\PaymentsTable.xaml.cs">
       <DependentUpon>PaymentsTable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Suppliers\SupplierDetails\SupplierNew.xaml.cs">
-      <DependentUpon>SupplierNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Suppliers\SupplierDetails\SupplierMainDetails.xaml.cs">
       <DependentUpon>SupplierMainDetails.xaml</DependentUpon>
@@ -436,10 +441,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Payments\PaymentsTable.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Suppliers\SupplierDetails\SupplierNew.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

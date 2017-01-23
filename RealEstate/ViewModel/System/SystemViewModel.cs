@@ -41,6 +41,7 @@ namespace RealEstate
             RealEstateRepository.Instance.AddEditor(EditorType.PaymentTypes);
             RealEstateRepository.Instance.AddEditor(EditorType.ServiceTypes);
             RealEstateRepository.Instance.AddEditor(EditorType.PaymentTypeForServices);
+            RealEstateRepository.Instance.AddEditor(EditorType.Statuses);
 
             RealEstateRepository.Instance.SelectEditor(EditorType.Countries);
         }

@@ -3,11 +3,12 @@
              xmlns:local="clr-namespace:RealEstate"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI" FlowDirection="RightToLeft"
-             d:DesignHeight="700" d:DesignWidth="900">
+             d:DesignHeight="700" d:DesignWidth="1100">
     <local:ModernUserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <local:PaymentsConverter x:Key="PaymentsConverter"/>
@@ -37,14 +38,17 @@
                     </StackPanel>
                 </Button>
                 <!-- actual form starts here -->
-                <StackPanel x:Name="Form" Orientation="Vertical">
+                <StackPanel x:Name="Form" Orientation="Vertical" local:EnterKeyTraversal.IsEnabled="True">
+                    <i:Interaction.Behaviors>
+                        <local:SelectAllTextOnFocusMultiBehavior />
+                    </i:Interaction.Behaviors>
                     <StackPanel.Resources>
                         <Style TargetType="StackPanel">
                             <Setter Property="Orientation" Value="Horizontal" />
                             <Setter Property="Margin" Value="7" />
                         </Style>
                         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                            <Setter Property="Width" Value="100" />
+                            <Setter Property="Width" Value="80" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
@@ -63,11 +67,31 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <GroupBox  Header="הערות" Grid.Column="2" Grid.RowSpan="2" VerticalContentAlignment="Top">
-                            <TextBox  Name="tbMultiLine" TextWrapping="Wrap" Width="180"  Margin="10,15,10,15"
+                        <GroupBox  Header="הערות" Grid.Column="2" Grid.RowSpan="1">
+                            <GroupBox.Style>
+                                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                                    <Setter Property="Grid.RowSpan" Value="1"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEditEditor}"  Value="True">
+                                            <Setter Property="Grid.RowSpan" Value="1"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </GroupBox.Style>
+                                <TextBox IsTabStop="False" VerticalAlignment="Top"  Height="135" Name="tbMultiLine"  TextWrapping="Wrap"  Width="220" Margin="0,15"
                             AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding Customer.Comment}">
+                                <!--<TextBox.Style>
+                                    <Style  TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                        <Setter Property="Height" Value="205"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEditEditor}"  Value="True">
+                                                <Setter Property="Height" Value="280"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>-->
                             </TextBox>
                         </GroupBox>
                         <GroupBox  Header="פרטים כלליים">
@@ -110,33 +134,39 @@
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox  Header="יצירת קשר" Grid.Row="1" Grid.ColumnSpan="2">
-                            <StackPanel Orientation="Vertical">
+                        <GroupBox Header="יצירת קשר" Grid.Row="1" Grid.ColumnSpan="3">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel >
+                                    <StackPanel  Margin="7,7,15,7">
                                     <Label Content="טלפון 1" Target="{Binding ElementName=TextPhone1}"/>
                                     <TextBox x:Name="TextPhone1" Width="150" Text="{Binding Customer.Phone1, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 </StackPanel>
-                                <StackPanel Margin="40,7,7,7" Grid.Column="1">
+                                <StackPanel Margin="30,7,7,7" Grid.Column="1">
                                     <Label  Content="טלפון 2" Target="{Binding ElementName=TextPhone2}"/>
                                     <TextBox x:Name="TextPhone2" Width="150" Text="{Binding Customer.Phone2, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 </StackPanel>
-                            </Grid>
+                                    <StackPanel Margin="33,7,7,7" Grid.Column="2">
+                                        <Label  Content="מייל" Target="{Binding ElementName=TextPhone2}"/>
+                                        <TextBox Width="150" Text="{Binding Customer.Email, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                    </StackPanel>
+                                </Grid>
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Grid.ColumnSpan="2" Grid.Row="2" Header="תשלומים" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
+                        <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Margin="1,7" Header="תשלומים" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>

@@ -73,7 +73,7 @@ namespace RealEstate
                 if (tableViewModel.TableEditorMetadata.RowBackgroundConverter != null)
                 {
                     DataTrigger dataTrigger = new DataTrigger();
-                    dataTrigger.Binding = new Binding() { Converter = tableViewModel.TableEditorMetadata.RowBackgroundConverter, ConverterParameter= tableViewModel };
+                    dataTrigger.Binding = new Binding() { Converter = tableViewModel.TableEditorMetadata.RowBackgroundConverter, ConverterParameter = tableViewModel };
                     dataTrigger.Value = true;
                     SolidColorBrush brush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#f1f1f1"));
                     dataTrigger.Setters.Add(new Setter(Control.BackgroundProperty, brush));
@@ -115,6 +115,19 @@ namespace RealEstate
                     if (field.Converter != null)
                     {
                         ((Binding)col.Binding).Converter = field.Converter;
+                    }
+
+                    if (field.BackgroundBinding != null)
+                    {
+                        Style defaultStyle = Application.Current.TryFindResource(typeof(TextBlock)) as Style;
+                        Style elementStyle = new Style(typeof(TextBlock), defaultStyle);
+                        Setter setter = new Setter(TextBlock.BackgroundProperty, field.BackgroundBinding);
+                        elementStyle.Setters.Add(setter);
+                        elementStyle.Setters.Add(new Setter(TextBlock.PaddingProperty, new Thickness(5,2,5,2)));
+                        elementStyle.Setters.Add(new Setter(TextBlock.HorizontalAlignmentProperty, HorizontalAlignment.Stretch));
+                        elementStyle.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Center));
+                        col.Foreground = new SolidColorBrush(Colors.Black);
+                        col.ElementStyle = elementStyle; 
                     }
 
                     DG1.Columns.Add(col);

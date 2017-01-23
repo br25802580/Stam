@@ -80,6 +80,9 @@ namespace RealEstate
         public bool IsAmountFormat { get; set; }
         public IValueConverter Converter { get; set; }
         public DataGridLength Width { get; set; }
-
+        public Binding BackgroundBinding { get; set; }
+       // public IValueConverter BackgroundConverter { get; set; }
     }
+
+
 }

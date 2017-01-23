@@ -96,6 +96,7 @@ namespace RealEstate
         {
             InitList(typeof(City));
             InitList(typeof(ProjectType));
+            InitList(typeof(Status));
         }
 
         public override void RefreshData()
@@ -112,6 +113,7 @@ namespace RealEstate
             if (!IsEditEditor)
             {
                 ProjectType = ProjectTypes.FirstOrDefault(projectType => projectType.Id == ProjectTypeId);
+                Flat.Status = new GeneralBL().GetStatuses().FirstOrDefault(status => status.Id == 1);
             }
             else
             {

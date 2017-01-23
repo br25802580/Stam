@@ -1092,7 +1092,7 @@ namespace RealEstate
             InitList(typeof(PaymentRelation));
             InitList(typeof(PaymentMethod));
             InitList(typeof(Bank));
-
+            duringAutoChanges = true;
             Amount = Payment.Amount.HasValue ? Payment.Amount.Value : 0;
             PaymentRelation paymentRelation = Payment.PaymentRelation;
 
@@ -1165,6 +1165,7 @@ namespace RealEstate
 
             PaymentMethod = Payment.PaymentMethod;
 
+            duringAutoChanges = false;
             OnPropertyChanged(null);
             // Customers = Project.CustomerInProjects.Select(c => c.Customer).ToList();
             //    Suppliers = Project.SupplierInProjects.Select(s => s.Supplier).ToList();

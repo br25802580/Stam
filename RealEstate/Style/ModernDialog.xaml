@@ -9,7 +9,7 @@
         <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
         <Setter Property="MaxWidth" Value="950" />
-        <Setter Property="MaxHeight" Value="640" />
+        <Setter Property="MaxHeight" Value="700" />
         <Setter Property="MinWidth" Value="240" />
         <Setter Property="MinHeight" Value="100" />
         <Setter Property="ShowInTaskbar" Value="False" />

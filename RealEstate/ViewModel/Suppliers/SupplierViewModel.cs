@@ -19,7 +19,7 @@ namespace RealEstate
 
         public SupplierViewModel()
         {
-            InitList(typeof(City));
+            //InitList(typeof(City));
             InitList(typeof(ServiceType));
             InitList(typeof(Country));
             InitList(typeof(Gender));
@@ -64,6 +64,22 @@ namespace RealEstate
                 Supplier.Country = Countries.FirstOrDefault(country => country.Name == "ישראל");
                 Supplier.Gender = Genders.FirstOrDefault(gender => gender.Name == "זכר");
             }
+
+            Supplier.PropertyChanged += Supplier_PropertyChanged;
+            SetCitiesByCountry();
+        }
+
+        private void Supplier_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Country")
+            {
+                SetCitiesByCountry();
+            }
+        }
+
+        private void SetCitiesByCountry()
+        {
+            Cities = Supplier.Country.Cities.OrderBy(city => city.Name).ToList();
         }
 
         public override void RefreshEntityTitle()
@@ -198,6 +214,7 @@ namespace RealEstate
 
             tableViewModel.Buttons.Add(new ButtonMetadata("הוספת תשלום", GetAddProjectPaymentCommand(EditorType.PaymentNew), PackIconKind.Database));
             tableViewModel.Buttons.Add(new ButtonMetadata("הוספת חוב", GetAddProjectPaymentCommand(EditorType.DebtNew), PackIconKind.CodeNotEqual));
+            tableViewModel.Fields.Add(new ColumnMetadata("Project.Name", "פרויקט"));
 
             tableViewModel.InitialFilter = (obj) => { return ((Project)obj).SupplierInProjects.Any(sInP => sInP.Supplier == Supplier); };
             tableViewModel.Init();

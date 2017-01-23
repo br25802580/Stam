@@ -5,6 +5,7 @@ using RealEstate.BL;
 using RealEstate.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace RealEstate
 
         public CustomerViewModel()
         {
-            InitList(typeof(City));
+            //InitList(typeof(City));
             InitList(typeof(Country));
             InitList(typeof(Gender));
         }
@@ -61,6 +62,22 @@ namespace RealEstate
             {
                 Customer.Country = Countries.FirstOrDefault(country => country.Name == "ישראל");
                 Customer.Gender = Genders.FirstOrDefault(gender => gender.Name == "זכר");
+            }
+
+            Customer.PropertyChanged += Customer_PropertyChanged;
+            SetCitiesByCountry();
+        }
+
+        private void SetCitiesByCountry()
+        {
+            Cities = Customer.Country.Cities.OrderBy(city => city.Name).ToList();
+        }
+
+        private void Customer_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Country")
+            {
+                SetCitiesByCountry();
             }
         }
 
@@ -204,7 +221,7 @@ namespace RealEstate
 
             tableViewModel.Buttons.Add(new ButtonMetadata("הוספת תשלום", GetAddProjectPaymentCommand(EditorType.PaymentNew), PackIconKind.Database));
             tableViewModel.Buttons.Add(new ButtonMetadata("הוספת חוב", GetAddProjectPaymentCommand(EditorType.DebtNew), PackIconKind.CodeNotEqual));
-
+            tableViewModel.Fields.Add(new ColumnMetadata("Project.Name", "פרויקט"));
             tableViewModel.InitialFilter = (obj) => { return ((Project)obj).CustomerInProjects.Any(cInP => cInP.Customer == Customer); };
             tableViewModel.Init();
         }

@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI" FlowDirection="RightToLeft"
              d:DesignHeight="700" d:DesignWidth="800">
@@ -32,7 +33,10 @@
                     </StackPanel>
                 </Button>
                 <!-- actual form starts here -->
-                <StackPanel x:Name="Form" Orientation="Vertical">
+                <StackPanel x:Name="Form" Orientation="Vertical" local:EnterKeyTraversal.IsEnabled="True">
+                    <i:Interaction.Behaviors>
+                        <local:SelectAllTextOnFocusMultiBehavior />
+                    </i:Interaction.Behaviors>
 
                     <StackPanel.Resources>
                         <!--<Style BasedOn="{StaticResource {x:Type TextBoxBase}}" TargetType="{x:Type TextBox}">
@@ -48,7 +52,7 @@
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-                            <Setter Property="Padding" Value="0,3" />
+                            <Setter Property="Padding" Value="-3,3" />
                         </Style>
                         <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
                             <Setter Property="Padding" Value="0,3" />
@@ -65,23 +69,8 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <GroupBox Header="הערות"  Grid.Column="2" >
-                            <GroupBox.Style>
-                                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
-                                    <Setter Property="Grid.RowSpan" Value="1"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsEditEditor}"  Value="True">
-                                            <Setter Property="Grid.RowSpan" Value="2"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </GroupBox.Style>
                             <StackPanel Orientation="Vertical">
-                                <TextBox Height="135" Name="tbMultiLine" TextWrapping="Wrap"  Width="180" Margin="7"
-                                         Visibility="{Binding IsEditEditor, Converter={StaticResource OppositveBoolToVisibilityConverters}, FallbackValue=Collapsed}"
-                            AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding Project.Comment}">
-                            </TextBox>
-                                <TextBox Height="250"  TextWrapping="Wrap"  Width="180" Margin="7"
-                                         Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}"
+                                <TextBox Name="tbMultiLine" TextWrapping="Wrap" Height="130" Width="180" Margin="7"
                             AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding Project.Comment}">
                                 </TextBox>
                             </StackPanel>
@@ -99,6 +88,12 @@
                                 <StackPanel>
                                     <Label Content="תיאור" Target="{Binding ElementName=TextName}" BorderBrush="Transparent"/>
                                     <TextBox Width="150" Text="{Binding Project.Description, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <Label Target="{Binding ElementName=TextChequeNumber}">
+                                        מעלית?
+                                    </Label>
+                                    <CheckBox FlowDirection="LeftToRight" IsChecked="{Binding Project.HasElevator}"/>
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>
@@ -123,29 +118,30 @@
                             </StackPanel>
                         </GroupBox>
 
-                        <GroupBox Grid.ColumnSpan="2" Grid.Row="1" Header="פרטי תשלום" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
+                        <GroupBox Grid.ColumnSpan="3" Grid.Row="1" Header="פרטי תשלום" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
                                     <RowDefinition Height="auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Margin="15,7,15,7">
+                                <StackPanel>
                                     <Label  Content="תשלומים" />
                                     <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Project, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Column="1" Margin="40,7,7,7">
+                                <StackPanel Grid.Column="1" >
                                     <Label  Content="הכנסות" />
                                     <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Project, Converter={StaticResource RevenuesConverter}, StringFormat=C, Mode=OneWay}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Row="1" Margin="15,7,15,7">
+                                <StackPanel Grid.Column="2">
                                     <Label   Content="הוצאות" />
                                     <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Project, Converter={StaticResource ExpensesConverter}, StringFormat=C, Mode=OneWay}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Column="1" Grid.Row="1" Margin="40,7,7,7">
+                                <StackPanel Grid.Column="3" >
                                     <Label  Content="חובות" />
                                     <TextBlock Style="{StaticResource AmountText}" Width="150" Text="{Binding Project, Converter={StaticResource DebtsConverter}, StringFormat=C, Mode=OneWay}"/>
                                 </StackPanel>

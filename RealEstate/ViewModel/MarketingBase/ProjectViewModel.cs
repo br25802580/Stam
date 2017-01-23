@@ -21,7 +21,7 @@ namespace RealEstate
         public ProjectViewModel()
         {
             InitList(typeof(ProjectType));
-            InitList(typeof(City));
+            //InitList(typeof(City));
             InitList(typeof(Country));
         }
 
@@ -76,6 +76,22 @@ namespace RealEstate
                 Project.ProjectType = ProjectTypes.FirstOrDefault(projectType => projectType.Id == ProjectTypeId);
                 Project.Country = Countries.FirstOrDefault(country => country.Name == "ישראל");
             }
+
+            Project.PropertyChanged += Project_PropertyChanged;
+            SetCitiesByCountry();
+        }
+
+        private void Project_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Country")
+            {
+                SetCitiesByCountry();
+            }
+        }
+
+        private void SetCitiesByCountry()
+        {
+            Cities = Project.Country.Cities.OrderBy(city => city.Name).ToList();
         }
 
         public override void RefreshEntityTitle()

@@ -21,7 +21,6 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\De
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Payments\PaymentsPage.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Payments\ExpensesTable.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Payments\PaymentsTable.g.cs
-C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Suppliers\SupplierDetails\SupplierNew.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Suppliers\SupplierDetails\SupplierMainDetails.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Suppliers\SupplierDetails\SupplierView.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Suppliers\SuppliersPage.g.cs
@@ -104,7 +103,6 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\De
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Payments\PaymentsPage.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Payments\ExpensesTable.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Payments\PaymentsTable.baml
-C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Suppliers\SupplierDetails\SupplierNew.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Suppliers\SupplierDetails\SupplierMainDetails.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Suppliers\SupplierDetails\SupplierView.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\Suppliers\SuppliersPage.baml
@@ -158,3 +156,4 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\De
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentTypeDetails.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentTypeForServiceDetails.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Debug\Views\System\PaymentTypeForServiceDetails.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Debug\SpicyTaco.AutoGrid.dll

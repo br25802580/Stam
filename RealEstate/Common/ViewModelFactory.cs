@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace RealEstate
@@ -255,6 +256,7 @@ namespace RealEstate
             AddServiceTypesEditor();
             AddPaymentTypesEditor();
             AddPaymentTypeForServicesEditor();
+            AddStatusesEditor();
 
             pageType = PageType.System;
 
@@ -312,6 +314,13 @@ namespace RealEstate
             editorMetaData = new NewEditorMetadata(type, typeof(PaymentTypeForServiceViewModel), editorType, pageType,
              typeof(PaymentTypeForServiceDetails));
             editorMetaData.IconKind = PackIconKind.Run;
+            EditorsMetaData.Add(editorType, editorMetaData);
+
+            type = typeof(Status);
+            editorType = EditorType.Status;
+            editorMetaData = new NewEditorMetadata(type, typeof(NamedElementViewModel), editorType, pageType,
+             typeof(CountryDetails));
+            editorMetaData.IconKind = PackIconKind.BookmarkCheck;
             EditorsMetaData.Add(editorType, editorMetaData);
         }
 
@@ -840,6 +849,33 @@ namespace RealEstate
             EditorsMetaData.Add(editorType, tableEditorMetadata);
         }
 
+        private void AddStatusesEditor()
+        {
+            PageType pageType = PageType.System;
+            Type type = typeof(Data.Status);
+            EditorType editorType = EditorType.Statuses;
+            TableEditorMetadata tableEditorMetadata = new TableEditorMetadata(type, typeof(TableViewModel), editorType, pageType, "/Views/Customers/CustomersTable.xaml");
+
+            tableEditorMetadata.PluralCaption = "סטטוסי נכס";
+            tableEditorMetadata.SingleCaption = "סטטוס נכס";
+            tableEditorMetadata.EditInPopup = true;
+
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Name", "שם") { Width = new DataGridLength(230) });
+
+            tableEditorMetadata.IconKind = PackIconKind.BookmarkCheck;
+            tableEditorMetadata.InitList = () => { return new ObservableCollection<Status>(new GeneralBL().GetStatuses()); };
+            tableEditorMetadata.ChildEditorType = EditorType.Status;
+            tableEditorMetadata.NewEditorType = EditorType.Status;
+
+            tableEditorMetadata.GetReadOnlyItems = (sourceList) =>
+            {
+                IList<Status> list = sourceList as IList<Status>;
+                return list.Where(status => status.Id <= 4).ToList();
+            };
+
+            EditorsMetaData.Add(editorType, tableEditorMetadata);
+        }
+
         private void AddBanksEditor()
         {
             PageType pageType = PageType.System;
@@ -857,8 +893,6 @@ namespace RealEstate
             tableEditorMetadata.InitList = () => { return new ObservableCollection<Bank>(new GeneralBL().GetBanks()); };
             tableEditorMetadata.ChildEditorType = EditorType.Bank;
             tableEditorMetadata.NewEditorType = EditorType.Bank;
-
-            tableEditorMetadata.EditInPopup = true;
 
             EditorsMetaData.Add(editorType, tableEditorMetadata);
         }
@@ -881,8 +915,6 @@ namespace RealEstate
             tableEditorMetadata.InitList = () => { return new ObservableCollection<PaymentRelation>(new PaymentsBL().GetPaymentRelations()); };
             tableEditorMetadata.ChildEditorType = EditorType.PaymentRelation;
             tableEditorMetadata.NewEditorType = EditorType.PaymentRelation;
-
-            tableEditorMetadata.EditInPopup = true;
 
             EditorsMetaData.Add(editorType, tableEditorMetadata);
         }
@@ -913,7 +945,7 @@ namespace RealEstate
             {
                 return new ObservableCollection<PaymentType>(new PaymentsBL().GetPaymentTypes()
                             .Where(paymentType => paymentType.PaymentTypeForServices.Count == 0)
-                            .OrderBy(paymentType=> new PaymentRelationTypeConverter().Convert(paymentType,null,null,null))
+                            .OrderBy(paymentType => new PaymentRelationTypeConverter().Convert(paymentType, null, null, null))
                             .ThenBy(paymentType => new PaymentRelationSenderConverter().Convert(paymentType, null, null, null)));
             };
             tableEditorMetadata.ChildEditorType = EditorType.PaymentType;
@@ -1078,8 +1110,10 @@ namespace RealEstate
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Name", "שם"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("ProjectType.Name", "סוג פרויקט"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("City.Name", "עיר"));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Country.Name", "מדינה"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Street", "רחוב"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("HouseNumber", "מס' בית"));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("HasElevator", "מעלית?", new YesNoConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "תשלומים", new PaymentsConverter(), true));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "הכנסות", new RevenuesConverter(), true));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "הוצאות", new ExpensesConverter(), true));
@@ -1103,13 +1137,15 @@ namespace RealEstate
             tableEditorMetadata.IconKind = PackIconKind.HomeMapMarker;
 
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Project.ProjectType.Name", "סוג"));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata("Project.Name", "פרויקט"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Project", "כתובת", new ProjectAddressConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("FlatNumber", "מס' דירה"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Floor", "קומה"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("SquareMeter", @"מ""ר"));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata("HasElevator", "מעלית?", new YesNoConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("RoomsCount", "חדרים"));
+
+            Binding backgroundBinding = new Binding("Status.Id") { Converter = new StatusConverter() };
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Status.Name", "סטטוס") { BackgroundBinding = backgroundBinding });
+
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "תשלומים", new PaymentsConverter(), true));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "הכנסות", new RevenuesConverter(), true));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "הוצאות", new ExpensesConverter(), true));
