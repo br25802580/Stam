@@ -77,7 +77,7 @@ namespace RealEstate
                         ServiceType serviceType = Entity as ServiceType;
                         if (serviceType != null)
                         {
-                            if (string.IsNullOrEmpty(bank.Name))
+                            if (string.IsNullOrEmpty(serviceType.Name))
                             {
                                 beforeSaveResult.IsValidData = false;
                                 beforeSaveResult.ErrorMessage = "נא הגדר סוג שירות";

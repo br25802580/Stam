@@ -17,7 +17,7 @@ namespace RealEstate
 {
     public sealed class RealEstateRepository
     {
-        #region Fields
+        #region Fields 
 
         private MainViewModel mainViewModel;
         private static volatile ViewModelFactory metaDataFactory;

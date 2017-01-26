@@ -210,7 +210,7 @@ namespace RealEstate
             type = typeof(Data.Payment);
             editorType = EditorType.PaymentNew;
             editorMetaData = new NewEditorMetadata(type, typeof(PaymentViewModel), editorType, pageType,
-                typeof(PaymentMainDetails), 900);
+                typeof(PaymentMainDetails), 970);
             //editorMetaData = new NewEditorMetadata(type, typeof(PaymentViewModel), editorType, pageType,
             //   typeof(PaymentMainDetails), typeof(PaymentWrapper));
             editorMetaData.IconKind = PackIconKind.Database;
@@ -225,7 +225,7 @@ namespace RealEstate
             type = typeof(Data.Debt);
             editorType = EditorType.DebtNew;
             editorMetaData = new NewEditorMetadata(type, typeof(DebtViewModel), editorType, pageType,
-             typeof(DebtMainDetails), 900);
+             typeof(DebtMainDetails), 950);
             editorMetaData.IconKind = PackIconKind.CodeNotEqual;
             EditorsMetaData.Add(editorType, editorMetaData);
 

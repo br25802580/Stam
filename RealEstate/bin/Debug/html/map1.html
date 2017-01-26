@@ -109,12 +109,12 @@
             title: "Click for show the data hf fhg gfh gf gfh fhf fgf the client"
         });
 		//var address = 'מיכה 7 בני ברק ישראל';
-		 var address = 'ישראל,  h,h,h,jhk,h, 51';
+		 var address = 'ישראל, בני ברק, h,h,h,jhk,h, 51';
 		 var  geocoder= new google.maps.Geocoder();
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
-	map.setZoom(6);
+	map.setZoom(16);
             var marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location
