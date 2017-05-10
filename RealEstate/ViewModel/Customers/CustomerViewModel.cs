@@ -36,17 +36,6 @@ namespace RealEstate
             set { Entity = value; }
         }
 
-        private ModernUri selectedSource;
-        public ModernUri SelectedSource
-        {
-            get { return selectedSource; }
-            set
-            {
-                selectedSource = value;
-                OnPropertyChanged("SelectedSource");
-            }
-        }
-
         #endregion Properties
 
         #region Methods
@@ -70,7 +59,10 @@ namespace RealEstate
 
         private void SetCitiesByCountry()
         {
-            Cities = Customer.Country.Cities.OrderBy(city => city.Name).ToList();
+            if (Customer.Country != null)
+                Cities = Customer.Country.Cities.OrderBy(city => city.Name).ToList();
+            else
+                Cities = null;
         }
 
         private void Customer_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -85,14 +77,14 @@ namespace RealEstate
         {
             BeforeSaveResult beforeSaveResult = new BeforeSaveResult();
 
-            if (string.IsNullOrEmpty(Customer.Name))
+            if (string.IsNullOrWhiteSpace(Customer.Name))
             {
                 beforeSaveResult.IsValidData = false;
                 beforeSaveResult.ErrorMessage = "נא הגדר שם פרטי";
                 return beforeSaveResult;
             }
 
-            if (string.IsNullOrEmpty(Customer.Family))
+            if (string.IsNullOrWhiteSpace(Customer.Family))
             {
                 beforeSaveResult.IsValidData = false;
                 beforeSaveResult.ErrorMessage = "נא הגדר שם משפחה";
@@ -115,7 +107,7 @@ namespace RealEstate
             Link link = new ModernLink() { Source = new ModernUri(UriString, UriKind.Relative), DisplayName = "פרטים", ViewModel = this };
             Links.Add(link);
 
-            selectedSource = new ModernUri(UriString, UriKind.Relative);
+            SelectedSource = new ModernUri(UriString, UriKind.Relative);
 
             AddDebtsLink();
             AddPaymentsLink();

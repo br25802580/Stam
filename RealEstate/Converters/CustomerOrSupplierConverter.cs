@@ -51,7 +51,7 @@ namespace RealEstate
                                     returnedValue = $"{payment.Bank.Name} (בנק)";
                                 break;
                             default:
-                                if (!string.IsNullOrEmpty(payment.SenderDescription))
+                                if (!string.IsNullOrWhiteSpace(payment.SenderDescription))
                                     returnedValue = $"{payment.SenderDescription} (מקור חיצוני)";
                                 break;
                         }
@@ -82,7 +82,7 @@ namespace RealEstate
                                 returnedValue = $"{debt.Bank.Name} (בנק)";
                             break;
                         default:
-                            if (!string.IsNullOrEmpty(debt.SenderDescription))
+                            if (!string.IsNullOrWhiteSpace(debt.SenderDescription))
                                 returnedValue = $"{debt.SenderDescription} (מקור חיצוני)";
                             break;
                     }

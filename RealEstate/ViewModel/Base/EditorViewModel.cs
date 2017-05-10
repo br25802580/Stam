@@ -40,6 +40,17 @@ namespace RealEstate
 
         #region Properties
 
+        private Uri selectedSource;
+        public Uri SelectedSource
+        {
+            get { return selectedSource; }
+            set
+            {
+                selectedSource = value;
+                OnPropertyChanged("SelectedSource");
+            }
+        }
+
         private string entityTitle;
         public string EntityTitle
         {
@@ -500,11 +511,11 @@ namespace RealEstate
                     mapViewModel.Address = $"{_country} {_city} {street} {houseNumber}";
 
                     mapViewModel.Zoom = 16;
-                    if (string.IsNullOrEmpty(street))
+                    if (string.IsNullOrWhiteSpace(street))
                     {
                         mapViewModel.Zoom = 11;
                     }
-                    if (string.IsNullOrEmpty(_city))
+                    if (string.IsNullOrWhiteSpace(_city))
                     {
                         mapViewModel.Zoom = 6;
                     }
@@ -522,11 +533,11 @@ namespace RealEstate
             mapViewModel.Address = $"{_country} {_city} {street} {houseNumber}";
 
             mapViewModel.Zoom = 16;
-            if (string.IsNullOrEmpty(street))
+            if (string.IsNullOrWhiteSpace(street))
             {
                 mapViewModel.Zoom = 11;
             }
-            if (string.IsNullOrEmpty(_city))
+            if (string.IsNullOrWhiteSpace(_city))
             {
                 mapViewModel.Zoom = 6;
             }

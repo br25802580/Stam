@@ -41,7 +41,7 @@ namespace RealEstate
             Country country = Entity as Country;
             if (country != null)
             {
-                if (string.IsNullOrEmpty(country.Name))
+                if (string.IsNullOrWhiteSpace(country.Name))
                 {
                     beforeSaveResult.IsValidData = false;
                     beforeSaveResult.ErrorMessage = "נא הגדר שם מדינה";
@@ -53,7 +53,7 @@ namespace RealEstate
                 SenderType senderType = Entity as SenderType;
                 if (senderType != null)
                 {
-                    if (string.IsNullOrEmpty(senderType.Name))
+                    if (string.IsNullOrWhiteSpace(senderType.Name))
                     {
                         beforeSaveResult.IsValidData = false;
                         beforeSaveResult.ErrorMessage = "נא הגדר שם נמען";
@@ -65,7 +65,7 @@ namespace RealEstate
                     Bank bank = Entity as Bank;
                     if (bank != null)
                     {
-                        if (string.IsNullOrEmpty(bank.Name))
+                        if (string.IsNullOrWhiteSpace(bank.Name))
                         {
                             beforeSaveResult.IsValidData = false;
                             beforeSaveResult.ErrorMessage = "נא הגדר שם בנק";
@@ -77,7 +77,7 @@ namespace RealEstate
                         ServiceType serviceType = Entity as ServiceType;
                         if (serviceType != null)
                         {
-                            if (string.IsNullOrEmpty(serviceType.Name))
+                            if (string.IsNullOrWhiteSpace(serviceType.Name))
                             {
                                 beforeSaveResult.IsValidData = false;
                                 beforeSaveResult.ErrorMessage = "נא הגדר סוג שירות";

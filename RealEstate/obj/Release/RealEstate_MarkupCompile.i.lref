@@ -5,10 +5,10 @@ FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Contracts\ContractsPage.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Contracts\ContractDetails\ContractMainDetails.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Customers\Table.xaml;;
+FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Debts\DebtDetails\DebtMainDetailsCopy.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Debts\DebtDetails\DebtMainDetails.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Debts\DebtDetails\DebtView.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Debts\DebtsTable.xaml;;
-FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Map\MapPage.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Map\MapMainDetails.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Payments\PaymentDetails\ConstantPaymentMainDetails.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Payments\RevenuesTable.xaml;;
@@ -17,7 +17,6 @@ FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Payments\PaymentsPage.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Payments\ExpensesTable.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Payments\PaymentsTable.xaml;;
-FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Suppliers\SupplierDetails\SupplierNew.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Suppliers\SupplierDetails\SupplierMainDetails.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Suppliers\SupplierDetails\SupplierView.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Suppliers\SuppliersPage.xaml;;
@@ -36,5 +35,11 @@ FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Projects\ProjectsTable.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Lease\LeasesPage.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\Home\Home.xaml;;
+FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\System\PaymentTypeForServiceDetails.xaml;;
+FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\System\PaymentTypeDetails.xaml;;
+FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\System\PaymentRelationDetails.xaml;;
+FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\System\CityDetails.xaml;;
+FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\System\CountryDetails.xaml;;
+FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\System\SystemPage.xaml;;
 FC:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\Views\UC\SenderChooser.xaml;;
 

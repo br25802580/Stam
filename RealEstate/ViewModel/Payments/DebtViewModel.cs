@@ -499,17 +499,6 @@ namespace RealEstate
             }
         }
 
-        private ModernUri selectedSource;
-        public ModernUri SelectedSource
-        {
-            get { return selectedSource; }
-            set
-            {
-                selectedSource = value;
-                OnPropertyChanged("SelectedSource");
-            }
-        }
-
         #endregion Properties
 
         #region Commands
@@ -609,6 +598,7 @@ namespace RealEstate
             InitList(typeof(Bank));
 
             PaymentRelation paymentRelation = Debt.PaymentRelation;
+            PaymentType _paymentType = Debt.PaymentType;
 
             if (IsEditEditor && Debt.PaymentRelation != null)
             {
@@ -626,6 +616,7 @@ namespace RealEstate
 
             if (paymentRelation != null)
                 PaymentRelation = paymentRelation;
+           
 
             //      FillBySenderFilter();
 
@@ -637,7 +628,6 @@ namespace RealEstate
             //{
             //    IsCustomerSender = true;
             //}
-            PaymentType paymentType = Debt.PaymentType;
             if (Debt.CustomerInProject != null)
             {
                 Customer = Debt.CustomerInProject.Customer;
@@ -646,7 +636,8 @@ namespace RealEstate
             {
                 Supplier = Debt.SupplierInProject.Supplier;
             }
-            PaymentType = paymentType;
+            if (_paymentType != null)
+                PaymentType = _paymentType;
             Project = GetProject();
             Flat = GetFlat();
 
@@ -1009,7 +1000,7 @@ namespace RealEstate
             Link link = new ModernLink() { Source = new ModernUri(UriString, UriKind.Relative), DisplayName = "פרטים", ViewModel = this };
             Links.Add(link);
 
-            selectedSource = new ModernUri(UriString, UriKind.Relative);
+            SelectedSource = new ModernUri(UriString, UriKind.Relative);
 
             //AddPaymentsLink();
             AddPaymentItemsLink();
@@ -1031,7 +1022,7 @@ namespace RealEstate
         private void RefreshPaymentTypes()
         {
             PaymentTypes = GetPaymentItems(paymentRelation);
-            if (PaymentTypes?.Count > 0)
+            if (PaymentTypes?.Count > 0 && !PaymentTypes.Contains(PaymentType))
             {
                 PaymentType = PaymentTypes[0];
             }

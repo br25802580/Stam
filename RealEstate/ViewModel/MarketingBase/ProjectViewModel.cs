@@ -35,14 +35,15 @@ namespace RealEstate
             set { Entity = value; }
         }
 
-        private ModernUri selectedSource;
-        public ModernUri SelectedSource
+        private bool nameByAddress = true;
+        public bool NameByAddress
         {
-            get { return selectedSource; }
+            get { return nameByAddress; }
             set
             {
-                selectedSource = value;
-                OnPropertyChanged("SelectedSource");
+                nameByAddress = value;
+                SetProjectNameByAddress();
+                OnPropertyChanged("NameByAddress");
             }
         }
 
@@ -83,15 +84,36 @@ namespace RealEstate
 
         private void Project_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Country")
+            switch (e.PropertyName)
             {
-                SetCitiesByCountry();
+                case "Country":
+                    SetCitiesByCountry();
+                    break;
+                case "City":
+                case "Street":
+                case "HouseNumber":
+                    SetProjectNameByAddress();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SetProjectNameByAddress()
+        {
+            if (NameByAddress)
+            {
+                string address = $"{Project.City?.Name}, {Project.Street} {Project.HouseNumber?.ToString()}";
+                Project.Name = address;
             }
         }
 
         private void SetCitiesByCountry()
         {
-            Cities = Project.Country.Cities.OrderBy(city => city.Name).ToList();
+            if (Project.Country != null)
+                Cities = Project.Country.Cities.OrderBy(city => city.Name).ToList();
+            else
+                Cities = null;
         }
 
         public override void RefreshEntityTitle()
@@ -100,11 +122,17 @@ namespace RealEstate
             base.RefreshEntityTitle();
         }
 
+        public override void RefreshData()
+        {
+            base.RefreshData();
+            OnPropertyChanged(null);
+        }
+
         public override BeforeSaveResult BeforeSave()
         {
             BeforeSaveResult beforeSaveResult = new BeforeSaveResult();
 
-            if (string.IsNullOrEmpty(Project.Name))
+            if (string.IsNullOrWhiteSpace(Project.Name))
             {
                 beforeSaveResult.IsValidData = false;
                 beforeSaveResult.ErrorMessage = "נא הגדר שם פרויקט";
@@ -126,7 +154,7 @@ namespace RealEstate
             Link link = new ModernLink() { Source = new ModernUri(UriString, UriKind.Relative), DisplayName = "פרטים", ViewModel = this };
             Links.Add(link);
 
-            selectedSource = new ModernUri(UriString, UriKind.Relative);
+            SelectedSource = new ModernUri(UriString, UriKind.Relative);
 
             AddFlatsLink();
             AddDebtsLink();

@@ -122,7 +122,7 @@ namespace RealEstate
 
             type = typeof(Data.Flat);
             editorType = EditorType.LeaseFlatNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(LeaseFlatViewModel), editorType, pageType, typeof(FlatMainDetails), 900);
+            editorMetaData = new NewEditorMetadata(type, typeof(LeaseFlatViewModel), editorType, pageType, typeof(FlatMainDetails), 970);
             editorMetaData.IconKind = PackIconKind.HomeMapMarker;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -149,7 +149,7 @@ namespace RealEstate
 
             type = typeof(Data.Flat);
             editorType = EditorType.SaleFlatNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(SalesFlatViewModel), editorType, pageType, typeof(FlatMainDetails), 900);
+            editorMetaData = new NewEditorMetadata(type, typeof(SalesFlatViewModel), editorType, pageType, typeof(FlatMainDetails), 970);
             editorMetaData.IconKind = PackIconKind.HomeMapMarker;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -179,7 +179,7 @@ namespace RealEstate
 
             type = typeof(Data.CustomerInProject);
             editorType = EditorType.ContractNew;
-            editorMetaData = new NewEditorMetadata(type, typeof(ContractViewModel), editorType, pageType, typeof(ContractMainDetails), 900);
+            editorMetaData = new NewEditorMetadata(type, typeof(ContractViewModel), editorType, pageType, typeof(ContractMainDetails), 970);
             editorMetaData.IconKind = PackIconKind.FormatFloatLeft;
             EditorsMetaData.Add(editorType, editorMetaData);
 
@@ -536,7 +536,7 @@ namespace RealEstate
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "מקור/יעד", new CustomerOrSupplierByEntityConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("PaymentMethod.Name", "אמצעי תשלום"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata(".", "סוג תשלום", new PaymentTypesConverter()));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata("Comment", "הערה"));
+            //tableEditorMetadata.Fields.Add(new ColumnMetadata("Comment", "הערה"));
 
             tableEditorMetadata.ChildEditorType = EditorType.Payment;
             tableEditorMetadata.NewEditorType = EditorType.PaymentNew;
@@ -581,7 +581,7 @@ namespace RealEstate
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Amount", "סכום"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Payment", "סוג תשלום", new PaymentTypesConverter()));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Payment.Amount", "סך חשבונית"));
-            tableEditorMetadata.Fields.Add(new ColumnMetadata("Payment.Date", "תאריך תשלום"));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Payment.PaymentDate", "תאריך תשלום"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Debt.Amount", "סכום חוב"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Debt.DelinquentAmount", "יתרת חוב"));
             tableEditorMetadata.Fields.Add(new ColumnMetadata("Debt.DueDate", "תאריך יעד חוב"));
@@ -1153,8 +1153,8 @@ namespace RealEstate
 
             tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata("Project.City.Name", "עיר"));
             tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata("Project.Name", "פרויקט"));
-            tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata("Customer", "לקוח"));
-            tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata("Supplier", "ספק"));
+            //tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata("Customer", "לקוח"));
+            //tableEditorMetadata.AvailableGroups.Add(new ColumnMetadata("Supplier", "ספק"));
             tableEditorMetadata.Groups.Add(tableEditorMetadata.AvailableGroups[0]);
             tableEditorMetadata.Groups.Add(tableEditorMetadata.AvailableGroups[1]);
 

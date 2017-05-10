@@ -114,6 +114,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="log4net.dll" size="275968">
+      <assemblyIdentity name="log4net" version="2.0.7.0" publicKeyToken="669E0DDF0BB1AA2A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>MTGPui3BO0Bk/sfO6j8TcEXlNU3MaXOmUZ2Uvm2QH+4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MaterialDesignColors.dll" size="224256">
       <assemblyIdentity name="MaterialDesignColors" version="1.1.2.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -174,38 +186,50 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.exe" size="353192">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.exe" size="410536">
       <assemblyIdentity name="RealEstate" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>8mtIgWBQe319SqXzQOxc2cODmbrxbrvgqEphyjeSEGM=</dsig:DigestValue>
+        <dsig:DigestValue>yMIG0IqnPlnYWMuLrLX/Ys+PCY6U5qaNjn+E8eUM/F8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.BL.dll" size="9216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.BL.dll" size="11776">
       <assemblyIdentity name="RealEstate.BL" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>l+RljO6WUIk8Uyx50ppoc7x51l+BglRhDnomkJ41B2k=</dsig:DigestValue>
+        <dsig:DigestValue>kitXD4WXSMXJHkzVkmKCmLNLjW2y5Ga1aD8GPzLtoAw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.Data.dll" size="144896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RealEstate.Data.dll" size="168448">
       <assemblyIdentity name="RealEstate.Data" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QIFlqiU3TDcWfo8U+MJImuVM9UWQTJuFYaMQzpDlUAk=</dsig:DigestValue>
+        <dsig:DigestValue>ntq8VTD5M6vurSi8fKrWXNOFnWD5zh0gFLUEHuGueH4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SpicyTaco.AutoGrid.dll" size="19968">
+      <assemblyIdentity name="SpicyTaco.AutoGrid" version="1.1.19.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>20YIxaTt5bPzHn+Mg5FCU2ovA7XbtS8hQBHjv5P6TBI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -422,13 +446,13 @@
       <dsig:DigestValue>CX+FeLp4HPDlR2VG0gHTqRo+ey6YUVYCroOBDghTQ9o=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="RealEstate.exe.config" size="1612">
+  <file name="RealEstate.exe.config" size="3669">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>3GKBK0jhv8A7pfkW63zXfZzUDcrlw0HrqdMxVVwjKYs=</dsig:DigestValue>
+      <dsig:DigestValue>K6bdsnMdq2gMXOk6voDXdeLwJIqnXy+ij9jU66DUbQw=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

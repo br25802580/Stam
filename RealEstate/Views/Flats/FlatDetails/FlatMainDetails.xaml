@@ -9,7 +9,7 @@
              mc:Ignorable="d" MinHeight="380"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI" FlowDirection="RightToLeft"
              xmlns:st="http://schemas.spicytaco.io/" 
-             d:DesignHeight="800" d:DesignWidth="900">
+             d:DesignHeight="800" d:DesignWidth="950">
     <local:ModernUserControl.Resources>
         <local:OppositveBoolToVisibilityConverters x:Key="OppositveBoolToVisibilityConverters"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -69,7 +69,7 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <GroupBox Grid.Row="0" Grid.ColumnSpan="2" Header="פרטי פרויקט">
-                            <st:AutoGrid Rows="auto,auto,auto" Columns="2*,5*,45,2*,5*">
+                            <st:AutoGrid Rows="auto,auto,auto" Columns="2*,4*,45,2*,4*">
                                 <Label Content="סוג דירה" Target="{Binding ElementName=ComboProjectType}"/>
                                 <ComboBox x:Name="ComboProjectType" ItemsSource="{Binding ProjectTypes}" SelectedItem="{Binding ProjectType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
                                 <Label/>
@@ -99,8 +99,8 @@
                             </TextBox>
                         </GroupBox>
                         <GroupBox Grid.ColumnSpan="3" Grid.Row="1" Header="פרטי דירה">
-                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*,45,2*,5*,45,2*,5*">
-                                <Label Content="מס' דירה" Target="{Binding ElementName=TextFlatNumber}"/>
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,4*,45,2*,4*,45,2*,4*">
+                                <Label FontWeight="Bold" Content="מס' דירה" Target="{Binding ElementName=TextFlatNumber}"/>
                                 <TextBox x:Name="TextFlatNumber" Text="{Binding Flat.FlatNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 <Label/>
 
@@ -131,11 +131,11 @@
                                     </TextBox.Text>
                                 </TextBox>
 
-                                <Label Content="שטח מרפסת (מ&quot;ר)" Target="{Binding ElementName=TextAirDirection}"/>
+                                <Label Content="מרפסות (מ&quot;ר)" Margin="5,7,0,5" Target="{Binding ElementName=TextAirDirection}"/>
                                 <TextBox  Text="{Binding Flat.BalconyArea, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 <Label/>
 
-                                <Label Content="שטח גינה (מ&quot;ר)" Target="{Binding ElementName=TextAirDirection}"/>
+                                <Label Content="גינה (מ&quot;ר)" Target="{Binding ElementName=TextAirDirection}"/>
                                 <TextBox  Text="{Binding Flat.GardenArea, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 <Label/>
 

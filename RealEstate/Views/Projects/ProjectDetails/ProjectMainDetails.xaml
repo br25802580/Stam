@@ -3,7 +3,8 @@
              xmlns:local="clr-namespace:RealEstate"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"          
+             xmlns:ac="clr-namespace:AdornedControl"    
              xmlns:st="http://schemas.spicytaco.io/" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -75,10 +76,26 @@
                             </TextBox>
                         </GroupBox>
                         <GroupBox  Header="פרטי פרויקט">
-                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*">
-                                <Label Content="שם פרויקט" Target="{Binding ElementName=TextName}" BorderBrush="Transparent"/>
-                                <TextBox x:Name="TextName" Text="{Binding Project.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                            <st:AutoGrid Rows="auto" Columns="2*,4*">
+                                <Label FontWeight="Bold" Content="שם פרויקט" Target="{Binding ElementName=TextName}" BorderBrush="Transparent"/>
+                          <ac:AdornedControl
+		        HorizontalAdornerPlacement="Outside"
+                IsAdornerVisible="True"	   
+		        >
+                                    <TextBox x:Name="TextName" Text="{Binding Project.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
 
+                                    <ac:AdornedControl.AdornerContent>
+
+                                        <ToggleButton IsChecked="{Binding NameByAddress}" Height="25" Width="25" Margin="5,-10,0,-10" HorizontalAlignment="Right" Style="{StaticResource ModernToggleButton}">
+                                            <materialDesign:PackIcon ToolTip="שם לפי כתובת" Kind="MapMarker"  Height="15" Width="15" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                                        </ToggleButton>
+                                        
+                                    </ac:AdornedControl.AdornerContent>
+
+                                </ac:AdornedControl>
+                                
+                                <!--<TextBox x:Name="TextName" Text="{Binding Project.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>-->
+                                <!--<ac:AdornedControl></ac:AdornedControl>-->
                                 <Label Content="סוג פרויקט" Target="{Binding ElementName=ComboProjectType}" BorderBrush="Transparent"/>
                                 <ComboBox x:Name="ComboProjectType" ItemsSource="{Binding ProjectTypes}" SelectedItem="{Binding Project.ProjectType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
 
@@ -92,7 +109,7 @@
                             </st:AutoGrid>
                         </GroupBox>
                         <GroupBox  Header="כתובת" Grid.Column="1">
-                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*">
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,4*">
 
                                 <Label Content="ארץ" Target="{Binding ElementName=ComboCity}"/>
                                 <ComboBox  ItemsSource="{Binding Countries}" SelectedItem="{Binding Project.Country, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />

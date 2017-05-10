@@ -31,18 +31,7 @@ namespace RealEstate
         {
             get { return Entity as CustomerInProject; }
             set { Entity = value; }
-        }
-
-        private ModernUri selectedSource;
-        public ModernUri SelectedSource
-        {
-            get { return selectedSource; }
-            set
-            {
-                selectedSource = value;
-                OnPropertyChanged("SelectedSource");
-            }
-        }
+        }      
 
         private bool? isLeaseProject = null;
         public bool? IsLeaseProject
@@ -223,14 +212,14 @@ namespace RealEstate
         {
             BeforeSaveResult beforeSaveResult = new BeforeSaveResult();
 
-            //if (string.IsNullOrEmpty(Customer.Name))
+            //if (string.IsNullOrWhiteSpace(Customer.Name))
             //{
             //    beforeSaveResult.IsValidData = false;
             //    beforeSaveResult.ErrorMessage = "נא הגדר שם פרטי";
             //    return beforeSaveResult;
             //}
 
-            //if (string.IsNullOrEmpty(Customer.Family))
+            //if (string.IsNullOrWhiteSpace(Customer.Family))
             //{
             //    beforeSaveResult.IsValidData = false;
             //    beforeSaveResult.ErrorMessage = "נא הגדר שם משפחה";
@@ -314,7 +303,7 @@ namespace RealEstate
             Link link = new ModernLink() { Source = new ModernUri(UriString, UriKind.Relative), DisplayName = "פרטים", ViewModel = this };
             Links.Add(link);
 
-            selectedSource = new ModernUri(UriString, UriKind.Relative);
+            SelectedSource = new ModernUri(UriString, UriKind.Relative);
 
             AddDebtsLink();
             AddPaymentsLink();

@@ -148,10 +148,10 @@
                                 </StackPanel>
                                 <StackPanel Margin="0" Grid.Row="0" Orientation="Vertical">
                                     <st:AutoGrid ChildMargin="0" Margin="0,2,0,0" Rows="auto,auto,auto" Columns="2*,4*"  Visibility="{Binding Path=SenderFilter, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static local:SenderFilter.ByProject}}">
-                                        <Label Margin="7" Content="פרויקט" Target="{Binding ElementName=ComboProject1}"/>
-                                        <ComboBox Margin="7" x:Name="ComboProject1" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
-                                        <Label Margin="7" Content="דירה" Target="{Binding ElementName=ComboFlat1}"/>
-                                        <ComboBox Margin="7"  x:Name="ComboFlat1" ItemsSource="{Binding Flats}" SelectedItem="{Binding Flat, Mode=TwoWay}"  VerticalAlignment="Center" >
+                                        <Label Margin="5,7" Content="פרויקט" Target="{Binding ElementName=ComboProject1}"/>
+                                        <ComboBox Margin="5,7" x:Name="ComboProject1" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
+                                        <Label Margin="5,7" Content="דירה" Target="{Binding ElementName=ComboFlat1}"/>
+                                        <ComboBox Margin="5,7"  x:Name="ComboFlat1" ItemsSource="{Binding Flats}" SelectedItem="{Binding Flat, Mode=TwoWay}"  VerticalAlignment="Center" >
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -166,7 +166,7 @@
 
                                         <!--Margin="165,-2,0,0"-->
                                         <Label/>
-                                        <materialDesign:PackIcon Margin="7" Height="23" Visibility="{Binding DisplaySenderFilter,Converter={StaticResource BoolToVisibilityConverter}}" Kind="ArrowDown" Width="15"  HorizontalAlignment="Center"/>
+                                        <materialDesign:PackIcon Margin="5,7" Height="23" Visibility="{Binding DisplaySenderFilter,Converter={StaticResource BoolToVisibilityConverter}}" Kind="ArrowDown" Width="15"  HorizontalAlignment="Center"/>
 
                                     </st:AutoGrid>
                                     <st:AutoGrid Margin="0" Rows="auto" Columns="2*,4*" Visibility="{Binding IsCustomerSender, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}">
@@ -193,14 +193,14 @@
                                     </st:AutoGrid>
                                     <st:AutoGrid ChildMargin="0"  Margin="0,2,0,0" Rows="auto,auto,auto" Columns="2*,4*" Visibility="{Binding Path=SenderFilter, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static local:SenderFilter.BySender}}">
                                         <Label/>
-                                        <materialDesign:PackIcon Margin="7" Visibility="{Binding DisplaySenderFilter,Converter={StaticResource BoolToVisibilityConverter}}"
+                                        <materialDesign:PackIcon Margin="5,7" Visibility="{Binding DisplaySenderFilter,Converter={StaticResource BoolToVisibilityConverter}}"
                                                                      HorizontalAlignment="Center" Kind="ArrowDown"  Height="23" Width="15" />
 
-                                        <Label Margin="7" Content="פרויקט" Target="{Binding ElementName=ComboProject}"/>
-                                        <ComboBox Margin="7" x:Name="ComboProject" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
+                                        <Label Margin="5,7" Content="פרויקט" Target="{Binding ElementName=ComboProject}"/>
+                                        <ComboBox Margin="5,7" x:Name="ComboProject" ItemsSource="{Binding Projects}" SelectedItem="{Binding Project, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
 
-                                        <Label Margin="7" Content="דירה" Target="{Binding ElementName=ComboFlat}"/>
-                                        <ComboBox Margin="7" x:Name="ComboFlat" ItemsSource="{Binding Flats}" SelectedItem="{Binding Flat, Mode=TwoWay}"  VerticalAlignment="Center" >
+                                        <Label Margin="5,7" Content="דירה" Target="{Binding ElementName=ComboFlat}"/>
+                                        <ComboBox Margin="5,7" x:Name="ComboFlat" ItemsSource="{Binding Flats}" SelectedItem="{Binding Flat, Mode=TwoWay}"  VerticalAlignment="Center" >
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -238,7 +238,7 @@
                                 <Label Target="{Binding ElementName=TextChequeNumber}">
                                     חייב במע"ם?
                                 </Label>
-                                <CheckBox Height="23" Margin="7" HorizontalAlignment="Left" FlowDirection="LeftToRight" IsChecked="{Binding Payment.WithVat}"/>
+                                <CheckBox Height="23" Margin="5,7" HorizontalAlignment="Left" FlowDirection="LeftToRight" IsChecked="{Binding Payment.WithVat}"/>
 
                                 <Label Content="אופן תשלום" Target="{Binding ElementName=ComboPaymentMethod}"/>
                                 <ComboBox x:Name="ComboPaymentMethod" ItemsSource="{Binding PaymentMethods}" SelectedItem="{Binding PaymentMethod, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center" />
@@ -246,7 +246,7 @@
                             </st:AutoGrid>
                         </GroupBox>
                         <GroupBox Grid.ColumnSpan="3" Grid.Row="1" Header="פרטי צ'ק" Visibility="{Binding DisplayChequeDetails, Converter={StaticResource BoolToVisibility}}">
-                            <st:AutoGrid Rows="auto,auto" Columns="2*,5*,45,2*,5*,45,2*,5*">
+                            <st:AutoGrid Rows="auto,auto" Columns="2*,4*,45,2*,4*,75,2*,4*">
 
                                 <Label  Content="מס' צ'ק" Target="{Binding ElementName=TextChequeNumber}"/>
                                 <TextBox x:Name="TextChequeNumber" Text="{Binding Payment.ChequeNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
@@ -258,7 +258,7 @@
                             </st:AutoGrid>
                         </GroupBox>
                         <GroupBox Grid.ColumnSpan="3" Grid.Row="1" Header="פרטי אשראי" Visibility="{Binding DisplayCreditDetails, Converter={StaticResource BoolToVisibility}}">
-                            <st:AutoGrid Rows="auto,auto" Columns="2*,5*,45,2*,5*,45,2*,5*">
+                            <st:AutoGrid Rows="auto,auto" Columns="2*,4*,45,2*,4*,75,2*,4*">
 
                                 <Label  Content="מס' אשראי" Target="{Binding ElementName=TextChequeNumber}" 
                                             />
@@ -275,7 +275,7 @@
                             </st:AutoGrid>
                         </GroupBox>
                     </Grid>
-                    <GroupBox Header="פריטי תשלום">
+                    <GroupBox  Margin="10" Header="פריטי תשלום">
                         <StackPanel Orientation="Vertical">
                             <StackPanel Height="25" Margin="7,7,7,0" Orientation="Horizontal" HorizontalAlignment="Left">
                                 <Button BorderThickness="0" Padding="5" ToolTip="הוספה" Command="{Binding AddPaymentItemCommand}">

@@ -182,7 +182,7 @@ namespace RealEstate
                 return beforeSaveResult;
             }
 
-            if (string.IsNullOrEmpty(PaymentType.Name))
+            if (string.IsNullOrWhiteSpace(PaymentType.Name))
             {
                 beforeSaveResult.IsValidData = false;
                 beforeSaveResult.ErrorMessage = "נא הגדר סוג תשלום";

@@ -25,17 +25,6 @@ namespace RealEstate
             set { Entity = value; }
         }
 
-        private ModernUri selectedSource;
-        public ModernUri SelectedSource
-        {
-            get { return selectedSource; }
-            set
-            {
-                selectedSource = value;
-                OnPropertyChanged("SelectedSource");
-            }
-        }
-
         public virtual string CustomersTitle
         {
             get;
@@ -104,6 +93,8 @@ namespace RealEstate
             base.RefreshData();
             ProjectType = Flat.Project?.ProjectType != null ? Flat.Project.ProjectType : ProjectTypes[0];
             Project = Flat.Project;
+            OnPropertyChanged(null);
+
         }
 
         public override void Init()
@@ -181,7 +172,7 @@ namespace RealEstate
             Link link = new ModernLink() { Source = new ModernUri(UriString, UriKind.Relative), DisplayName = "פרטים", ViewModel = this };
             Links.Add(link);
 
-            selectedSource = new ModernUri(UriString, UriKind.Relative);
+            SelectedSource = new ModernUri(UriString, UriKind.Relative);
 
             AddDebtsLink();
             AddPaymentsLink();

@@ -1,4 +1,3 @@
-C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\RealEstate.exe.config
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\RealEstate.exe
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\RealEstate.pdb
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\EntityFramework.dll
@@ -65,7 +64,6 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Re
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Debts\DebtDetails\DebtMainDetails.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Debts\DebtDetails\DebtView.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Debts\DebtsTable.g.cs
-C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Map\MapPage.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Map\MapMainDetails.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\PaymentDetails\ConstantPaymentMainDetails.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\RevenuesTable.g.cs
@@ -74,7 +72,6 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Re
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\PaymentsPage.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\ExpensesTable.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\PaymentsTable.g.cs
-C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Suppliers\SupplierDetails\SupplierNew.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Suppliers\SupplierDetails\SupplierMainDetails.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Suppliers\SupplierDetails\SupplierView.g.cs
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Suppliers\SuppliersPage.g.cs
@@ -110,7 +107,6 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Re
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Debts\DebtDetails\DebtMainDetails.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Debts\DebtDetails\DebtView.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Debts\DebtsTable.baml
-C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Map\MapPage.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Map\MapMainDetails.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\PaymentDetails\ConstantPaymentMainDetails.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\RevenuesTable.baml
@@ -119,7 +115,6 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Re
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\PaymentsPage.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\ExpensesTable.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Payments\PaymentsTable.baml
-C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Suppliers\SupplierDetails\SupplierNew.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Suppliers\SupplierDetails\SupplierMainDetails.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Suppliers\SupplierDetails\SupplierView.baml
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Suppliers\SuppliersPage.baml
@@ -146,3 +141,21 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Re
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\RealEstate.exe.manifest
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\RealEstate.application
 C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\RealEstate.application
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\log4net.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\SpicyTaco.AutoGrid.dll
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\log4net.xml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Debts\DebtDetails\DebtMainDetailsCopy.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\PaymentTypeForServiceDetails.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\PaymentTypeDetails.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\PaymentRelationDetails.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\CityDetails.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\CountryDetails.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\SystemPage.g.cs
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\Debts\DebtDetails\DebtMainDetailsCopy.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\PaymentTypeForServiceDetails.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\PaymentTypeDetails.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\PaymentRelationDetails.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\CityDetails.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\CountryDetails.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\obj\Release\Views\System\SystemPage.baml
+C:\Users\user\Documents\Visual Studio 2015\Projects\RealEstate\RealEstate\bin\Release\RealEstate.exe.config

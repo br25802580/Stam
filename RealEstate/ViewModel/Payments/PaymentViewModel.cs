@@ -618,17 +618,6 @@ namespace RealEstate
             }
         }
 
-        private ModernUri selectedSource;
-        public ModernUri SelectedSource
-        {
-            get { return selectedSource; }
-            set
-            {
-                selectedSource = value;
-                OnPropertyChanged("SelectedSource");
-            }
-        }
-
         #endregion Properties
 
         #region Commands
@@ -1448,7 +1437,7 @@ namespace RealEstate
             Link link = new ModernLink() { Source = new ModernUri(UriString, UriKind.Relative), DisplayName = "פרטים", ViewModel = this };
             Links.Add(link);
 
-            selectedSource = new ModernUri(UriString, UriKind.Relative);
+            SelectedSource = new ModernUri(UriString, UriKind.Relative);
 
             AddPaymentItemsLink();
 

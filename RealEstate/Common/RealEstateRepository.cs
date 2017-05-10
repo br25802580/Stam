@@ -190,7 +190,7 @@ namespace RealEstate
                 Type viewModelType = editorMetaData.ViewModelType;
                 viewModel = Activator.CreateInstance(viewModelType) as EditorViewModel;
 
-                if (string.IsNullOrEmpty(extraEditorKey))
+                if (string.IsNullOrWhiteSpace(extraEditorKey))
                 {
                     pageType = editorMetaData.PageType;
                     editorKey = editorType.ToString();
@@ -256,7 +256,7 @@ namespace RealEstate
                         tableViewModel.Buttons = new List<ButtonMetadata>(tableEditorMetadata.Buttons);
                     }
 
-                    if (!string.IsNullOrEmpty(extraEditorKey))
+                    if (!string.IsNullOrWhiteSpace(extraEditorKey))
                     {
                         EditorViewModel editorNavigationViewModel = navigationViewModel as EditorViewModel;
                         if (editorNavigationViewModel != null)
@@ -309,7 +309,7 @@ namespace RealEstate
 
                 viewModel.Init();
 
-                if (!string.IsNullOrEmpty(entityTitle))
+                if (!string.IsNullOrWhiteSpace(entityTitle))
                 {
                     viewModel.EntityTitle = entityTitle;
                 }
@@ -371,7 +371,7 @@ namespace RealEstate
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             BeforeSaveResult beforeSaveResult = currentNewEditor.BeforeSave();
-            if (!beforeSaveResult.IsValidData && !string.IsNullOrEmpty(beforeSaveResult.ErrorMessage))
+            if (!beforeSaveResult.IsValidData && !string.IsNullOrWhiteSpace(beforeSaveResult.ErrorMessage))
             {
                 DialogUtils.DisplaySaveErrorMessage(beforeSaveResult.ErrorMessage);
                 //   e.Cancel = true;

@@ -45,7 +45,7 @@ namespace RealEstate
         {
             BeforeSaveResult beforeSaveResult = new BeforeSaveResult();
 
-            if (string.IsNullOrEmpty(City.Name))
+            if (string.IsNullOrWhiteSpace(City.Name))
             {
                 beforeSaveResult.IsValidData = false;
                 beforeSaveResult.ErrorMessage = "נא הגדר שם";

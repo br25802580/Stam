@@ -149,6 +149,7 @@ namespace RealEstate
 
                 CustomerInProject customerInProject = firstDebt.CustomerInProject;
                 SupplierInProject supplierInProject = firstDebt.SupplierInProject;
+                PaymentRelation paymentRelation = firstDebt.PaymentRelation;
 
                 Project project = null;
                 Flat flat = null;
@@ -160,27 +161,32 @@ namespace RealEstate
 
                 if (customerInProject != null)
                 {
-                    isSameTarget = debts.All(debt => debt.CustomerInProject == customerInProject);
+                    isSameTarget = debts.All(debt => debt.CustomerInProject == customerInProject 
+                    && debt.PaymentRelation== paymentRelation);
 
                     if (isSameTarget)
                     {
                         project = customerInProject.Project;
                         flat = customerInProject.Flat;
                         customer = customerInProject.Customer;
-                        fromSenderTypeId = project?.ProjectTypeId == 1 ? 2 : 3;
-                        toSenderTypeId = 4;
+                        fromSenderTypeId = paymentRelation.FromSenderTypeId.Value;
+                        toSenderTypeId = paymentRelation.ToSenderTypeId.Value;
                     }
                 }
                 else if (supplierInProject != null)
                 {
-                    isSameTarget = debts.All(debt => debt.SupplierInProject == supplierInProject);
+                    isSameTarget = debts.All(debt => debt.SupplierInProject == supplierInProject 
+                    && debt.PaymentRelation == paymentRelation);
                     if (isSameTarget)
                     {
                         project = supplierInProject.Project;
                         flat = supplierInProject.Flat;
                         supplier = supplierInProject.Supplier;
-                        fromSenderTypeId = 4;
-                        toSenderTypeId = 1;
+
+                        fromSenderTypeId = paymentRelation.FromSenderTypeId.Value;
+                        toSenderTypeId = paymentRelation.ToSenderTypeId.Value;
+                        //fromSenderTypeId = 4;
+                        //toSenderTypeId = 1;
                     }
                 }
 
@@ -198,7 +204,7 @@ namespace RealEstate
                 }
                 else
                 {
-                    DialogUtils.DisplayMessage("אין אפשרות לבצע תשלום. וודא שהחובות מכילים ערך זהה בשדות פרויקט, דירה, ספק/לקוח.", "ביצוע תשלום");
+                    DialogUtils.DisplayMessage("אין אפשרות לבצע תשלום. וודא שהחובות מכילים ערך זהה בשדות פרויקט, דירה, ספק/לקוח, הכנסה/הוצאה.", "ביצוע תשלום");
                 }
             }
         }

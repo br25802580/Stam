@@ -75,17 +75,17 @@
                             </TextBox>
                         </GroupBox>
                         <GroupBox  Header="פרטים כלליים">
-                            <st:AutoGrid Rows="auto,auto,auto,auto,auto" Columns="2*,5*">
+                            <st:AutoGrid Rows="auto,auto,auto,auto,auto" Columns="2*,4*">
                                 <Label Content="סוג שירות" Target="{Binding ElementName=ComboServiceType}"/>
                                 <ComboBox x:Name="ComboServiceType" ItemsSource="{Binding ServiceTypes}" SelectedItem="{Binding Supplier.ServiceType, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
 
                                 <Label Content="מין"/>
                                 <ComboBox ItemsSource="{Binding Genders}" SelectedItem="{Binding Supplier.Gender, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
 
-                                <Label Content="שם" Target="{Binding ElementName=TextName}"/>
-                                <TextBox x:Name="TextName" Text="{Binding Supplier.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <Label FontWeight="Bold" Content="שם" Target="{Binding ElementName=TextName}"/>
+                                <TextBox  x:Name="TextName" Text="{Binding Supplier.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
 
-                                <Label Content="משפחה" Target="{Binding ElementName=TextFamily}"/>
+                                <Label FontWeight="Bold" Content="משפחה" Target="{Binding ElementName=TextFamily}"/>
                                 <TextBox x:Name="TextFamily" Text="{Binding Supplier.Family, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
 
                                 <Label Content="ח.פ" Target="{Binding ElementName=TextFamily}"/>
@@ -93,7 +93,7 @@
                             </st:AutoGrid>
                         </GroupBox>
                         <GroupBox  Header="כתובת" Grid.Column="1">
-                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,5*">
+                            <st:AutoGrid Rows="auto,auto,auto,auto" Columns="2*,4*">
                                 <Label Content="ארץ" Target="{Binding ElementName=ComboCity}"/>
                                 <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding Supplier.Country, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"  />
 
@@ -108,7 +108,7 @@
                             </st:AutoGrid>
                         </GroupBox>
                         <GroupBox  Header="יצירת קשר" Grid.Row="1" Grid.ColumnSpan="3">
-                            <st:AutoGrid Rows="auto" Columns="2*,5*,45,2*,5*,45,2*,5*" Orientation="Vertical">
+                            <st:AutoGrid Rows="auto" Columns="2*,4*,45,2*,4*,45,2*,4*" Orientation="Vertical">
                                 <Label Content="טלפון 1" Target="{Binding ElementName=TextPhone1}"/>
                                 <TextBox x:Name="TextPhone1" Text="{Binding Supplier.Phone1, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                                 <Label/>
@@ -118,11 +118,11 @@
                                 <Label/>
 
                                 <Label  Content="מייל" Target="{Binding ElementName=TextPhone2}"/>
-                                <TextBox Text="{Binding Supplier.Eצשןך, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                                <TextBox Text="{Binding Supplier.Email, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                             </st:AutoGrid>
                         </GroupBox>
                         <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="תשלומים" Visibility="{Binding IsEditEditor, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visibility}">
-                            <st:AutoGrid Rows="auto" Columns="2*,5*,45,2*,5*,45,2*,5*" Orientation="Vertical">
+                            <st:AutoGrid Rows="auto" Columns="2*,4*,45,2*,4*,45,2*,4*" Orientation="Vertical">
                                 <Label  Margin="7,15" Content="תשלומים" />
                                 <TextBlock Style="{StaticResource AmountText}" Text="{Binding Supplier, Converter={StaticResource PaymentsConverter}, StringFormat=C, Mode=OneWay}"/>
                                 <Label/>
