@@ -96,8 +96,8 @@ namespace RealEstate
             AddDebtsEditor();
 
             AddPaymentItemsEditor();
-
             AddConstantPaymentsEditor();
+            AddPaymentChequeEditor();
 
             //PageType.Leases
 
@@ -182,7 +182,7 @@ namespace RealEstate
             editorMetaData = new NewEditorMetadata(type, typeof(ContractViewModel), editorType, pageType, typeof(ContractMainDetails), 970);
             editorMetaData.IconKind = PackIconKind.FormatFloatLeft;
             EditorsMetaData.Add(editorType, editorMetaData);
-
+       
             //PageType.Suppliers
 
             pageType = PageType.Suppliers;
@@ -236,7 +236,14 @@ namespace RealEstate
             editorMetaData.IconKind = PackIconKind.Database;
             EditorsMetaData.Add(editorType, editorMetaData);
 
-            //            pageType = PageType.Map;
+            type = typeof(PaymentCheque);
+            editorType = EditorType.PaymentChequeNew;
+            editorMetaData = new NewEditorMetadata(type, typeof(PaymentChequeViewModel), editorType, pageType,
+             typeof(PaymentChequeMainDetails));
+            editorMetaData.IconKind = PackIconKind.Database;
+            EditorsMetaData.Add(editorType, editorMetaData);
+
+            //PageType.Map
 
             pageType = PageType.Undefined;
             type = typeof(Map);
@@ -456,6 +463,29 @@ namespace RealEstate
 
             tableEditorMetadata.PluralCaption = "תשלומים קבועים";
             tableEditorMetadata.SingleCaption = "תשלום קבוע";
+
+            EditorsMetaData.Add(editorType, tableEditorMetadata);
+        }
+
+
+        private void AddPaymentChequeEditor()
+        {
+            EditorType editorType = EditorType.PaymentCheques;
+            Type type = typeof(PaymentCheque);
+            TableEditorMetadata tableEditorMetadata = new TableEditorMetadata(type, typeof(TableViewModel), editorType, PageType.Payments, "/Views/Customers/CustomersTable.xaml");
+
+            tableEditorMetadata.IconKind = PackIconKind.Database;
+
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Amount", "סכום"));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("DueDate", "תאריך יעד"));
+            tableEditorMetadata.Fields.Add(new ColumnMetadata("Number", "מס' ציק"));
+
+            tableEditorMetadata.ChildEditorType = EditorType.PaymentChequeNew;
+            tableEditorMetadata.NewEditorType = EditorType.PaymentChequeNew;
+            tableEditorMetadata.EditInPopup = true;
+
+            tableEditorMetadata.PluralCaption = "הפקדות עתידיות";
+            tableEditorMetadata.SingleCaption = "הפקדה עתידית";
 
             EditorsMetaData.Add(editorType, tableEditorMetadata);
         }

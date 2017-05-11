@@ -382,29 +382,10 @@ namespace RealEstate
 
         private EditorViewModel currentNewEditor;
         private bool canCloseDialog = true;
-        // private BeforeSaveResult currentBeforeSaveResult;
 
         private void Dialog_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = !canCloseDialog;
-            //bool isSecondEvent = currentBeforeSaveResult != null;
-            //if (currentBeforeSaveResult == null)
-            //{
-            //    currentBeforeSaveResult = currentNewEditor.BeforeSave();
-
-            //    if (!currentBeforeSaveResult.IsValidData)
-            //    {
-            //        DialogUtils.DisplaySaveErrorMessage(currentBeforeSaveResult.ErrorMessage);
-            //        //   e.Cancel = true;
-            //    }
-            //    e.Cancel = !currentBeforeSaveResult.IsValidData;
-            //}
-            //else
-            //{
-            //    e.Cancel = !currentBeforeSaveResult.IsValidData;
-            //    currentBeforeSaveResult = null;
-            //}
-            //..       DisplaySaveErrorMessage
         }
 
         public void RefreshAllEditors()

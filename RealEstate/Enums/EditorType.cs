@@ -62,6 +62,8 @@ namespace RealEstate
         PaymentTypeForServices,
         PaymentTypeForService,
         Statuses,
-        Status
+        Status,
+        PaymentCheques,
+        PaymentChequeNew,
     }
 }

@@ -223,6 +223,7 @@
     <Compile Include="ViewModel\Contracts\ContractViewModel.cs" />
     <Compile Include="ViewModel\Map\Map.cs" />
     <Compile Include="ViewModel\Map\MapViewModel.cs" />
+    <Compile Include="ViewModel\Payments\PaymentChequeViewModel.cs" />
     <Compile Include="ViewModel\Payments\ConstantPaymentViewModel.cs" />
     <Compile Include="ViewModel\Payments\PaymentsViewModel.cs" />
     <Compile Include="ViewModel\Payments\DebtViewModel.cs" />
@@ -252,29 +253,20 @@
     <Compile Include="Views\Contracts\ContractDetails\ContractMainDetails.xaml.cs">
       <DependentUpon>ContractMainDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Customers\Table.xaml.cs">
-      <DependentUpon>Table.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Debts\DebtDetails\DebtMainDetailsCopy.xaml.cs">
-      <DependentUpon>DebtMainDetailsCopy.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Debts\DebtDetails\DebtMainDetails.xaml.cs">
       <DependentUpon>DebtMainDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Debts\DebtDetails\DebtView.xaml.cs">
       <DependentUpon>DebtView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Debts\DebtsTable.xaml.cs">
-      <DependentUpon>DebtsTable.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Map\MapMainDetails.xaml.cs">
       <DependentUpon>MapMainDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Payments\PaymentDetails\PaymentChequeMainDetails.xaml.cs">
+      <DependentUpon>PaymentChequeMainDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Payments\PaymentDetails\ConstantPaymentMainDetails.xaml.cs">
       <DependentUpon>ConstantPaymentMainDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Payments\RevenuesTable.xaml.cs">
-      <DependentUpon>RevenuesTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Payments\PaymentDetails\PaymentMainDetails.xaml.cs">
       <DependentUpon>PaymentMainDetails.xaml</DependentUpon>
@@ -285,12 +277,6 @@
     <Compile Include="Views\Payments\PaymentsPage.xaml.cs">
       <DependentUpon>PaymentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Payments\ExpensesTable.xaml.cs">
-      <DependentUpon>ExpensesTable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Payments\PaymentsTable.xaml.cs">
-      <DependentUpon>PaymentsTable.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Suppliers\SupplierDetails\SupplierMainDetails.xaml.cs">
       <DependentUpon>SupplierMainDetails.xaml</DependentUpon>
     </Compile>
@@ -299,9 +285,6 @@
     </Compile>
     <Compile Include="Views\Suppliers\SuppliersPage.xaml.cs">
       <DependentUpon>SuppliersPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Suppliers\SuppliersTable.xaml.cs">
-      <DependentUpon>SuppliersTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Customers\CustomersPage.xaml.cs">
       <DependentUpon>CustomersPage.xaml</DependentUpon>
@@ -402,14 +385,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Customers\Table.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Debts\DebtDetails\DebtMainDetailsCopy.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Debts\DebtDetails\DebtMainDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -418,19 +393,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Debts\DebtsTable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Map\MapMainDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Payments\PaymentDetails\ConstantPaymentMainDetails.xaml">
+    <Page Include="Views\Payments\PaymentDetails\PaymentChequeMainDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Payments\RevenuesTable.xaml">
+    <Page Include="Views\Payments\PaymentDetails\ConstantPaymentMainDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -446,14 +417,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Payments\ExpensesTable.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Payments\PaymentsTable.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Suppliers\SupplierDetails\SupplierMainDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -463,10 +426,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Suppliers\SuppliersPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Suppliers\SuppliersTable.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -510,14 +469,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Flats\FlatsTable.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Projects\ProjectsTable.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Lease\LeasesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -526,12 +477,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Views\Flats\FlatsTable.xaml.cs">
-      <DependentUpon>FlatsTable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Projects\ProjectsTable.xaml.cs">
-      <DependentUpon>ProjectsTable.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\Main\MainViewModel.cs" />
     <Compile Include="ViewModel\Lease\LeasesViewModel.cs" />
     <Compile Include="Views\Lease\LeasesPage.xaml.cs">

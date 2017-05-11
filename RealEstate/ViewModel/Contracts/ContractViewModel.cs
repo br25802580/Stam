@@ -307,6 +307,7 @@ namespace RealEstate
 
             AddDebtsLink();
             AddPaymentsLink();
+            AddPaymentChequesLink();
             //AddProjectsLink();
             //AddFlatsLink();
             //AddMapLink();
@@ -385,6 +386,25 @@ namespace RealEstate
                 Debt debt = obj as Debt;
 
                 return debt.CustomerInProject != null && debt.CustomerInProject == Contract;
+            };
+            tableViewModel.Init();
+        }
+
+        private void AddPaymentChequesLink()
+        {
+            TableViewModel tableViewModel = RealEstateRepository.Instance.AddEditor(EditorType.PaymentCheques, this, "PaymentCheques", false) as TableViewModel;
+            tableViewModel.EntityTitle = EntityTitle;
+            tableViewModel.IsSubEditor = false;
+
+            tableViewModel.AfterAddEntity = (entity) =>
+            {
+                PaymentCheque paymentCheque = entity as PaymentCheque;
+                paymentCheque.CustomerInProject = Contract;
+            };
+
+            tableViewModel.InitListSource = () =>
+            {
+                return Contract.PaymentCheques.ToList();
             };
             tableViewModel.Init();
         }

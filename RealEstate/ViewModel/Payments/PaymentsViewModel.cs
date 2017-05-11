@@ -37,8 +37,11 @@ namespace RealEstate
             RealEstateRepository.Instance.AddEditor(EditorType.AllRevenues);
             RealEstateRepository.Instance.AddEditor(EditorType.AllExpenses);
             RealEstateRepository.Instance.AddEditor(EditorType.AllDebts);
-            RealEstateRepository.Instance.SelectEditor(EditorType.AllPayments);
 
+            //Soon we have to to add a sub-menu "Future Deposits" under the "Payments" tab
+            //RealEstateRepository.Instance.AddEditor(EditorType.PaymentCheques);
+
+            RealEstateRepository.Instance.SelectEditor(EditorType.AllPayments);
         }
     }
 }
